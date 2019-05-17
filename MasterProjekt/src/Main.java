@@ -1,22 +1,29 @@
 
-import java.util.Arrays;
 
+import org.opencv.core.Core;
 
-import org.opencv.core.Mat;
-import org.opencv.imgcodecs.Imgcodecs;
 
 public class Main
 {
    public static void main( String[] args )
    {
-	   System.load("C:\\opencv\\build\\java\\x64\\opencv_java410.dll");
-
-	   Mat img = Imgcodecs.imread("resources/images/Angelina_Jolie_009.jpg", Imgcodecs.IMREAD_GRAYSCALE);
+	 // System.load("C:\\opencv\\opencv_2.4.11\\build\\java\\x64\\opencv_java2411");
+     // System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
        
-       byte[] imgData = new byte[(int) (img.total() * img.channels())];
-       Arrays.fill(imgData, (byte) 0);
-       img.put(0, 0, imgData);
-       Imgcodecs.imwrite("resources/images/Angelina_Jolie_010.jpg", img);
-       System.out.println("test");
+      KeypointDetector.SurfDetector();       
+       //new HistComparison().run();
+
+    // Schedule a job for the event dispatch thread:
+       // creating and showing this application's GUI.
+       /**javax.swing.SwingUtilities.invokeLater(new Runnable() {
+           @Override
+           public void run() {
+               new CornerHarris(args);
+           }
+       });
+       */
+      
    }
+   
+  
 }
