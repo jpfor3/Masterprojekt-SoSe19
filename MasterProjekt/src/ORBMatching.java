@@ -3,9 +3,10 @@ import org.opencv.core.Mat;
 import org.opencv.core.MatOfDMatch;
 import org.opencv.core.MatOfKeyPoint;
 import org.opencv.features2d.DescriptorMatcher;
+import org.opencv.features2d.FeatureDetector;
 import org.opencv.features2d.Features2d;
 import org.opencv.features2d.ORB;
-import org.opencv.highgui.HighGui;
+import org.opencv.highgui.Highgui;
 import org.opencv.imgcodecs.Imgcodecs;
 
 public class ORBMatching {

@@ -1,5 +1,6 @@
 
-
+import AKAZE.AKAZEMatch;
+import AKAZE.AKAZEMatchDemo;
 import org.opencv.core.Core;
 
 
@@ -10,7 +11,9 @@ public class Main
 	 // System.load("C:\\opencv\\opencv_2.4.11\\build\\java\\x64\\opencv_java2411");
      // System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
        
-      KeypointDetector.SurfDetector();       
+      //KeypointDetector.SurfDetector();    
+      AKAZEMatch Akaze = new AKAZEMatch();
+      Akaze.run();
        //new HistComparison().run();
 
     // Schedule a job for the event dispatch thread:
