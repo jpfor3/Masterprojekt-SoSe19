@@ -1,12 +1,19 @@
 package SURF;
 import org.opencv.calib3d.Calib3d;
 
+
 import org.opencv.core.*;
+import org.opencv.features2d.DescriptorExtractor;
 import org.opencv.features2d.DescriptorMatcher;
+import org.opencv.features2d.FeatureDetector;
 import org.opencv.features2d.Features2d;
+import org.opencv.highgui.HighGui;
 import org.opencv.highgui.Highgui;
+import org.opencv.imgproc.Imgproc;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,48 +37,53 @@ public class KeypointDetector {
        System.out.println(lib.getAbsolutePath());
        System.load(lib.getAbsolutePath());
 
-       String bookObject = image1;
-       String bookScene = image2;
+       String refImage = image1;
+       String cmpImage = image2;
 
        System.out.println("Started....");
        System.out.println("Loading images...");
-       Mat objectImage = Highgui.imread(bookObject, Highgui.CV_LOAD_IMAGE_COLOR);
-       Mat sceneImage = Highgui.imread(bookScene, Highgui.CV_LOAD_IMAGE_COLOR);
+       Mat referenceImg = Highgui.imread(refImage, Highgui.CV_LOAD_IMAGE_COLOR);
+       Mat compareImg = Highgui.imread(cmpImage, Highgui.CV_LOAD_IMAGE_COLOR);
 
-       MatOfKeyPoint objectKeyPoints = new MatOfKeyPoint();
+       
+       MatOfKeyPoint refKeyPoints = new MatOfKeyPoint();
        FeatureDetector featureDetector = FeatureDetector.create(FeatureDetector.SURF);
        System.out.println("Detecting key points...");
-       featureDetector.detect(objectImage, objectKeyPoints);
-       KeyPoint[] keypoints = objectKeyPoints.toArray();
+       featureDetector.detect(referenceImg, refKeyPoints);
+       KeyPoint[] keypoints = refKeyPoints.toArray();
        System.out.println(keypoints);
 
-       MatOfKeyPoint objectDescriptors = new MatOfKeyPoint();
+       MatOfKeyPoint refDescriptors = new MatOfKeyPoint();
        DescriptorExtractor descriptorExtractor = DescriptorExtractor.create(DescriptorExtractor.SURF);
        System.out.println("Computing descriptors...");
-       descriptorExtractor.compute(objectImage, objectKeyPoints, objectDescriptors);
+       descriptorExtractor.compute(referenceImg, refKeyPoints, refDescriptors);
 
        // Create the matrix for output image.
-       Mat outputImage = new Mat(objectImage.rows(), objectImage.cols(), Highgui.CV_LOAD_IMAGE_COLOR);
-       Scalar newKeypointColor = new Scalar(255, 0, 0);
+       Mat outputRefImage = new Mat(referenceImg.rows(), referenceImg.cols(), Highgui.CV_LOAD_IMAGE_COLOR);
+       Scalar refKeypointColor = new Scalar(255, 0, 0);
 
-       System.out.println("Drawing key points on object image...");
-       Features2d.drawKeypoints(objectImage, objectKeyPoints, outputImage, newKeypointColor, 0);
+       System.out.println("Drawing key points on reference image...");
+       Features2d.drawKeypoints(referenceImg, refKeyPoints, outputRefImage, refKeypointColor, 0);
 
        // Match object image with the scene image
-       MatOfKeyPoint sceneKeyPoints = new MatOfKeyPoint();
-       MatOfKeyPoint sceneDescriptors = new MatOfKeyPoint();
-       System.out.println("Detecting key points in background image...");
-       featureDetector.detect(sceneImage, sceneKeyPoints);
-       System.out.println("Computing descriptors in background image...");
-       descriptorExtractor.compute(sceneImage, sceneKeyPoints, sceneDescriptors);
+       MatOfKeyPoint cmpKeyPoints = new MatOfKeyPoint();
+       MatOfKeyPoint cmpDescriptors = new MatOfKeyPoint();
+       System.out.println("Detecting key points in compare image...");
+       featureDetector.detect(compareImg, cmpKeyPoints);
+       System.out.println("Computing descriptors in compare image...");
+       descriptorExtractor.compute(compareImg, cmpKeyPoints, cmpDescriptors);
 
-       Mat matchoutput = new Mat(sceneImage.rows() * 2, sceneImage.cols() * 2, Highgui.CV_LOAD_IMAGE_COLOR);
-       Scalar matchestColor = new Scalar(0, 255, 0);
+       Mat outputCmpImage = new Mat(compareImg.rows() , compareImg.cols() , Highgui.CV_LOAD_IMAGE_COLOR);
+       Scalar cmpKeypointColor = new Scalar(0, 255, 0);
 
+       System.out.println("Drawing key points on compare image...");
+       Features2d.drawKeypoints(compareImg, cmpKeyPoints, outputCmpImage, cmpKeypointColor, 0);
+
+       /**
        List<MatOfDMatch> matches = new LinkedList<MatOfDMatch>();
        DescriptorMatcher descriptorMatcher = DescriptorMatcher.create(DescriptorMatcher.FLANNBASED);
-       System.out.println("Matching object and scene images...");
-       descriptorMatcher.knnMatch(objectDescriptors, sceneDescriptors, matches, 2);
+       System.out.println("Matching ref and cmp images...");
+       descriptorMatcher.knnMatch(refDescriptors, cmpDescriptors, matches, 2);
 
        System.out.println("Calculating good match list...");
        LinkedList<DMatch> goodMatchesList = new LinkedList<DMatch>();
@@ -93,8 +105,8 @@ public class KeypointDetector {
        if (goodMatchesList.size() >= 7) {
            System.out.println("Object Found!!!");
 
-           List<KeyPoint> objKeypointlist = objectKeyPoints.toList();
-           List<KeyPoint> scnKeypointlist = sceneKeyPoints.toList();
+           List<KeyPoint> objKeypointlist = refKeyPoints.toList();
+           List<KeyPoint> scnKeypointlist = cmpKeyPoints.toList();
 
            LinkedList<Point> objectPoints = new LinkedList<>();
            LinkedList<Point> scenePoints = new LinkedList<>();
@@ -115,33 +127,63 @@ public class KeypointDetector {
            Mat scene_corners = new Mat(4, 1, CvType.CV_32FC2);
 
            obj_corners.put(0, 0, new double[]{0, 0});
-           obj_corners.put(1, 0, new double[]{objectImage.cols(), 0});
-           obj_corners.put(2, 0, new double[]{objectImage.cols(), objectImage.rows()});
-           obj_corners.put(3, 0, new double[]{0, objectImage.rows()});
+           obj_corners.put(1, 0, new double[]{referenceImg.cols(), 0});
+           obj_corners.put(2, 0, new double[]{referenceImg.cols(), referenceImg.rows()});
+           obj_corners.put(3, 0, new double[]{0, referenceImg.rows()});
 
            System.out.println("Transforming object corners to scene corners...");
            Core.perspectiveTransform(obj_corners, scene_corners, homography);
 
-           Mat img = Highgui.imread(bookScene, Highgui.CV_LOAD_IMAGE_COLOR);
+           Mat img = Highgui.imread(cmpImage, Highgui.CV_LOAD_IMAGE_COLOR);
 
-           Core.line(img, new Point(scene_corners.get(0, 0)), new Point(scene_corners.get(1, 0)), new Scalar(0, 255, 0), 4);
-           Core.line(img, new Point(scene_corners.get(1, 0)), new Point(scene_corners.get(2, 0)), new Scalar(0, 255, 0), 4);
-           Core.line(img, new Point(scene_corners.get(2, 0)), new Point(scene_corners.get(3, 0)), new Scalar(0, 255, 0), 4);
-           Core.line(img, new Point(scene_corners.get(3, 0)), new Point(scene_corners.get(0, 0)), new Scalar(0, 255, 0), 4);
-
+          
            System.out.println("Drawing matches image...");
            MatOfDMatch goodMatches = new MatOfDMatch();
            goodMatches.fromList(goodMatchesList);
 
-           Features2d.drawMatches(objectImage, objectKeyPoints, sceneImage, sceneKeyPoints, goodMatches, matchoutput, matchestColor, newKeypointColor, new MatOfByte(), 2);
+           Features2d.drawMatches(referenceImg, refKeyPoints, compareImg, cmpKeyPoints, goodMatches, matchoutput, matchestColor, newKeypointColor, new MatOfByte(), 2);
 
-           Highgui.imwrite("resources/images/outputImage.jpg", outputImage);
+           Highgui.imwrite("resources/images/outputImage2.jpg", outputImage);
            Highgui.imwrite("resources/images/matchoutput.jpg", matchoutput);
            Highgui.imwrite("resources/images/img.jpg", img);
        } else {
            System.out.println("Object Not Found");
        }
+       */
+
+       Highgui.imwrite("resources/images/outputRefImage.jpg", outputRefImage);
+       Highgui.imwrite("resources/images/outputCmpImage.jpg", outputCmpImage);
+       
+       createHistogram(outputRefImage, outputCmpImage);
+
 
        System.out.println("Ended....");
    }
+	
+	/**
+	 * Für die jeweiligen Keypoints werden Feature Histogramme berechnet. Anschließend wird der Abstand der Feature beider Bilder
+	 * zueinander ermittelt.
+	 * @param Referenzbild
+	 * @param Vergleichbild
+	 */
+	private static void createHistogram(Mat input, Mat input2)
+	{
+		  
+		    Mat hist_1 = new Mat();
+		    Mat hist_2 = new Mat();
+
+		    MatOfFloat ranges = new MatOfFloat(0f, 256f);
+		    MatOfInt histSize = new MatOfInt(25);
+
+		    Imgproc.calcHist(Arrays.asList(input), new MatOfInt(0),
+		            new Mat(), hist_1, histSize, ranges);
+		    Imgproc.calcHist(Arrays.asList(input2), new MatOfInt(0),
+		            new Mat(), hist_2, histSize, ranges);
+
+		    double res = Imgproc.compareHist(hist_1, hist_2, 0);
+		    Double d = new Double(res * 100);
+
+		    System.out.println("\n Distance between refImage and cmpImage: " + d);
+
+	}
 }
