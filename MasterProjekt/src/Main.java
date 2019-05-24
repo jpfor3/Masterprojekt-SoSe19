@@ -8,23 +8,17 @@ public class Main
 {
    public static void main( String[] args )
    {
-	 // System.load("C:\\opencv\\opencv_2.4.11\\build\\java\\x64\\opencv_java2411");
-     // System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+	 
+     System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
        
-      //KeypointDetector.SurfDetector();    
+     //Zu vergleichende Bilder
+     String image1 =  "resources/images/HansSarpei.jpg";
+     String image2 =  "resources/images/SchalkeTrikot.jpg";
+     
+      //KeypointDetector.SurfDetector(image1, image2);    
       AKAZEMatch Akaze = new AKAZEMatch();
-      Akaze.run();
-       //new HistComparison().run();
+      Akaze.run(image1, image2);
 
-    // Schedule a job for the event dispatch thread:
-       // creating and showing this application's GUI.
-       /**javax.swing.SwingUtilities.invokeLater(new Runnable() {
-           @Override
-           public void run() {
-               new CornerHarris(args);
-           }
-       });
-       */
       
    }
    

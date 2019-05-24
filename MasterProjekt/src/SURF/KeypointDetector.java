@@ -1,4 +1,6 @@
+package SURF;
 import org.opencv.calib3d.Calib3d;
+
 import org.opencv.core.*;
 import org.opencv.features2d.DescriptorMatcher;
 import org.opencv.features2d.Features2d;
@@ -11,7 +13,7 @@ import java.util.List;
 
 public class KeypointDetector {
 
-	public static void SurfDetector(){
+	public static void SurfDetector(String image1, String image2){
 	 
 	   File lib = null;
        String os = System.getProperty("os.name");
@@ -28,8 +30,8 @@ public class KeypointDetector {
        System.out.println(lib.getAbsolutePath());
        System.load(lib.getAbsolutePath());
 
-       String bookObject = "resources/images/Angelina_Jolie_009.jpg";
-       String bookScene = "resources/images/Brad_Pitt_009.jpg";
+       String bookObject = image1;
+       String bookScene = image2;
 
        System.out.println("Started....");
        System.out.println("Loading images...");

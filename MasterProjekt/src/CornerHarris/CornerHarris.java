@@ -1,3 +1,4 @@
+package CornerHarris;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Image;
@@ -18,6 +19,10 @@ import org.opencv.highgui.HighGui;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
+
+/**Klasse zum Erkennen und Visualisiren von Eckpunkten
+ *
+ */
 public class CornerHarris {
     private Mat srcGray = new Mat();
     private Mat dst = new Mat();
@@ -28,11 +33,11 @@ public class CornerHarris {
     private JLabel cornerLabel;
     private static final int MAX_THRESHOLD = 255;
     private int threshold = 200;
-    public CornerHarris(String[] args) {
+    public CornerHarris(String[] args, String image1) {
        
-        Mat src = Imgcodecs.imread("resources/images/Angelina_Jolie_009.jpg");
+        Mat src = Imgcodecs.imread(image1);
         if (src.empty()) {
-            System.err.println("Cannot read image: " + "resources/images/Angelina_Jolie_009.jpg");
+            System.err.println("Cannot read image: " + image1);
             System.exit(0);
         }
         Imgproc.cvtColor(src, srcGray, Imgproc.COLOR_BGR2GRAY);

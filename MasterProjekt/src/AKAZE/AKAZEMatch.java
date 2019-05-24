@@ -28,11 +28,11 @@ import org.xml.sax.SAXException;
 
 public class AKAZEMatch {
 	
-    public void run() {
+    public void run(String image1, String image2) {
         //! [load]
     	System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-        String filename1 =  "resources/images/graf1.png";
-        String filename2 =  "resources/images/graf3.png";
+        String filename1 =  image1;
+        String filename2 =  image2;
         String filename3 =  "resources/images/H1to3p.xml";
         Mat img1 = Imgcodecs.imread(filename1);
         Mat img2 = Imgcodecs.imread(filename2);
