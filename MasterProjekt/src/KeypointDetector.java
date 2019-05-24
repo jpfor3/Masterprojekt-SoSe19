@@ -1,6 +1,7 @@
 import org.opencv.calib3d.Calib3d;
 import org.opencv.core.*;
-import org.opencv.features2d.*;
+import org.opencv.features2d.DescriptorMatcher;
+import org.opencv.features2d.Features2d;
 import org.opencv.highgui.Highgui;
 
 import java.io.File;
