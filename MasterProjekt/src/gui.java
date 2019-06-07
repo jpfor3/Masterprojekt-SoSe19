@@ -10,4 +10,6 @@ public class gui {
     private JComboBox methodselect1cmbx;
     private JComboBox comboBox1;
     private JButton beginprocess1btn;
+    private JFileChooser fileChooser1;
+    private JFileChooser datapathChooser1;
 }
