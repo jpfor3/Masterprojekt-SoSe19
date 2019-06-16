@@ -14,7 +14,7 @@ public class Main
      
      //Zu vergleichende Bilder
      String image1 =  "resources/images/HansSarpei.jpg";
-     String image2 =  "resources/images/Hanssarpei.jpg";
+     String image2 =  "resources/images/Schalketrikot.jpg";
      
       KeypointDetector.SurfDetector(image1, image2);    
       //AKAZEMatch Akaze = new AKAZEMatch();
