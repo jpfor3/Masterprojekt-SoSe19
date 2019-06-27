@@ -1,4 +1,4 @@
-package SURF;
+package keypointdetector;
 import org.opencv.calib3d.Calib3d;
 
 
@@ -13,11 +13,15 @@ import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.xfeatures2d.PCTSignatures;
 
+import cluster.KMeans;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 
 public class KeypointDetector {
@@ -47,7 +51,7 @@ public class KeypointDetector {
        Mat referenceImg = Highgui.imread(refImage, Highgui.CV_LOAD_IMAGE_COLOR);
        Mat compareImg = Highgui.imread(cmpImage, Highgui.CV_LOAD_IMAGE_COLOR);
 
-
+      
        
        MatOfKeyPoint refKeyPoints = new MatOfKeyPoint();
        
@@ -84,18 +88,43 @@ public class KeypointDetector {
        System.out.println("Drawing key points on compare image...");
        Features2d.drawKeypoints(compareImg, cmpKeyPoints, outputCmpImage, cmpKeypointColor, 0);
        
+       Highgui.imwrite("resources/images/outputRefImage.jpg", outputRefImage);
+       Highgui.imwrite("resources/images/outputCmpImage.jpg", outputCmpImage);
+       
+       
        //TODO: Signaturen und Distanzmaß
+     
+       List<Mat> clusterList = new ArrayList<Mat>();
+       Mat clusterinput1 = (Mat) refKeyPoints;
+       Mat clusterinput2 = (Mat) cmpKeyPoints;
+       clusterList.add(clusterinput1);
+       clusterList.add(clusterinput2);
+
+
+       System.out.println("Creating clusters on images...");
+       for(Mat mat : clusterList)
+       {
+    	   KMeans.cluster(mat, 3);
+       }
+       
+       
+       
+       /**
        List<Mat> clusterList = new ArrayList<Mat>();
        clusterList.add(referenceImg);
        clusterList.add(compareImg);
-       
+
        PCTSignatures signature = PCTSignatures.create();
        signature.computeSignatures(clusterList, new ArrayList<Mat>(2));
        
+       System.out.println("Drawing clusters on compare image...");
        for(Mat mat : clusterList)
        {
+
     	   PCTSignatures.drawSignature(mat, new Mat(), new Mat());
        }
+       */
+       
        
        /**
        List<MatOfDMatch> matches = new LinkedList<MatOfDMatch>();
@@ -169,43 +198,8 @@ public class KeypointDetector {
        }
        */
 
-       Highgui.imwrite("resources/images/outputRefImage.jpg", outputRefImage);
-       Highgui.imwrite("resources/images/outputCmpImage.jpg", outputCmpImage);
-       
-       
-
-       
-       createHistogram(outputRefImage, outputCmpImage);
 
 
-       System.out.println("Ended....");
    }
 	
-
-	/**
-	 * Für die jeweiligen Keypoints werden Feature Histogramme berechnet. Anschließend wird der Abstand der Feature beider Bilder
-	 * zueinander ermittelt.
-	 * @param Referenzbild
-	 * @param Vergleichbild
-	 */
-	private static void createHistogram(Mat input, Mat input2)
-	{
-		  
-		    Mat hist_1 = new Mat();
-		    Mat hist_2 = new Mat();
-
-		    MatOfFloat ranges = new MatOfFloat(0f, 256f);
-		    MatOfInt histSize = new MatOfInt(25);
-
-		    Imgproc.calcHist(Arrays.asList(input), new MatOfInt(0),
-		            new Mat(), hist_1, histSize, ranges);
-		    Imgproc.calcHist(Arrays.asList(input2), new MatOfInt(0),
-		            new Mat(), hist_2, histSize, ranges);
-
-		    double res = Imgproc.compareHist(hist_1, hist_2, 0);
-		    Double d = new Double(res * 100);
-
-		    System.out.println("\n Distance between refImage and cmpImage: " + d);
-
-	}
 }

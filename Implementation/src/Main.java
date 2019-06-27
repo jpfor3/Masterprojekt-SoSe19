@@ -1,6 +1,6 @@
 import AKAZE.AKAZEMatch;
 import AKAZE.AKAZEMatchDemo;
-import SURF.KeypointDetector;
+import keypointdetector.KeypointDetector;
 
 import org.opencv.core.Core;
 
@@ -19,6 +19,8 @@ public class Main
       KeypointDetector.SurfDetector(image1, image2);    
       //AKAZEMatch Akaze = new AKAZEMatch();
       //Akaze.run(image1, image2);
+      System.out.println("Ended....");
+
 
       
    }
