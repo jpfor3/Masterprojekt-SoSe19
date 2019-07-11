@@ -101,8 +101,8 @@ public class KeypointDetector {
        //Cure als möglicher Algorithmus
        
        List<MatOfKeyPoint> clusterList = new ArrayList<MatOfKeyPoint>();
-       clusterList.add(refDescriptors);
-       clusterList.add(cmpDescriptors);
+       clusterList.add(refKeyPoints);
+       clusterList.add(cmpKeyPoints);
 
 
        System.out.println("Creating clusters on Keypoints...");
