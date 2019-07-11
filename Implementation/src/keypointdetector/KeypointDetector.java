@@ -3,6 +3,8 @@ import org.opencv.calib3d.Calib3d;
 
 
 
+
+
 import org.opencv.core.*;
 import org.opencv.features2d.DescriptorExtractor;
 import org.opencv.features2d.DescriptorMatcher;
@@ -13,6 +15,7 @@ import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.xfeatures2d.PCTSignatures;
 
+import cluster.DBScan;
 import cluster.KMeans;
 
 import java.io.File;
@@ -93,32 +96,47 @@ public class KeypointDetector {
        
        
        //TODO: Signaturen und Distanzmaß
+       
+       //DBScan; WEKA; JavaML als mögliche Library
+       //Cure als möglicher Algorithmus
+       
+       List<MatOfKeyPoint> clusterList = new ArrayList<MatOfKeyPoint>();
+       clusterList.add(refDescriptors);
+       clusterList.add(cmpDescriptors);
+
+
+       System.out.println("Creating clusters on Keypoints...");
+       for(MatOfKeyPoint kp : clusterList)
+       {
+    	   DBScan.cluster(kp);
+       }
+       
      
-       List<Mat> clusterList = new ArrayList<Mat>();
-       Mat clusterinput1 = (Mat) refKeyPoints;
-       Mat clusterinput2 = (Mat) cmpKeyPoints;
+       /**List<Mat> clusterList = new ArrayList<Mat>();
+       Mat clusterinput1 = (Mat) refDescriptors;
+       Mat clusterinput2 = (Mat) cmpDescriptors;
        clusterList.add(clusterinput1);
        clusterList.add(clusterinput2);
 
 
-       System.out.println("Creating clusters on images...");
+       System.out.println("Creating clusters on Keypoints...");
        for(Mat mat : clusterList)
        {
     	   KMeans.cluster(mat, 3);
        }
+       */
        
        
        
-       /**
-       List<Mat> clusterList = new ArrayList<Mat>();
-       clusterList.add(referenceImg);
-       clusterList.add(compareImg);
+       /**List<Mat> clusterList2 = new ArrayList<Mat>();
+       clusterList2.add(referenceImg);
+       clusterList2.add(compareImg);
 
        PCTSignatures signature = PCTSignatures.create();
-       signature.computeSignatures(clusterList, new ArrayList<Mat>(2));
+       signature.computeSignatures(clusterList2, new ArrayList<Mat>(2));
        
        System.out.println("Drawing clusters on compare image...");
-       for(Mat mat : clusterList)
+       for(Mat mat : clusterList2)
        {
 
     	   PCTSignatures.drawSignature(mat, new Mat(), new Mat());
