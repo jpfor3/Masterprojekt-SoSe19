@@ -95,7 +95,8 @@ public class KeypointDetector {
        Highgui.imwrite("resources/images/outputCmpImage.jpg", outputCmpImage);
        
        
-       //TODO: Signaturen und Distanzmaß
+       //TODO: Signaturen und Distanzmaß, Indizierung
+       
        
        //DBScan; WEKA; JavaML als mögliche Library
        //Cure als möglicher Algorithmus
