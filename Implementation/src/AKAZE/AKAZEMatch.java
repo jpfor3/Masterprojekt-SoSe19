@@ -1,6 +1,6 @@
 package AKAZE;
 
-
+/*
 import java.io.File;
 
 import java.io.IOException;
@@ -158,4 +158,5 @@ public class AKAZEMatch {
         System.exit(0);
     }
 }
+*/
 

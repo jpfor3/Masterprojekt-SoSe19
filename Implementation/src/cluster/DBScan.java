@@ -24,7 +24,7 @@ public class DBScan {
 	int i = 0;
 	for(KeyPoint KP : colkp)
 	{
-		double[] param = {KP.pt.x, KP.pt.y, KP.angle};
+		double[] param = {KP.pt.x, KP.pt.y, KP.angle}; 
 		i += 1;
 
 			System.out.println("\n" + param[1] + " ... " + i);

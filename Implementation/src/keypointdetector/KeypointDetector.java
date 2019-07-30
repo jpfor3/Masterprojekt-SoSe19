@@ -13,7 +13,7 @@ import org.opencv.features2d.Features2d;
 import org.opencv.highgui.HighGui;
 import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
-import org.opencv.xfeatures2d.PCTSignatures;
+//import org.opencv.xfeatures2d.PCTSignatures;
 
 import cluster.DBScan;
 import cluster.KMeans;
@@ -105,10 +105,23 @@ public class KeypointDetector {
        clusterList.add(cmpKeyPoints);
 
 
+       System.out.println("Printing the matrix dump");
+       System.out.println(refDescriptors.dump());
+    
+       Mat descriptor = refDescriptors;
+       ArrayList<Float> refList = new ArrayList<Float>();
+       for(desc : descriptor) {
+    	   
+    	   
+       }
+       
+       
+       
        System.out.println("Creating clusters on Keypoints...");
        for(MatOfKeyPoint kp : clusterList)
        {
-    	   DBScan.cluster(kp);
+//    	   DBScan.cluster(kp);
+    	   System.out.println(kp);
        }
        
      

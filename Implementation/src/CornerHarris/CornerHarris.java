@@ -68,7 +68,6 @@ public class CornerHarris {
         slider.setPaintTicks(true);
         slider.setPaintLabels(true);
         slider.addChangeListener(new ChangeListener() {
-            @Override
             public void stateChanged(ChangeEvent e) {
                 JSlider source = (JSlider) e.getSource();
                 threshold = source.getValue();

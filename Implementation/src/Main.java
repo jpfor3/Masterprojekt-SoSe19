@@ -1,4 +1,3 @@
-import AKAZE.AKAZEMatch;
 import AKAZE.AKAZEMatchDemo;
 import keypointdetector.KeypointDetector;
 
@@ -17,8 +16,6 @@ public class Main
      String image2 =  "resources/images/Schalketrikot.jpg";
      
       KeypointDetector.SurfDetector(image1, image2);    
-      //AKAZEMatch Akaze = new AKAZEMatch();
-      //Akaze.run(image1, image2);
       System.out.println("Ended....");
 
 
