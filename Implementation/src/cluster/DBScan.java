@@ -2,6 +2,7 @@ package cluster;
 
 import java.awt.geom.Point2D;
 
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -38,7 +39,7 @@ public class DBScan {
 	}
 		
 	
-    DBSCANClusterer<EuclideanDoublePoint> cls = new DBSCANClusterer<EuclideanDoublePoint>(80, 4);
+    DBSCANClusterer<EuclideanDoublePoint> cls = new DBSCANClusterer<EuclideanDoublePoint>(40, 4);
     List<Cluster<EuclideanDoublePoint>> list = cls.cluster(matOfKeypoints);
     System.out.println("\nListe: " );
     for(int count = 0; count < list.size(); count++)
@@ -46,8 +47,52 @@ public class DBScan {
     System.out.println(list.get(count).getPoints() + "\n");
     }
     
-    //TODO: Distanzmaße berechnen
+    centering(list);
     
 	}
     
+    //Center berechnen
+	private static void centering(List<Cluster<EuclideanDoublePoint>> list)
+	{
+	    List<double[]> centroids = new ArrayList<double[]>();
+
+	    for(int count = 0; count < list.size(); count++)
+	    {
+	    	double sum_x = 0;
+	    	double sum_y = 0;
+	    	double sum_re = 0;
+
+ 
+	    	for(int count2 = 0; count2 < list.get(count).getPoints().size(); count2++)
+	    	{
+	    		//Aufsummierung der einzelnen Keypoints im Cluster
+	    		EuclideanDoublePoint edp = list.get(count).getPoints().get(count2);
+
+		    	double[] newcenter =  edp.getPoint();
+		    	
+		    	sum_x += newcenter[0];
+		    	sum_y += newcenter[1];
+		    	sum_re += newcenter[4];
+		    	
+	    	}
+	        
+	    	//Berechnung des Mittelwerts im Cluster
+	    	double x = sum_x / list.get(count).getPoints().size();
+	    	double y = sum_y / list.get(count).getPoints().size();
+	    	double re = sum_re / list.get(count).getPoints().size();
+
+	    	
+	    	
+	    	double[] center = {x,y,re}; 
+	    	System.out.println("\n" + count + ") Center: " + center[0] + "; " + center[1] + "; " + center[2]);
+	    
+	    	//Erstellen einer ArrayList mit den gegebenen Centroids
+	    	centroids.add(center);
+
+	    }
+	    
+	    
+	}
+	
+	//TODO: Distanzmaße berechnen
 }
