@@ -38,6 +38,10 @@ public class KeypointDetector {
            } else {
                lib = new File("libs//x86//" + System.mapLibraryName("opencv_java2411"));
            }
+        	   
+       }
+       else if (os.toUpperCase().contains("LINUX")) {
+    	   
        }
 
        System.out.println(lib.getAbsolutePath());
@@ -92,7 +96,7 @@ public class KeypointDetector {
        Highgui.imwrite("resources/images/outputCmpImage.jpg", outputCmpImage);
        
        
-       //TODO: Signaturen und Distanzmaß
+       //TODO: Signaturen und Distanzmaï¿½
      
        List<Mat> clusterList = new ArrayList<Mat>();
        Mat clusterinput1 = (Mat) refKeyPoints;

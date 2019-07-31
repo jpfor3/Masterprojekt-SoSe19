@@ -4,11 +4,16 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/OpenCV 4.1"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/OpenCV-4.1.0"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/OpenCV_2.4.11"/>
-	<classpathentry kind="lib" path="C:/opencv/build/java/opencv-410_Xtras/opencv-410_Xtras.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk-12.0.1">
+	<classpathentry kind="lib" path="/home/apokalypto/Software/opencv-4.1.0/build_dlls/bin/opencv-410.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="/home/apokalypto/Software/opencv-4.1.0/build_dlls/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-12-oracle">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="JARs/opencv-2411.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
