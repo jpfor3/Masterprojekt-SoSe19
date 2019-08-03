@@ -84,7 +84,7 @@ public class KeypointDetector {
        featureDetector.detect(compareImg, cmpKeyPoints);
        System.out.println("Computing descriptors in compare image...");
        descriptorExtractor.compute(compareImg, cmpKeyPoints, cmpDescriptors);
-
+    
        Mat outputCmpImage = new Mat(compareImg.rows() , compareImg.cols() , Highgui.CV_LOAD_IMAGE_COLOR);
        Scalar cmpKeypointColor = new Scalar(0, 255, 0);
 
@@ -94,7 +94,6 @@ public class KeypointDetector {
        Highgui.imwrite("resources/images/outputRefImage.jpg", outputRefImage);
        Highgui.imwrite("resources/images/outputCmpImage.jpg", outputCmpImage);
        
-       
        //TODO: Signaturen und Distanzmaß, Indizierung
        
        
@@ -102,8 +101,8 @@ public class KeypointDetector {
        //Cure als möglicher Algorithmus
        
        List<MatOfKeyPoint> clusterList = new ArrayList<MatOfKeyPoint>();
-       clusterList.add(refKeyPoints);
-       clusterList.add(cmpKeyPoints);
+       clusterList.add(refDescriptors);
+       clusterList.add(cmpDescriptors);
 
 
        System.out.println("Creating clusters on Keypoints...");

@@ -21,36 +21,70 @@ public class DBScan {
 
 	/**
 	 * 
-	 * @param kp MatOfKeyPoint jede Zeile muss einzeln augewertet werden bei Clustering
+	 * @param descriptor MatOfKeyPoint jede Zeile muss einzeln augewertet werden bei Clustering
 	 */
-	public static void cluster(MatOfKeyPoint kp)
+	public static void cluster(MatOfKeyPoint descriptor)
 	{
 		
 	Collection<EuclideanDoublePoint> matOfKeypoints = new ArrayList<EuclideanDoublePoint>();	
-	Collection<KeyPoint> colkp = kp.toList();
+	Collection<KeyPoint> colkp = descriptor.toList();
 	
 	int i = 0;
-	for(KeyPoint KP : colkp)
+	for(int row = 0; row < descriptor.rows(); row++)
 	{
-		i++;
-		double[] param = {KP.pt.x, KP.pt.y, KP.size, KP.angle, KP.response, KP.octave, KP.class_id};
+		double[] param = new double[64];
+		for(int col = 0; col < descriptor.row(row).cols(); col++)
+		{
+			param[col] = descriptor.get(row, col)[0];
+		}
+		
 		EuclideanDoublePoint edp = new EuclideanDoublePoint(param);
 		matOfKeypoints.add(edp);
 	}
-		
-	
-    DBSCANClusterer<EuclideanDoublePoint> cls = new DBSCANClusterer<EuclideanDoublePoint>(40, 4);
-    List<Cluster<EuclideanDoublePoint>> list = cls.cluster(matOfKeypoints);
-    System.out.println("\nListe: " );
-    for(int count = 0; count < list.size(); count++)
-    {
-    System.out.println(list.get(count).getPoints() + "\n");
-    }
+		DBSCANClusterer<EuclideanDoublePoint> cls = new DBSCANClusterer<EuclideanDoublePoint>(0.1, 4);
+	    List<Cluster<EuclideanDoublePoint>> list = cls.cluster(matOfKeypoints);
+	    System.out.println("\nListe: " );
+	    for(int count = 0; count < list.size(); count++)
+	    {
+	    //System.out.println(list.get(count).getPoints()+ "\n");
+	    }
     
-    centering(list);
-    
+	    center(list);
 	}
-    
+	
+	
+    //Center berechnen
+	private static void center(List<Cluster<EuclideanDoublePoint>> list)
+	{
+		for(int count = 0; count < list.size(); count++)
+	    {
+			double[] sumOfDescriptor = new double[64];
+			double[] centroid = new double[64];
+			
+			for(int count2 = 0; count2 < list.get(count).getPoints().size(); count2++)
+	    	{
+				//Aufsummierung der einzelnen Keypoints im Cluster
+	    		EuclideanDoublePoint edp = list.get(count).getPoints().get(count2);
+	    		double[] newcenter =  edp.getPoint();
+	    		
+	    		for(int i = 0; i < 64; i++)
+	    		{
+	    		sumOfDescriptor[i] += newcenter[i];
+	    		}
+	    	}
+			
+			//Berechnung des Mittelwerts im Cluster
+			for(int i = 0; i < 64; i++)
+    		{
+			centroid[i] = sumOfDescriptor[i] / list.get(count).getPoints().size();
+    		}
+			System.out.println("Centroid("+count+"): "+centroid [1]);
+		}
+	}
+	
+	
+	
+	
     //Center berechnen
 	private static void centering(List<Cluster<EuclideanDoublePoint>> list)
 	{
@@ -88,7 +122,6 @@ public class DBScan {
 	    
 	    	//Erstellen einer ArrayList mit den gegebenen Centroids
 	    	centroids.add(center);
-
 	    }
 	    
 	    
