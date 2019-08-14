@@ -39,7 +39,6 @@ public class KMeans {
 
 		
 		System.out.println("\n Zeilen Centers: " + centers.rows()+ "\n Spalten Centers: " + centers.cols()) ;
-
 		System.out.println("\n Zeilen Keypoints: " + cutout.rows() + "\n Spalten Keypoints: " + cutout.cols());
 		
 		int rows = 0;
