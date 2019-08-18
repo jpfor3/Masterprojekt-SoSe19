@@ -28,9 +28,11 @@ public class Main
      desc1 = KeypointDetector.extractDescriptors(image1, desc1);
      desc2 = KeypointDetector.extractDescriptors(image1, desc2);
 
+     /*
+     // Type Mismatch
      double[] sig1 = DBScan.cluster(desc1);
      double[] sig2 = DBScan.cluster(desc2);
-     
+     */
      
      EarthMoversDistance EMD = new EarthMoversDistance();
      EMD.compute(sig1, sig2);
