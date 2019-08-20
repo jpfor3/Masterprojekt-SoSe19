@@ -35,7 +35,17 @@ public class Main
      */
      
      EarthMoversDistance EMD = new EarthMoversDistance();
-     EMD.compute(sig1, sig2);
+     //EMD.compute(sig1, sig2);
+     
+     
+     
+     ORBDetector o_detect = new ORBDetector();
+     
+     
+     System.out.println("DEBUG: Start ORB Detection");
+     o_detect.detect_keypoints(image1, image2);
+     System.out.println("DEBUG: End of ORB Detection");
+     
      
       
       
