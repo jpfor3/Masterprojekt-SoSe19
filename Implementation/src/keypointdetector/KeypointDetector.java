@@ -110,7 +110,22 @@ public class KeypointDetector {
 // ---------------------------------------------------------------------------------------------
        
 	public static MatOfKeyPoint extractDescriptors (String image, MatOfKeyPoint desc) {
-    	   
+		
+		File lib = null;
+	       String os = System.getProperty("os.name");
+	       String bitness = System.getProperty("sun.arch.data.model");
+
+	       if (os.toUpperCase().contains("WINDOWS")) {
+	           if (bitness.endsWith("64")) {
+	               lib = new File("libs//x64//" + System.mapLibraryName("opencv_java2411"));
+	           } else {
+	               lib = new File("libs//x86//" + System.mapLibraryName("opencv_java2411"));
+	           }
+	       }
+
+	    System.load(lib.getAbsolutePath());  
+		
+		
 		// Bild einlesen
 		Mat img = Highgui.imread(image, Highgui.CV_LOAD_IMAGE_COLOR);
     	   

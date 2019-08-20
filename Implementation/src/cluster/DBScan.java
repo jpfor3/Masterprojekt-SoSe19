@@ -13,12 +13,10 @@ import org.apache.commons.math3.stat.clustering.*;
 import org.opencv.core.KeyPoint;
 import org.opencv.core.MatOfKeyPoint;
 
-import com.sun.tools.javac.code.Attribute.Array;
+//import com.sun.tools.javac.code.Attribute.Array;
 
 public class DBScan {
 	
-
-
 	/**
 	 * 
 	 * @param descriptor MatOfKeyPoint jede Zeile muss einzeln augewertet werden bei Clustering
@@ -51,7 +49,39 @@ public class DBScan {
     
 	    center(list);
 	}
+
+// ---------------------------------------------------------------------------------------------
 	
+	public static void cluster2(MatOfKeyPoint descriptor)
+	{
+		
+	Collection<EuclideanDoublePoint> matOfKeypoints = new ArrayList<EuclideanDoublePoint>();	
+	Collection<KeyPoint> colkp = descriptor.toList();
+	
+	int i = 0;
+	for(int row = 0; row < descriptor.rows(); row++)
+	{
+		double[] param = new double[64];
+		for(int col = 0; col < descriptor.row(row).cols(); col++)
+		{
+			param[col] = descriptor.get(row, col)[0];
+		}
+		
+		EuclideanDoublePoint edp = new EuclideanDoublePoint(param);
+		matOfKeypoints.add(edp);
+	}
+		DBSCANClusterer<EuclideanDoublePoint> cls = new DBSCANClusterer<EuclideanDoublePoint>(0.1, 4);
+	    List<Cluster<EuclideanDoublePoint>> list = cls.cluster(matOfKeypoints);
+	    System.out.println("\nListe: " );
+	    for(int count = 0; count < list.size(); count++)
+	    {
+	    //System.out.println(list.get(count).getPoints()+ "\n");
+	    }
+    
+	    center(list);
+	}
+	
+// ------------------------------------------------------------------------------------------------
 	
     //Center berechnen
 	private static void center(List<Cluster<EuclideanDoublePoint>> list)
