@@ -21,7 +21,9 @@ public class Main
      String image1 =  "resources/images/HansSarpei.jpg";
      String image2 =  "resources/images/Schalketrikot.jpg";
      
-     KeypointDetector.SurfDetector(image1, image2);    
+     //KeypointDetector.SurfDetector(image1, image2);
+     ORBDetector det = new ORBDetector();
+     det.detect_keypoints(image1, image2);
    }
    
   

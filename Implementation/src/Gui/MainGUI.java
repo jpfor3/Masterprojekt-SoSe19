@@ -1,13 +1,21 @@
 package Gui;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import keypointdetector.KeypointDetector;
+import keypointdetector.ORBDetector;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
+
+import org.opencv.core.Core;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
@@ -19,6 +27,7 @@ public class MainGUI {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -86,6 +95,22 @@ public class MainGUI {
 		
 		JButton btnNewButton = new JButton("Suche starten");
 		frmWhip.getContentPane().add(btnNewButton, "cell 2 17 6 1");
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String image1 =  "resources/images/HansSarpei.jpg";
+			     String image2 =  "resources/images/Schalketrikot.jpg";
+			     
+			     
+			    //JFrame frame = new JFrame("Result");
+			    //frame.setVisible(true);
+			     ORBDetector det = new ORBDetector();
+			     det.detect_keypoints(image1, image2);
+				
+			}
+		});
 	}
 
 }

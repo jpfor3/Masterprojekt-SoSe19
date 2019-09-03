@@ -13,6 +13,13 @@ import org.opencv.highgui.Highgui;
 import org.opencv.imgcodecs.Imgcodecs;
 
 import java.util.List;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+import java.awt.Dimension;
+import java.io.File;
 import java.util.ArrayList;
 
 import org.opencv.core.Mat;
@@ -28,6 +35,21 @@ public class ORBDetector {
 	public void detect_keypoints (String image1, String image2) {
 		
 		// Vorabversion abgeschrieben vom Flann_Matcher-tutorial, adaptiert von SURF auf ORB
+		
+		   File lib = null;
+	       String os = System.getProperty("os.name");
+	       String bitness = System.getProperty("sun.arch.data.model");
+
+	       if (os.toUpperCase().contains("WINDOWS")) {
+	           if (bitness.endsWith("64")) {
+	               lib = new File("libs//x64//" + System.mapLibraryName("opencv_java2411"));
+	           } else {
+	               lib = new File("libs//x86//" + System.mapLibraryName("opencv_java2411"));
+	           }
+	       }
+
+	       System.out.println(lib.getAbsolutePath());
+	       System.load(lib.getAbsolutePath());
 		
 		ORB orb = ORB.create();
 		
@@ -47,7 +69,7 @@ public class ORBDetector {
 		orb.detectAndCompute(img1, new Mat(), keypoints1, descriptors1);
 		orb.detectAndCompute(img2, new Mat(), keypoints2, descriptors2);
 		
-		
+		System.out.println("Creating Matcher...");
 		DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_HAMMING);
 		List<MatOfDMatch> knnMatches = new ArrayList<>();
 		matcher.knnMatch(descriptors1, descriptors2, knnMatches, 2);
@@ -74,11 +96,18 @@ public class ORBDetector {
 		Mat imgmatches = new Mat();
 		Features2d.drawMatches(img1, keypoints1, img2, keypoints2, goodMatches, imgmatches, Scalar.all(-1), Scalar.all(-1), new MatOfByte(), Features2d.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS);
 		
+		System.out.println("Showing Matches...");
+		//HighGui.imshow("Good Matches", imgmatches);
+		//HighGui.waitKey(0);
 		
-		HighGui.imshow("Good Matches", imgmatches);
-		HighGui.waitKey(0);
+		JFrame frame = new JFrame("Result");
+		frame.setSize(1280, 960);
+		frame.add(new JLabel(new ImageIcon(HighGui.toBufferedImage(imgmatches))));
+	    frame.setVisible(true);
 		
-		System.exit(0);
+		
+		System.out.println("Done.");
+		//System.exit(0);
 		
 		
 		
