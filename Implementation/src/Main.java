@@ -1,17 +1,22 @@
+import AKAZE.AKAZEMatch;
 import AKAZE.AKAZEMatchDemo;
-import keypointdetector.*;
-import cluster.*;
-import Distanzmasse.*;
+import EMD.Feature2D;
+import EMD.JFastEMD;
+import EMD.Signature;
+import cluster.DBScan;
+import keypointdetector.KeypointDetector;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.opencv.core.Core;
-import org.opencv.core.Mat;
 import org.opencv.core.MatOfKeyPoint;
 
 
 public class Main
 {
+	
+
    public static void main( String[] args )
    {
 	 
@@ -21,10 +26,11 @@ public class Main
      String image1 =  "resources/images/HansSarpei.jpg";
      String image2 =  "resources/images/Schalketrikot.jpg";
      
-     //KeypointDetector.SurfDetector(image1, image2);
-     ORBDetector det = new ORBDetector();
-     det.detect_keypoints(image1, image2);
+      KeypointDetector.SurfDetector(image1, image2);    
+      //AKAZEMatch Akaze = new AKAZEMatch();
+      //Akaze.run(image1, image2);
+      
    }
    
-  
+   
 }

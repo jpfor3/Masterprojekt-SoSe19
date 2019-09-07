@@ -11,14 +11,16 @@ import org.opencv.features2d.DescriptorMatcher;
 import org.opencv.features2d.FeatureDetector;
 import org.opencv.features2d.Features2d;
 import org.opencv.features2d.KeyPoint;
+import org.opencv.highgui.HighGui;
 import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
-//import org.opencv.xfeatures2d.PCTSignatures;
+import org.opencv.xfeatures2d.PCTSignatures;
 
 import cluster.DBScan;
 import cluster.KMeans;
 
 import java.io.File;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -27,7 +29,11 @@ import java.util.List;
 import java.util.Map;
 
 
+
 public class KeypointDetector {
+
+    public static List<MatOfKeyPoint> _descriptorList = new ArrayList<MatOfKeyPoint>();
+	private static List<List<double[]>> _imageList = new ArrayList<List<double[]>>();
 
 	public static void SurfDetector(String image1, String image2){
 	 
@@ -94,83 +100,67 @@ public class KeypointDetector {
        Highgui.imwrite("resources/images/outputRefImage.jpg", outputRefImage);
        Highgui.imwrite("resources/images/outputCmpImage.jpg", outputCmpImage);
        
-       List<MatOfKeyPoint> clusterList = new ArrayList<MatOfKeyPoint>();
-       clusterList.add(refDescriptors);
-       clusterList.add(cmpDescriptors);
-
-
-       System.out.println("Creating clusters on Keypoints...");
-       for(MatOfKeyPoint kp : clusterList)
-       {
-    	   DBScan.cluster(kp);
-       }
-	
-	}
-       
-// ---------------------------------------------------------------------------------------------
-       
-	public static MatOfKeyPoint extractDescriptors (String image, MatOfKeyPoint desc) {
-		
-		File lib = null;
-	       String os = System.getProperty("os.name");
-	       String bitness = System.getProperty("sun.arch.data.model");
-
-	       if (os.toUpperCase().contains("WINDOWS")) {
-	           if (bitness.endsWith("64")) {
-	               lib = new File("libs//x64//" + System.mapLibraryName("opencv_java2411"));
-	           } else {
-	               lib = new File("libs//x86//" + System.mapLibraryName("opencv_java2411"));
-	           }
-	       }
-
-	    System.load(lib.getAbsolutePath());  
-		
-		
-		// Bild einlesen
-		Mat img = Highgui.imread(image, Highgui.CV_LOAD_IMAGE_COLOR);
-    	   
-    	// Zunächst KeyPoints bestimmen
-    	MatOfKeyPoint refKeyPoints = new MatOfKeyPoint();
-    	   
-    	FeatureDetector featureDetector = FeatureDetector.create(FeatureDetector.SURF);
-        featureDetector.detect(img, refKeyPoints);
-           
-        // Deskriptoren aus Keypoints ermitteln
-        MatOfKeyPoint Descriptors = new MatOfKeyPoint();
-        DescriptorExtractor descriptorExtractor = DescriptorExtractor.create(DescriptorExtractor.SURF);
-        descriptorExtractor.compute(img, refKeyPoints, Descriptors);
-        desc = Descriptors;
-           
-        return desc;
-	}       
-       
-// ---------------------------------------------------------------------------------------------
-       
        //TODO: Signaturen und Distanzmaß, Indizierung
-       
-       
-       // 1. Clustern mit k-means oder DBScan 
-       // 2. Generiertes Clusterset entspricht einer Signatur 
-       // 3. Input Clusterset des ausgewählten Bilds mit dem des zu vergleichenden (double [])
-       // 4. Berechnung der Earth Movers Distance
-       
-       
-       
-       
-       
        
        
        //DBScan; WEKA; JavaML als mögliche Library
        //Cure als möglicher Algorithmus
        
+       _descriptorList.add(refDescriptors);
+       _descriptorList.add(cmpDescriptors);
 
+       System.out.println("KP Detection Ended....");
        
-     
+
+       System.out.println("Creating clusters on Keypoints...");
+       for(MatOfKeyPoint kp : _descriptorList)
+       {
+    	  List<double[]> clusterlist = DBScan.cluster(kp);
+     	  _imageList.add(clusterlist);
+    	   
+       }
+ 	
+       System.out.println("Clustering Ended....");
+       
+      double sumDist = 0; 
+ 	  for(int i=0; i < _imageList.get(0).size() ; i++)
+ 	  {
+ 	   	 for(int j=0; j < _imageList.get(1).size(); j++)
+ 	   	 {
+ 	   		 double euclDist = euclDistance(_imageList.get(0).get(i), _imageList.get(1).get(j));
+ 	   		 System.out.println("\n Distance between Cluster " + i + " of Image 1 and Cluster " + j + " of Image 2: " + euclDist);
+ 	   		 
+ 	   		 System.out.println("Mass for Cluster " + i + " and " + j + ": " + (DBScan._massList.get(0)[i] + DBScan._massList.get(1)[j]));
+ 	   		 double weightDist = euclDist * (DBScan._massList.get(0)[i] + DBScan._massList.get(1)[j]);
+ 	   		 
+ 	   		 sumDist += weightDist;
+ 	   	 } 
+ 	
+ 	  }
+ 	  double overAllMass = 0;
+ 	  
+ 	  for(int i = 0; i < DBScan._massList.size(); i++)
+ 	  {
+ 		  for(int j = 0; j < DBScan._massList.get(i).length; j++)
+ 		  {
+ 			  overAllMass += DBScan._massList.get(i)[j];
+ 		  }
+ 	  }
+ 	  
+ 	  double normDist = sumDist / overAllMass;
+ 	  
+ 	  System.out.println("\n\n Distance between Image 0 and 1: " + normDist);
+ 	  
+ 	  //Probleme mit EMD: Optimierungsprobleme bei Zuweisung der Erdhaufen zu Löchern
+ 	  //				  Penalty, falls Erde übrig bleibt
+ 	  
        /**List<Mat> clusterList = new ArrayList<Mat>();
        Mat clusterinput1 = (Mat) refDescriptors;
        Mat clusterinput2 = (Mat) cmpDescriptors;
        clusterList.add(clusterinput1);
        clusterList.add(clusterinput2);
+
+
        System.out.println("Creating clusters on Keypoints...");
        for(Mat mat : clusterList)
        {
@@ -183,12 +173,14 @@ public class KeypointDetector {
        /**List<Mat> clusterList2 = new ArrayList<Mat>();
        clusterList2.add(referenceImg);
        clusterList2.add(compareImg);
+
        PCTSignatures signature = PCTSignatures.create();
        signature.computeSignatures(clusterList2, new ArrayList<Mat>(2));
        
        System.out.println("Drawing clusters on compare image...");
        for(Mat mat : clusterList2)
        {
+
     	   PCTSignatures.drawSignature(mat, new Mat(), new Mat());
        }
        */
@@ -199,47 +191,65 @@ public class KeypointDetector {
        DescriptorMatcher descriptorMatcher = DescriptorMatcher.create(DescriptorMatcher.FLANNBASED);
        System.out.println("Matching ref and cmp images...");
        descriptorMatcher.knnMatch(refDescriptors, cmpDescriptors, matches, 2);
+
        System.out.println("Calculating good match list...");
        LinkedList<DMatch> goodMatchesList = new LinkedList<DMatch>();
+
        float nndrRatio = 0.7f;
+
        for (int i = 0; i < matches.size(); i++) {
            MatOfDMatch matofDMatch = matches.get(i);
            DMatch[] dmatcharray = matofDMatch.toArray();
            DMatch m1 = dmatcharray[0];
            DMatch m2 = dmatcharray[1];
+
            if (m1.distance <= m2.distance * nndrRatio) {
                goodMatchesList.addLast(m1);
+
            }
        }
+
        if (goodMatchesList.size() >= 7) {
            System.out.println("Object Found!!!");
+
            List<KeyPoint> objKeypointlist = refKeyPoints.toList();
            List<KeyPoint> scnKeypointlist = cmpKeyPoints.toList();
+
            LinkedList<Point> objectPoints = new LinkedList<>();
            LinkedList<Point> scenePoints = new LinkedList<>();
+
            for (int i = 0; i < goodMatchesList.size(); i++) {
                objectPoints.addLast(objKeypointlist.get(goodMatchesList.get(i).queryIdx).pt);
                scenePoints.addLast(scnKeypointlist.get(goodMatchesList.get(i).trainIdx).pt);
            }
+
            MatOfPoint2f objMatOfPoint2f = new MatOfPoint2f();
            objMatOfPoint2f.fromList(objectPoints);
            MatOfPoint2f scnMatOfPoint2f = new MatOfPoint2f();
            scnMatOfPoint2f.fromList(scenePoints);
+
            Mat homography = Calib3d.findHomography(objMatOfPoint2f, scnMatOfPoint2f, Calib3d.RANSAC, 3);
+
            Mat obj_corners = new Mat(4, 1, CvType.CV_32FC2);
            Mat scene_corners = new Mat(4, 1, CvType.CV_32FC2);
+
            obj_corners.put(0, 0, new double[]{0, 0});
            obj_corners.put(1, 0, new double[]{referenceImg.cols(), 0});
            obj_corners.put(2, 0, new double[]{referenceImg.cols(), referenceImg.rows()});
            obj_corners.put(3, 0, new double[]{0, referenceImg.rows()});
+
            System.out.println("Transforming object corners to scene corners...");
            Core.perspectiveTransform(obj_corners, scene_corners, homography);
+
            Mat img = Highgui.imread(cmpImage, Highgui.CV_LOAD_IMAGE_COLOR);
+
           
            System.out.println("Drawing matches image...");
            MatOfDMatch goodMatches = new MatOfDMatch();
            goodMatches.fromList(goodMatchesList);
+
            Features2d.drawMatches(referenceImg, refKeyPoints, compareImg, cmpKeyPoints, goodMatches, matchoutput, matchestColor, newKeypointColor, new MatOfByte(), 2);
+
            Highgui.imwrite("resources/images/outputImage2.jpg", outputImage);
            Highgui.imwrite("resources/images/matchoutput.jpg", matchoutput);
            Highgui.imwrite("resources/images/img.jpg", img);
@@ -252,3 +262,19 @@ public class KeypointDetector {
 
    }
 	
+	 public static double euclDistance(double[] centroid1, double[] centroid2)
+	   {
+		double sumsquaredistances = 0;
+		for(int i = 0; i < centroid1.length; i++)
+		{
+			double squaredistances = (centroid1[i] - centroid2[i]) *  (centroid1[i] - centroid2[i]);
+			sumsquaredistances += squaredistances;
+		}
+		
+		double euclideanDist = Math.sqrt(sumsquaredistances);
+		
+		return euclideanDist;
+		   
+	   }
+	
+}
