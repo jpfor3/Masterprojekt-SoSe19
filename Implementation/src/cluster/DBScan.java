@@ -2,6 +2,7 @@ package cluster;
 
 import java.awt.geom.Point2D;
 
+
 import org.apache.commons.math3.ml.distance.EarthMoversDistance;
 
 import java.util.ArrayList;
@@ -14,8 +15,6 @@ import java.util.function.Consumer;
 import org.apache.commons.math3.stat.clustering.*;
 import org.opencv.core.KeyPoint;
 import org.opencv.core.MatOfKeyPoint;
-
-import com.sun.tools.javac.code.Attribute.Array;
 
 
 

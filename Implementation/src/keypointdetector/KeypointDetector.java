@@ -33,7 +33,6 @@ import java.util.Map;
 public class KeypointDetector {
 
     public static List<MatOfKeyPoint> _descriptorList = new ArrayList<MatOfKeyPoint>();
-	private static List<List<double[]>> _imageList = new ArrayList<List<double[]>>();
 
 	public static void SurfDetector(String image1, String image2){
 	 
@@ -112,47 +111,9 @@ public class KeypointDetector {
        System.out.println("KP Detection Ended....");
        
 
-       System.out.println("Creating clusters on Keypoints...");
-       for(MatOfKeyPoint kp : _descriptorList)
-       {
-    	  List<double[]> clusterlist = DBScan.cluster(kp);
-     	  _imageList.add(clusterlist);
-    	   
-       }
- 	
-       System.out.println("Clustering Ended....");
+      
        
-      double sumDist = 0; 
- 	  for(int i=0; i < _imageList.get(0).size() ; i++)
- 	  {
- 	   	 for(int j=0; j < _imageList.get(1).size(); j++)
- 	   	 {
- 	   		 double euclDist = euclDistance(_imageList.get(0).get(i), _imageList.get(1).get(j));
- 	   		 System.out.println("\n Distance between Cluster " + i + " of Image 1 and Cluster " + j + " of Image 2: " + euclDist);
- 	   		 
- 	   		 System.out.println("Mass for Cluster " + i + " and " + j + ": " + (DBScan._massList.get(0)[i] + DBScan._massList.get(1)[j]));
- 	   		 double weightDist = euclDist * (DBScan._massList.get(0)[i] + DBScan._massList.get(1)[j]);
- 	   		 
- 	   		 sumDist += weightDist;
- 	   	 } 
- 	
- 	  }
- 	  double overAllMass = 0;
- 	  
- 	  for(int i = 0; i < DBScan._massList.size(); i++)
- 	  {
- 		  for(int j = 0; j < DBScan._massList.get(i).length; j++)
- 		  {
- 			  overAllMass += DBScan._massList.get(i)[j];
- 		  }
- 	  }
- 	  
- 	  double normDist = sumDist / overAllMass;
- 	  
- 	  System.out.println("\n\n Distance between Image 0 and 1: " + normDist);
- 	  
- 	  //Probleme mit EMD: Optimierungsprobleme bei Zuweisung der Erdhaufen zu Löchern
- 	  //				  Penalty, falls Erde übrig bleibt
+
  	  
        /**List<Mat> clusterList = new ArrayList<Mat>();
        Mat clusterinput1 = (Mat) refDescriptors;
@@ -262,19 +223,5 @@ public class KeypointDetector {
 
    }
 	
-	 public static double euclDistance(double[] centroid1, double[] centroid2)
-	   {
-		double sumsquaredistances = 0;
-		for(int i = 0; i < centroid1.length; i++)
-		{
-			double squaredistances = (centroid1[i] - centroid2[i]) *  (centroid1[i] - centroid2[i]);
-			sumsquaredistances += squaredistances;
-		}
-		
-		double euclideanDist = Math.sqrt(sumsquaredistances);
-		
-		return euclideanDist;
-		   
-	   }
-	
+
 }
