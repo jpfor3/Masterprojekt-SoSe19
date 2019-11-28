@@ -7,36 +7,48 @@ import cluster.DBScan;
 public class GewichteteDistanz {
 
 	 
-	 public static double calcDistances(List<List<double[]>> imageList)
+	 public static List<Double> calcDistances(List<List<double[]>> centeredDescriptors)
 	 {
 		  double sumDist = 0; 
-		  for(int i=0; i < imageList.get(0).size() ; i++)
-		  {
-		   	 for(int j=0; j < imageList.get(1).size(); j++)
-		   	 {
-		   		 double euclDist = euclDistance(imageList.get(0).get(i), imageList.get(1).get(j));
-		   		 System.out.println("\n Distance between Cluster " + i + " of Image 1 and Cluster " + j + " of Image 2: " + euclDist);
-		   		 
-		   		 System.out.println("Mass for Cluster " + i + " and " + j + ": " + (DBScan._massList.get(0)[i] + DBScan._massList.get(1)[j]));
-		   		 double weightDist = euclDist * (DBScan._massList.get(0)[i] + DBScan._massList.get(1)[j]);
-		   		 
-		   		 sumDist += weightDist;
-		   	 } 
-		
-		  }
-		  double overAllMass = 0;
+		  List <Double> listOfDistances = null;
 		  
-		  for(int i = 0; i < DBScan._massList.size(); i++)
+		  for(int g=0; g < centeredDescriptors.size(); g++)
 		  {
-			  for(int j = 0; j < DBScan._massList.get(i).length; j++)
+			  for(int h=0; h < centeredDescriptors.size(); h++)
 			  {
-				  overAllMass += DBScan._massList.get(i)[j];
+				  for(int i=0; i < centeredDescriptors.get(g).size() ; i++)
+				  {
+				   	 for(int j=0; j < centeredDescriptors.get(h).size(); j++)
+				   	 {
+				   		 double euclDist = euclDistance(centeredDescriptors.get(g).get(i), centeredDescriptors.get(h).get(j));
+				   		 //System.out.println("\n Distance between Cluster " + i + " of Image 1 and Cluster " + j + " of Image 2: " + euclDist);
+				   		 
+				   		 //System.out.println("Mass for Cluster " + i + " and " + j + ": " + (DBScan._massList.get(g)[i] + DBScan._massList.get(h)[j]));
+				   		 double weightDist = euclDist * (DBScan._massList.get(g)[i] + DBScan._massList.get(h)[j]);
+				   		 
+				   		 sumDist += weightDist;
+				   	 } 
+				
+				  }
+				  double overAllMass = 0;
+				  
+				  for(int i = 0; i < DBScan._massList.size(); i++)
+				  {
+					  for(int j = 0; j < DBScan._massList.get(i).length; j++)
+					  {
+						  overAllMass += DBScan._massList.get(i)[j];
+					  }
+				  }
+				  
+				  double normDist = sumDist / overAllMass;
+				  listOfDistances.add(normDist);
+				  System.out.println("\nDistance between image " + g + " and " + h);
 			  }
 		  }
+		 
 		  
-		  double normDist = sumDist / overAllMass;
 		  
-		  return normDist;
+		  return listOfDistances;
 		  
 		  //Probleme mit EMD: Optimierungsprobleme bei Zuweisung der Erdhaufen zu Löchern
 		  //				  Penalty, falls Erde übrig bleibt

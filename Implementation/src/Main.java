@@ -3,6 +3,7 @@ import Distanzmasse.GewichteteDistanz;
 import cluster.DBScan;
 import keypointdetector.KeypointDetector;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,32 +17,41 @@ public class Main
 
    public static void main( String[] args )
    {
-	 List<List<double[]>> imageList = new ArrayList<List<double[]>>();
-
+	 List<MatOfKeyPoint> descriptorList = new ArrayList<MatOfKeyPoint>();
+	 List<List<double[]>> centeredDescriptors = new ArrayList<List<double[]>>();
 	 
      System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-	 //System.loadLibrary("C:/opencv/opencv_2.4.11/build/java/x64/opencv_java2411.dll");
+     
      //Zu vergleichende Bilder
-     String image1 =  "resources/images/HansSarpei.jpg";
+     /**String image1 =  "resources/images/HansSarpei.jpg";
      String image2 =  "resources/images/SchalkeTrikot.jpg";
      String image3 =  "resources/images/Tennisball.jpg";
+     */
+     File folder = new File("resources/images/");
+     File[] listOfFiles = folder.listFiles();
+     List<String> images = new ArrayList<String>();
+
+     for (File file : listOfFiles) {
+         if (file.isFile()) {
+             images.add("resources/images/" + file.getName());
+         }
+     }
      
-      KeypointDetector.SurfDetector(image1, image2);    
+      KeypointDetector.SurfDetector(images);    
+      descriptorList = KeypointDetector._descriptorList;
       
       System.out.println("Creating clusters on Keypoints...");
-      for(MatOfKeyPoint kp : KeypointDetector._descriptorList)
+      
+      for(MatOfKeyPoint kp : descriptorList)
       {
    	  List<double[]> clusterlist = DBScan.cluster(kp);
-   	  imageList.add(clusterlist);
-   	   
+   	  centeredDescriptors.add(clusterlist);   
       }
 	
       System.out.println("Clustering Ended....");
       
-      double normDist = GewichteteDistanz.calcDistances(imageList);
+      List<Double> listOfDistances = GewichteteDistanz.calcDistances(centeredDescriptors);
       
-	  System.out.println("\n\n Distance between Image 0 and 1: " + normDist);
-
       //AKAZEMatch Akaze = new AKAZEMatch();
       //Akaze.run(image1, image2);
       

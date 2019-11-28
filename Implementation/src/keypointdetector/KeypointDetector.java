@@ -34,7 +34,7 @@ public class KeypointDetector {
 
     public static List<MatOfKeyPoint> _descriptorList = new ArrayList<MatOfKeyPoint>();
 
-	public static void SurfDetector(String image1, String image2){
+	public static void SurfDetector(List<String> images){
 	 
 	   File lib = null;
        String os = System.getProperty("os.name");
@@ -51,64 +51,52 @@ public class KeypointDetector {
        System.out.println(lib.getAbsolutePath());
        System.load(lib.getAbsolutePath());
 
-       String refImage = image1;
-       String cmpImage = image2;
 
        System.out.println("Started....");
        System.out.println("Loading images...");
-       Mat referenceImg = Highgui.imread(refImage, Highgui.CV_LOAD_IMAGE_COLOR);
-       Mat compareImg = Highgui.imread(cmpImage, Highgui.CV_LOAD_IMAGE_COLOR);
-
-      
        
-       MatOfKeyPoint refKeyPoints = new MatOfKeyPoint();
+       int i = 0;
+       
+       for(String image : images)
+       {
+
+       Mat img = Highgui.imread(image, Highgui.CV_LOAD_IMAGE_COLOR);    
+       MatOfKeyPoint kp = new MatOfKeyPoint();
        
        //TODO: Try other Algorithms
        FeatureDetector featureDetector = FeatureDetector.create(FeatureDetector.SURF);
        System.out.println("Detecting key points...");
-       featureDetector.detect(referenceImg, refKeyPoints);
-       KeyPoint[] keypoints = refKeyPoints.toArray();
+       featureDetector.detect(img, kp);
+       KeyPoint[] keypoints = kp.toArray();
        System.out.println(keypoints);
 
-       MatOfKeyPoint refDescriptors = new MatOfKeyPoint();
+       MatOfKeyPoint descriptors = new MatOfKeyPoint();
        DescriptorExtractor descriptorExtractor = DescriptorExtractor.create(DescriptorExtractor.SURF);
        System.out.println("Computing descriptors...");
-       descriptorExtractor.compute(referenceImg, refKeyPoints, refDescriptors);
+       descriptorExtractor.compute(img, kp, descriptors);
 
        // Create the matrix for output image.
-       Mat outputRefImage = new Mat(referenceImg.rows(), referenceImg.cols(), Highgui.CV_LOAD_IMAGE_COLOR);
-       Scalar refKeypointColor = new Scalar(255, 0, 0);
+       Mat outputImage = new Mat(img.rows(), img.cols(), Highgui.CV_LOAD_IMAGE_COLOR);
+       Scalar KeypointColor = new Scalar(255, 0, 0);
 
        System.out.println("Drawing key points on reference image...");
-       Features2d.drawKeypoints(referenceImg, refKeyPoints, outputRefImage, refKeypointColor, 0);
+       Features2d.drawKeypoints(img, kp, outputImage, KeypointColor, 0);
 
-       // Match reference image with the compare image
-       MatOfKeyPoint cmpKeyPoints = new MatOfKeyPoint();
-       MatOfKeyPoint cmpDescriptors = new MatOfKeyPoint();
-       System.out.println("Detecting key points in compare image...");
-       featureDetector.detect(compareImg, cmpKeyPoints);
-       System.out.println("Computing descriptors in compare image...");
-       descriptorExtractor.compute(compareImg, cmpKeyPoints, cmpDescriptors);
-    
-       Mat outputCmpImage = new Mat(compareImg.rows() , compareImg.cols() , Highgui.CV_LOAD_IMAGE_COLOR);
-       Scalar cmpKeypointColor = new Scalar(0, 255, 0);
+       i +=1;
+       Highgui.imwrite("resources/output_images/image(" + i + ").jpg", outputImage);
+       
+       _descriptorList.add(descriptors);
+       }
+       
+       System.out.println("KP Detection Ended....");
 
-       System.out.println("Drawing key points on compare image...");
-       Features2d.drawKeypoints(compareImg, cmpKeyPoints, outputCmpImage, cmpKeypointColor, 0);
-       
-       Highgui.imwrite("resources/images/outputRefImage.jpg", outputRefImage);
-       Highgui.imwrite("resources/images/outputCmpImage.jpg", outputCmpImage);
-       
        //TODO: Signaturen und Distanzmaß, Indizierung
        
        
        //DBScan; WEKA; JavaML als mögliche Library
        //Cure als möglicher Algorithmus
        
-       _descriptorList.add(refDescriptors);
-       _descriptorList.add(cmpDescriptors);
 
-       System.out.println("KP Detection Ended....");
        
 
       
