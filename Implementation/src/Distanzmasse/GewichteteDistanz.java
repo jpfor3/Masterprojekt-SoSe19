@@ -1,5 +1,6 @@
 package Distanzmasse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cluster.DBScan;
@@ -8,16 +9,18 @@ public class GewichteteDistanz {
 
 	 
 	 public static List<Double> calcDistances(List<List<double[]>> centeredDescriptors)
-	 {
-		  double sumDist = 0; 
-		  List <Double> listOfDistances = null;
+	 { 
+		  List <Double> listOfDistances = new ArrayList<Double>();
 		  
 		  for(int g=0; g < centeredDescriptors.size(); g++)
 		  {
 			  for(int h=0; h < centeredDescriptors.size(); h++)
 			  {
+				  double sumDist = 0;
+				  
 				  for(int i=0; i < centeredDescriptors.get(g).size() ; i++)
 				  {
+					  
 				   	 for(int j=0; j < centeredDescriptors.get(h).size(); j++)
 				   	 {
 				   		 double euclDist = euclDistance(centeredDescriptors.get(g).get(i), centeredDescriptors.get(h).get(j));
@@ -42,7 +45,7 @@ public class GewichteteDistanz {
 				  
 				  double normDist = sumDist / overAllMass;
 				  listOfDistances.add(normDist);
-				  System.out.println("\nDistance between image " + g + " and " + h);
+				  System.out.println("\nDistance between image " + g + " and " + h + ": " + normDist);
 			  }
 		  }
 		 

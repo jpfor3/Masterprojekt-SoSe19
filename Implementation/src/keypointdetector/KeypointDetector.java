@@ -82,10 +82,12 @@ public class KeypointDetector {
        System.out.println("Drawing key points on reference image...");
        Features2d.drawKeypoints(img, kp, outputImage, KeypointColor, 0);
 
-       i +=1;
-       Highgui.imwrite("resources/output_images/image(" + i + ").jpg", outputImage);
        
+       Highgui.imwrite("resources/output_images/image(" + i + ").jpg", outputImage);
+
        _descriptorList.add(descriptors);
+       
+       i +=1;
        }
        
        System.out.println("KP Detection Ended....");
