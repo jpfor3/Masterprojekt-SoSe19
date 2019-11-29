@@ -1,5 +1,5 @@
 import AKAZE.AKAZEMatchDemo;
-import Distanzmasse.GewichteteDistanz;
+import Distanzmasse.FastEMD;
 import cluster.DBScan;
 import keypointdetector.KeypointDetector;
 
@@ -50,7 +50,7 @@ public class Main
 	
       System.out.println("Clustering Ended....");
       
-      List<Double> listOfDistances = GewichteteDistanz.calcDistances(centeredDescriptors);
+      List<Double> listOfDistances = FastEMD.calcDistances(centeredDescriptors);
       
       //AKAZEMatch Akaze = new AKAZEMatch();
       //Akaze.run(image1, image2);

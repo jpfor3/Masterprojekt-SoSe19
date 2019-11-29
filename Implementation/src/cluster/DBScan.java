@@ -3,6 +3,7 @@ package cluster;
 import java.awt.geom.Point2D;
 
 
+
 import org.apache.commons.math3.ml.distance.EarthMoversDistance;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import org.opencv.core.MatOfKeyPoint;
 
 public class DBScan {
 	
-	public static List<int[]> _massList = new ArrayList<int[]>();
+	public static List<double[]> _massList = new ArrayList<double[]>();
 
 	/**
 	 * 
@@ -46,7 +47,7 @@ public class DBScan {
 		DBSCANClusterer<EuclideanDoublePoint> cls = new DBSCANClusterer<EuclideanDoublePoint>(0.1, 4);
 	    List<Cluster<EuclideanDoublePoint>> list = cls.cluster(matOfKeypoints);
 	    System.out.println("\n___________________________Image_______________________________\n: " );
-	    int[] masses = new int[list.size()];
+	    double[] masses = new double[list.size()];
 	    for(int count = 0; count < list.size(); count++)
 	    {
 	    	double[] centroid = new double[64];
