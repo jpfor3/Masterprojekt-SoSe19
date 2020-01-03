@@ -120,11 +120,4 @@ public class DBScan {
 	}
 	*/
 
-	
-	
-    
-	    
-	
-	
-	//TODO: Distanzmaﬂe berechnen
 }
