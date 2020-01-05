@@ -9,7 +9,9 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/OpenCV_2.4.11"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/OpenCV-4.1.0"/>
-	<classpathentry kind="lib" path="C:/opencv/build/java/commons-math3-3.6.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/commons-collections"/>
+	<classpathentry kind="lib" path="C:/opencv/build/java/collections-generic-4.01.jar"/>
 	<classpathentry kind="lib" path="C:/opencv/build/java/JFastEMD2.jar"/>
+	<classpathentry kind="lib" path="C:/opencv/build/java/commons-math3-3.6.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

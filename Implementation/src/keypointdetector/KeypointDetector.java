@@ -6,6 +6,7 @@ import org.opencv.calib3d.Calib3d;
 
 
 
+
 import org.opencv.core.*;
 import org.opencv.features2d.DescriptorExtractor;
 import org.opencv.features2d.DescriptorMatcher;
@@ -57,7 +58,7 @@ public class KeypointDetector {
        System.out.println("Started....");
        System.out.println("Loading images...");
        
-       int i = 1;
+       int i = 0;
        
        for(String image : images)
        {
@@ -73,34 +74,36 @@ public class KeypointDetector {
 	 private MatOfKeyPoint detectSURFKeypoints(String image, int i)
      {
   	   Mat img = Highgui.imread(image, Highgui.CV_LOAD_IMAGE_COLOR);    
-         MatOfKeyPoint kp = new MatOfKeyPoint();
+       MatOfKeyPoint kp = new MatOfKeyPoint();
          
-         //TODO: Try other Algorithms
-         FeatureDetector featureDetector = FeatureDetector.create(FeatureDetector.SURF);
-         System.out.println("Detecting key points...");
-         featureDetector.detect(img, kp);
-         KeyPoint[] keypoints = kp.toArray();
-         System.out.println(keypoints);
-
-         MatOfKeyPoint descriptors = new MatOfKeyPoint();
-         DescriptorExtractor descriptorExtractor = DescriptorExtractor.create(DescriptorExtractor.SURF);
-         System.out.println("Computing descriptors...");
-         descriptorExtractor.compute(img, kp, descriptors);
-
-         // Create the matrix for output image.
-         Mat outputImage = new Mat(img.rows(), img.cols(), Highgui.CV_LOAD_IMAGE_COLOR);
-         Scalar KeypointColor = new Scalar(255, 0, 0);
-
-         System.out.println("Drawing key points on reference image...");
-         Features2d.drawKeypoints(img, kp, outputImage, KeypointColor, 0);
-
+       //TODO: Try other Algorithms
+       FeatureDetector featureDetector = FeatureDetector.create(FeatureDetector.SURF);
+       featureDetector.detect(img, kp);
+       
+       MatOfKeyPoint descriptors = new MatOfKeyPoint();
+       DescriptorExtractor descriptorExtractor = DescriptorExtractor.create(DescriptorExtractor.SURF);
+       descriptorExtractor.compute(img, kp, descriptors);
          
-         Highgui.imwrite("resources/output_images/image(" + i + ").jpg", outputImage);
-
-         
-         return descriptors;
+       return descriptors;
          
      }
+	 
+	 public static void drawKeypoints(String image, int i)
+	 {
+		 Mat img = Highgui.imread(image, Highgui.CV_LOAD_IMAGE_COLOR);    
+         MatOfKeyPoint kp = new MatOfKeyPoint();
+         
+         FeatureDetector featureDetector = FeatureDetector.create(FeatureDetector.SURF);
+         featureDetector.detect(img, kp);
+         
+		 // Create the matrix for output image.
+         Mat outputImage = new Mat(img.rows(), img.cols(), Highgui.CV_LOAD_IMAGE_COLOR);
+         Scalar KeypointColor = new Scalar(255, 0, 0);
+         
+         Features2d.drawKeypoints(img, kp, outputImage, KeypointColor, 0);
+         
+         Highgui.imwrite("resources/sorted_output_images/" + i + ".jpg", outputImage);
+	 }
 	 
 	 public List<MatOfKeyPoint> getDescriptorList()
 	 {

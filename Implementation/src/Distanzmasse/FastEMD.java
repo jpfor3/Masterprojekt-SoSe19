@@ -12,6 +12,8 @@ import cluster.DBScan;
 public class FastEMD {
 
 	private static List<List<double[]>> _centeredDescriptors;
+ 	private static List<Double> _listOfDistances = new ArrayList<Double>();
+
 	 /**
 	  * Method to which calculates the distances between every image based on EMD.
 	  * To perform the EMD algorithm an external .jar file from GitHub has been used. In order to use
@@ -125,15 +127,14 @@ public class FastEMD {
 		   	  sigH.setFeatures(features1DH);
 		   	  
 		   	  //Calculate distance between image g and h
-		   	  List<Double> listOfDistances = new ArrayList<Double>();
 		   	  double EMDdistance = JFastEMD.distance(sigG, sigH, -1);
 		   	  System.out.println("\nDistance between image 0 and image " + h + " is " + EMDdistance);
-		   	  listOfDistances.add(EMDdistance);
+		   	  _listOfDistances.add(EMDdistance);
 			   	  
 			  }
 		  
 		 
-		  return null;
+		  return _listOfDistances;
 		  		  
 		  //Probleme mit EMD: Optimierungsprobleme bei Zuweisung der Erdhaufen zu Löchern
 		  //				  Penalty, falls Erde übrig bleibt
