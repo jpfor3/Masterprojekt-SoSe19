@@ -23,20 +23,22 @@ import org.opencv.core.MatOfKeyPoint;
 public class DBScan {
 	
 	public static List<double[]> _massList = new ArrayList<double[]>();
-
+	public static MatOfKeyPoint _descriptor;
 	/**
 	 * 
 	 * @param descriptor MatOfKeyPoint jede Zeile muss einzeln augewertet werden bei Clustering
 	 */
 	public static List<double[]> cluster(MatOfKeyPoint descriptor)
 	{
+	_descriptor = descriptor;
 	List<double[]> centroidlist = new ArrayList<double[]>();
 		
 	Collection<EuclideanDoublePoint> matOfKeypoints = new ArrayList<EuclideanDoublePoint>();	
 	
+	//System.out.println("\nKP: " + _descriptor.cols());
 	for(int row = 0; row < descriptor.rows(); row++)
 	{
-		double[] param = new double[64];
+		double[] param = new double[_descriptor.cols()];
 		for(int col = 0; col < descriptor.row(row).cols(); col++)
 		{
 			param[col] = descriptor.get(row, col)[0];
@@ -51,7 +53,7 @@ public class DBScan {
 	    double[] masses = new double[list.size()];
 	    for(int count = 0; count < list.size(); count++)
 	    {
-	    	double[] centroid = new double[64];
+	    	double[] centroid = new double[_descriptor.cols()];
 	    	int mass = list.get(count).getPoints().size();
 	    	masses[count] = mass;
 		    centroid = center(count, list, mass, centroid);
@@ -71,28 +73,28 @@ public class DBScan {
 	{
 			double[] centroids = centroid;
 		
-			double[] sumOfDescriptor = new double[64];
+			double[] sumOfDescriptor = new double[_descriptor.cols()];
 			
 			for(int count2 = 0; count2 < list.get(count).getPoints().size(); count2++)
 	    	{
 				//Aufsummierung der einzelnen Keypoints im Cluster
 	    		EuclideanDoublePoint edp = list.get(count).getPoints().get(count2);
 	    		double[] newcenter =  edp.getPoint();
-	    		for(int i = 0; i < 64; i++)
+	    		for(int i = 0; i < _descriptor.cols(); i++)
 	    		{
 	    		sumOfDescriptor[i] += newcenter[i];
 	    		}
 	    	}
 			
 			//Berechnung des Mittelwerts im Cluster
-			for(int i = 0; i < 64; i++)
+			for(int i = 0; i < _descriptor.cols(); i++)
     		{
 			centroids[i] = sumOfDescriptor[i] / list.get(count).getPoints().size();
     		}
 			
 			StringBuilder allCentroids = new StringBuilder();
 	
-			for(int i = 0; i <64; i++)
+			for(int i = 0; i <_descriptor.cols(); i++)
 			{
 				allCentroids.append(centroids[i] + "; ");
 			}

@@ -1,41 +1,21 @@
 package keypointdetector;
-import org.opencv.calib3d.Calib3d;
-
-
-
-
-
-
-
 import org.opencv.core.*;
 import org.opencv.features2d.DescriptorExtractor;
-import org.opencv.features2d.DescriptorMatcher;
 import org.opencv.features2d.FeatureDetector;
 import org.opencv.features2d.Features2d;
-import org.opencv.features2d.KeyPoint;
-import org.opencv.highgui.HighGui;
 import org.opencv.highgui.Highgui;
-import org.opencv.imgproc.Imgproc;
-import org.opencv.xfeatures2d.PCTSignatures;
-
-import cluster.DBScan;
-import cluster.KMeans;
-
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 
 
 public class KeypointDetector {
 
     public static List<MatOfKeyPoint> _descriptorList = new ArrayList<MatOfKeyPoint>();
-
+    private static String _detector;
+    private static int _kpDetector;
+    private static int _descriptorExtractor;
 
 	public KeypointDetector(List<String> images){
 	 
@@ -60,9 +40,28 @@ public class KeypointDetector {
        
        int i = 0;
        
+       
+	   //TODO: Auswahl von detector über GUI
+	   _detector = "BRISK";
+	     
+	   switch (_detector) {
+	   case "SIFT": _kpDetector = 3;
+			   		_descriptorExtractor = 1;
+			    	break;
+	   case "SURF": _kpDetector = 4;
+	   				_descriptorExtractor = 2;
+	     		    break;
+	   case "ORB": _kpDetector = 5;
+	   				_descriptorExtractor = 3;
+	     			break;
+	   case "BRISK": _kpDetector = 11;
+	   				_descriptorExtractor = 5;
+	     			break;
+	     }
+       
        for(String image : images)
        {
-    	   MatOfKeyPoint descriptors = detectSURFKeypoints(image, i);
+    	   MatOfKeyPoint descriptors = detectKeypoints(image, i);
     	   _descriptorList.add(descriptors);
 	       i +=1;
        } 
@@ -71,17 +70,16 @@ public class KeypointDetector {
 	
 	
 	
-	 private MatOfKeyPoint detectSURFKeypoints(String image, int i)
+	 private MatOfKeyPoint detectKeypoints(String image, int i)
      {
   	   Mat img = Highgui.imread(image, Highgui.CV_LOAD_IMAGE_COLOR);    
        MatOfKeyPoint kp = new MatOfKeyPoint();
-         
-       //TODO: Try other Algorithms
-       FeatureDetector featureDetector = FeatureDetector.create(FeatureDetector.SURF);
+       
+       FeatureDetector featureDetector = FeatureDetector.create(_kpDetector);
        featureDetector.detect(img, kp);
        
        MatOfKeyPoint descriptors = new MatOfKeyPoint();
-       DescriptorExtractor descriptorExtractor = DescriptorExtractor.create(DescriptorExtractor.SURF);
+       DescriptorExtractor descriptorExtractor = DescriptorExtractor.create(_descriptorExtractor);
        descriptorExtractor.compute(img, kp, descriptors);
          
        return descriptors;
@@ -93,7 +91,7 @@ public class KeypointDetector {
 		 Mat img = Highgui.imread(image, Highgui.CV_LOAD_IMAGE_COLOR);    
          MatOfKeyPoint kp = new MatOfKeyPoint();
          
-         FeatureDetector featureDetector = FeatureDetector.create(FeatureDetector.SURF);
+         FeatureDetector featureDetector = FeatureDetector.create(_kpDetector);
          featureDetector.detect(img, kp);
          
 		 // Create the matrix for output image.

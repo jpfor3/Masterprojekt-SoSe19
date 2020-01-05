@@ -71,7 +71,6 @@ public class Main
       for(int i = 1; i < images.size(); i++)
       {
           map.put(images.get(i), listOfDistances.get(i-1));
-          System.out.println(map.getKey(listOfDistances.get(i-1)));
       }
       
       Collections.sort(listOfDistances);
@@ -85,7 +84,6 @@ public class Main
      for(int i = 1; i < images.size(); i++)
       {
       KeypointDetector.drawKeypoints(sortedImages.get(i-1), i);
-      System.out.println(sortedImages.get(i-1));
       }
    }
    

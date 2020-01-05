@@ -27,7 +27,7 @@ public class FastEMD {
 		 _centeredDescriptors = centeredDescriptors;
 	  	  /**
 	  	   * Creation of double arrays which contain every descriptor of an image. Therefore all features of all 
-	  	   * descriptors have to be aggregated in one array of the size of the number of features (in our case 64) 
+	  	   * descriptors have to be aggregated in one array of the size of the number of features 
 	  	   * times the number of descriptors. 
 	  	   */
 		 
@@ -35,10 +35,10 @@ public class FastEMD {
 		  * Creating of array for input image
 		  */
 		  //Creating the feature array with all features
-	  	  double[] featuresG = new double[centeredDescriptors.get(0).size() * 64];
+	  	  double[] featuresG = new double[centeredDescriptors.get(0).size() * DBScan._descriptor.cols()];
 	  	  
 	  	  //Creating the array with the corresponding weights of every feature
-	  	  double[] weightsG = new double[DBScan._massList.get(0).length * 64];
+	  	  double[] weightsG = new double[DBScan._massList.get(0).length * DBScan._descriptor.cols()];
 	  	  
 	  	  int arrayPosG = 0;
 		  int weightPosG = 0;
@@ -51,10 +51,10 @@ public class FastEMD {
 			  //Copying the features from i into the feature array
 			  featuresG = concatenateFeaturesG(featuresG, arrayPosG, featurePosG, i);
 			  
-			  //Inserting the weights of every descriptor i 64 times in a row 
+			  //Inserting the weights of every descriptor i 
 			  weightsG = concatenateWeightsG(weightsG, arrayPosG, weightPosG, i);		
 			  
-			  arrayPosG += 64;			 
+			  arrayPosG += DBScan._descriptor.cols();			 
 		  }
 		  
 		  //Inserting feature and weight arrays into Signature class 
@@ -86,10 +86,10 @@ public class FastEMD {
 		  for(int h=1; h < centeredDescriptors.size(); h++)
 		  {
 			  //Creating the feature array with all features
-		  	  double[] featuresH = new double[centeredDescriptors.get(h).size() * 64];
+		  	  double[] featuresH = new double[centeredDescriptors.get(h).size() * DBScan._descriptor.cols()];
 
 		  	  //Creating the array with the corresponding weights of every feature
-		  	  double[] weightsH = new double[DBScan._massList.get(h).length * 64];
+		  	  double[] weightsH = new double[DBScan._massList.get(h).length * DBScan._descriptor.cols()];
 
 			 
 			  int arrayPosH = 0;
@@ -103,10 +103,10 @@ public class FastEMD {
 				  //Copying the features from j into the feature array
 				  featuresH = concatenateFeaturesH(featuresH, arrayPosH, featurePosH, h, j);
 				  
-				  //Inserting the weights of every descriptor j 64 times in a row 
+				  //Inserting the weights of every descriptor j 
 				  weightsH = concatenateWeightsH(weightsH, arrayPosH, weightPosH, h, j);		
 				  
-				  arrayPosH += 64;			 
+				  arrayPosH += DBScan._descriptor.cols();			 
 			  }
 			  
 			  //Inserting feature and weight arrays into Signature class 
