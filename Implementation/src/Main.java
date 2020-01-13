@@ -36,7 +36,7 @@ public class Main
      List<String> images = new ArrayList<String>();
 
      //Adding input image
-     images.add("resources/images/Burgstaller.jpg");
+     images.add("resources/images/HansSarpei.jpg");
      
      //Adding images for comparison
      for (File file : listOfFiles) {

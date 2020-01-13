@@ -126,8 +126,13 @@ public class FastEMD {
 		   	  sigH.setNumberOfFeatures(features1DH.length);
 		   	  sigH.setFeatures(features1DH);
 		   	  
-		   	  //Calculate distance between image g and h
-		   	  double EMDdistance = JFastEMD.distance(sigG, sigH, -1);
+		   	  /**Calculate distance between image g and h
+		   	  */
+		   	  
+		   	  //Choose between ground and hamming distance
+		   	  boolean hamming = true;
+		   	  
+		   	  double EMDdistance = JFastEMD.distance(sigG, sigH, -1, hamming);
 		   	  System.out.println("\nDistance between image 0 and image " + h + " is " + EMDdistance);
 		   	  _listOfDistances.add(EMDdistance);
 			   	  

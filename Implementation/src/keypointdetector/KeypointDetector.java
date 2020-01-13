@@ -42,7 +42,7 @@ public class KeypointDetector {
        
        
 	   //TODO: Auswahl von detector über GUI
-	   _detector = "BRISK";
+	   _detector = "SURF";
 	     
 	   switch (_detector) {
 	   case "SIFT": _kpDetector = 3;
