@@ -22,7 +22,7 @@ public class FastEMD {
 	  * 
 	  * @param centeredDescriptors
 	  */
-	 public static List<Double> calcDistances(List<List<double[]>> centeredDescriptors)
+	 public static List<Double> calcDistances(List<List<double[]>> centeredDescriptors, List<String> images)
 	 { 	  	  
 		 _centeredDescriptors = centeredDescriptors;
 	  	  /**
@@ -83,6 +83,7 @@ public class FastEMD {
 		  /**
 		   * Creating arrays for all h compare images 
 		   */
+	   	  
 		  for(int h=1; h < centeredDescriptors.size(); h++)
 		  {
 			  //Creating the feature array with all features
@@ -130,10 +131,10 @@ public class FastEMD {
 		   	  */
 		   	  
 		   	  //Choose between ground and hamming distance
-		   	  boolean hamming = true;
+		   	  boolean hamming = false;
 		   	  
 		   	  double EMDdistance = JFastEMD.distance(sigG, sigH, -1, hamming);
-		   	  System.out.println("\nDistance between image 0 and image " + h + " is " + EMDdistance);
+		   	  System.out.println("\nDistance between image " + images.get(0).substring(17) + " and image " + images.get(h).substring(17) + " is " + EMDdistance);
 		   	  _listOfDistances.add(EMDdistance);
 			   	  
 			  }
@@ -141,8 +142,6 @@ public class FastEMD {
 		 
 		  return _listOfDistances;
 		  		  
-		  //Probleme mit EMD: Optimierungsprobleme bei Zuweisung der Erdhaufen zu Löchern
-		  //				  Penalty, falls Erde übrig bleibt
 	 }
 	 
 	 private static double[] concatenateFeaturesG(double[] featuresG, int arrayPos, int featurePos, int descriptor)
