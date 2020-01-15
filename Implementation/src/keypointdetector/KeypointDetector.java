@@ -94,14 +94,18 @@ public class KeypointDetector {
          FeatureDetector featureDetector = FeatureDetector.create(_kpDetector);
          featureDetector.detect(img, kp);
          
+         Mat empty = new Mat();  
 		 // Create the matrix for output image.
-         Mat outputImage = new Mat(img.rows(), img.cols(), Highgui.CV_LOAD_IMAGE_COLOR);
-         Scalar KeypointColor = new Scalar(255, 0, 0);
-         
-         Features2d.drawKeypoints(img, kp, outputImage, KeypointColor, 0);
-         
-         Highgui.imwrite("resources/sorted_output_images/" + i + ".jpg", outputImage);
-	 }
+         if(!empty.dump().equals(img.dump()))
+         {
+	         Mat outputImage = new Mat(img.rows(), img.cols(), Highgui.CV_LOAD_IMAGE_COLOR);
+	         Scalar KeypointColor = new Scalar(255, 0, 0);
+	         
+	         Features2d.drawKeypoints(img, kp, outputImage, KeypointColor, 0);
+	         
+	         Highgui.imwrite("resources/sorted_output_images/" + i + ".jpg", outputImage);
+         }
+     }
 	 
 	 public List<MatOfKeyPoint> getDescriptorList()
 	 {

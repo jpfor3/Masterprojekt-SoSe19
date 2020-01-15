@@ -35,12 +35,13 @@ public class Main
      /**
       * Adding input image
       */
-     images.add("resources/images/Oczipka.jpg");
+     images.add("resources/images/Kimmich.jpg");
      
      /**
       * Deleting all buffered images if input image changes
       */
      BufferedReader reader = new BufferedReader(new FileReader("resources/index/idx.txt"));
+     reader.readLine();
      reader.readLine();
      if(!images.get(0).equals(reader.readLine()))
 	 {
@@ -167,7 +168,7 @@ public class Main
    {
 	   //Printing index Nr
 	   FileWriter writer = new FileWriter("resources/index/idx.txt");
-	   writer.append("" + sortedImages.size());
+	   writer.append("\n" + sortedImages.size());
 	   
 	   //Printing input image
 	   writer.append("\n" + images.get(0));
