@@ -1,2 +1,3 @@
-11
-resources/images/Oczipka.jpg
+
+30
+resources/images/Kimmich.jpg
