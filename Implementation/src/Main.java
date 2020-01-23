@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,6 +37,8 @@ public class Main
       * Adding input image
       */
      images.add("resources/images/Kimmich.jpg");
+
+
      
      /**
       * Deleting all buffered images if input image changes
@@ -105,62 +108,69 @@ public class Main
       KeypointDetector KPDetector = new KeypointDetector(images); 
       _descriptorList = KPDetector.getDescriptorList();
       
+      System.out.println(_descriptorList.size());
+
+      
+//      for(MatOfKeyPoint kp : _descriptorList) {
+//    	  System.out.println(kp.toString());
+//      }
+      
       System.out.println("KP Detection Ended....");
       
       System.out.println("Creating clusters on Keypoints...");
-      
-      for(MatOfKeyPoint kp : _descriptorList)
-      {
-   	  List<double[]> clusterlist = DBScan.cluster(kp);
-   	  _centeredDescriptors.add(clusterlist);   
-      }
-	
-      System.out.println("Clustering Ended....");
-      
-      System.out.println("Calculating Distances....");
-      List<Double> listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images);
-      
-      //Load buffered images into index
-      List<Double> bufferedDistances = new ArrayList<Double>();
-      List<String> bufferedImages = new ArrayList<String>();
-      
-      reader = new BufferedReader(new FileReader("resources/index/image_distances.txt"));
-
-      for(int i = 1; i < index+1; i++)
-      {
-    	  bufferedImages.add(reader.readLine());
-    	  bufferedDistances.add(new Double(reader.readLine()));
-      }
-      
-      reader.close();
-      
-      images.addAll(bufferedImages);
-      listOfDistances.addAll(bufferedDistances);
-      
-      //Map and sort distances of images
-      BidiMap<String, Double> map = new DualHashBidiMap<>();
-      
-      for(int i = 1; i < images.size(); i++)
-      {
-          map.put(images.get(i), listOfDistances.get(i-1));
-      }
-      
-      Collections.sort(listOfDistances);
-      List<String> sortedImages = new ArrayList<String>();
-      
-      for(int i = 1; i < images.size(); i++)
-      {
-    	  sortedImages.add(map.getKey(listOfDistances.get(i-1)));  	  
-      }
-      
-      
-      for(int i = 0; i < sortedImages.size(); i++)
-      {
-      KeypointDetector.drawKeypoints(sortedImages.get(i), i);
-      }
-      
-      appendingToTxt(sortedImages, listOfDistances, images);
-
+//      
+//      for(MatOfKeyPoint kp : _descriptorList)
+//      {
+//   	  List<double[]> clusterlist = DBScan.cluster(kp);
+//   	  _centeredDescriptors.add(clusterlist);   
+//      }
+//	
+//      System.out.println("Clustering Ended....");
+//      
+//      System.out.println("Calculating Distances....");
+//      List<Double> listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images);
+//      
+//      //Load buffered images into index
+//      List<Double> bufferedDistances = new ArrayList<Double>();
+//      List<String> bufferedImages = new ArrayList<String>();
+//      
+//      reader = new BufferedReader(new FileReader("resources/index/image_distances.txt"));
+//
+//      for(int i = 1; i < index+1; i++)
+//      {
+//    	  bufferedImages.add(reader.readLine());
+//    	  bufferedDistances.add(new Double(reader.readLine()));
+//      }
+//      
+//      reader.close();
+//      
+//      images.addAll(bufferedImages);
+//      listOfDistances.addAll(bufferedDistances);
+//      
+//      //Map and sort distances of images
+//      BidiMap<String, Double> map = new DualHashBidiMap<>();
+//      
+//      for(int i = 1; i < images.size(); i++)
+//      {
+//          map.put(images.get(i), listOfDistances.get(i-1));
+//      }
+//      
+//      Collections.sort(listOfDistances);
+//      List<String> sortedImages = new ArrayList<String>();
+//      
+//      for(int i = 1; i < images.size(); i++)
+//      {
+//    	  sortedImages.add(map.getKey(listOfDistances.get(i-1)));  	  
+//      }
+//      
+//      
+//      for(int i = 0; i < sortedImages.size(); i++)
+//      {
+//      KeypointDetector.drawKeypoints(sortedImages.get(i), i);
+//      }
+//      
+//      appendingToTxt(sortedImages, listOfDistances, images);
+//
    }
 
    

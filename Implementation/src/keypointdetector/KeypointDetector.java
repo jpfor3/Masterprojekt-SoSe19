@@ -81,9 +81,9 @@ public class KeypointDetector {
        MatOfKeyPoint descriptors = new MatOfKeyPoint();
        DescriptorExtractor descriptorExtractor = DescriptorExtractor.create(_descriptorExtractor);
        descriptorExtractor.compute(img, kp, descriptors);
-         
+
        return descriptors;
-         
+       
      }
 	 
 	 public static void drawKeypoints(String image, int i)

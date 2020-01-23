@@ -19,4 +19,21 @@ public class Feature2D implements Feature {
         double deltaY = y - f2d.y;
         return Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
     }
+    
+    public double hammingDist(Feature f) {
+		Feature2D fG = (Feature2D)f;
+		if(x == fG.x && y == fG.y)
+		{
+			return 0;
+		} 
+		else 
+		{
+			return 1;
+		}
+	}
+    
+	public double getValue()
+	{
+		return this.x;
+	}
 }

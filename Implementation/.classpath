@@ -8,14 +8,14 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/commons-collections"/>
-	<classpathentry kind="lib" path="C:/Users/ACER/Git Repositories/Projekt Master Branch2/Masterprojekt-SoSe19/Implementation/libs/Frameworks/collections-generic-4.01.jar"/>
-	<classpathentry kind="lib" path="C:/Users/jeanp/Desktop/JFastEMD2.jar">
+	<classpathentry kind="lib" path="C:/Users/JP/Desktop/MP Libraries/JFastEMD2.jar">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Users/jeanp/Desktop/JFastEMD-master/src/com/telmomenezes"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/CommonMath3_3.6.1"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/OpenCV_2.4.11"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/OpenCV_4.1.0"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Common Math 3.6.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/OpenCV 2.4.11"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/OpenCV 4.1"/>
+	<classpathentry kind="lib" path="C:/Users/JP/Desktop/MP Libraries/collections-generic-4.01.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

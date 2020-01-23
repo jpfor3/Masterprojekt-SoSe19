@@ -57,8 +57,8 @@ public class Test {
     {
         Signature sig1 = getSignature(map1, bins);
         Signature sig2 = getSignature(map2, bins);
-
-        double dist = JFastEMD.distance(sig1, sig2, -1);
+        // Musste angepasst werden mit boolean wegen hamming
+        double dist = JFastEMD.distance(sig1, sig2, -1, false);
 
         return dist;
     }
