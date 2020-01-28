@@ -94,7 +94,7 @@ public class JaccardDistance {
 		for(int g=0; g < set1.size(); g++) {
 			for(int h=0; h < set2.size(); h++) {
 				// Adds an array of the compared descriptors and their distance in the form [d1, d2, distance(d1,d2)]
-				double temp[] = {g+1, h, getretrfer};
+				double temp[] = {g+1, h};
 //				list.add([g+1, h+1, norm(set1.get(g),set2.get(h),NORM_L2));	
 				
 			}
