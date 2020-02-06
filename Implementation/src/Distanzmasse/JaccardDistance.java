@@ -100,6 +100,7 @@ public class JaccardDistance {
 		}
 		return set;
 	}
+
 	
 	public static double calcL2distance(Mat desc1, Mat desc2) {
 		double dist_l2  = Core.norm(desc1, desc2, 4); // NORM_L2 = 4, see https://docs.opencv.org/3.4/javadoc/org/opencv/core/Core.html#NORM_L2
