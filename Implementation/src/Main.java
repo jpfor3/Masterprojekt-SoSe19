@@ -1,4 +1,5 @@
 import Distanzmasse.FastEMD;
+import Distanzmasse.JaccardDistance;
 import cluster.DBScan;
 import keypointdetector.KeypointDetector;
 import org.apache.commons.collections15.BidiMap;
@@ -108,9 +109,11 @@ public class Main
       KeypointDetector KPDetector = new KeypointDetector(images); 
       _descriptorList = KPDetector.getDescriptorList();
       
-      System.out.println(_descriptorList.size());
+      System.out.println(_descriptorList);
 
-      
+      JaccardDistance JD = new JaccardDistance();
+      JD.calculateJaccard(_descriptorList, 0);
+
 //      for(MatOfKeyPoint kp : _descriptorList) {
 //    	  System.out.println(kp.toString());
 //      }
@@ -171,30 +174,30 @@ public class Main
 //      
 //      appendingToTxt(sortedImages, listOfDistances, images);
 //
+//   }
+//
+//   
+//   private static void appendingToTxt(List<String> sortedImages, List<Double> listOfDistances, List<String> images) throws IOException 
+//   {
+//	   //Printing index Nr
+//	   FileWriter writer = new FileWriter("resources/index/idx.txt");
+//	   writer.append("\n" + sortedImages.size());
+//	   
+//	   //Printing input image
+//	   writer.append("\n" + images.get(0));
+//	   writer.close();
+//	   
+//	   writer = new FileWriter("resources/index/image_distances.txt");
+//
+//	   for(int i = 0; i < sortedImages.size(); i++)
+//	      {
+//		   writer.append(sortedImages.get(i) + "\n");
+//		   writer.append(listOfDistances.get(i) + "\n");	      
+//		   }
+//	      
+//      writer.close();
+//	   
    }
-
-   
-   private static void appendingToTxt(List<String> sortedImages, List<Double> listOfDistances, List<String> images) throws IOException 
-   {
-	   //Printing index Nr
-	   FileWriter writer = new FileWriter("resources/index/idx.txt");
-	   writer.append("\n" + sortedImages.size());
-	   
-	   //Printing input image
-	   writer.append("\n" + images.get(0));
-	   writer.close();
-	   
-	   writer = new FileWriter("resources/index/image_distances.txt");
-
-	   for(int i = 0; i < sortedImages.size(); i++)
-	      {
-		   writer.append(sortedImages.get(i) + "\n");
-		   writer.append(listOfDistances.get(i) + "\n");	      
-		   }
-	      
-      writer.close();
-	   
-   }
-   
-   
 }
+   
+   
