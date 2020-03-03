@@ -1,9 +1,14 @@
+/**
+ * INFO: Falls Bilder aus dem Ordner images entfernt werden, müssen die Inhalte der Textdateien idx.txt und image_distances.txt
+ * gelöscht werden
+ */
+
 import Distanzmasse.FastEMD;
 import Distanzmasse.JaccardDistance;
 import cluster.DBScan;
 import keypointdetector.KeypointDetector;
-import org.apache.commons.collections15.BidiMap;
-import org.apache.commons.collections15.bidimap.DualHashBidiMap;
+
+
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,6 +21,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.collections15.BidiMap;
+import org.apache.commons.collections15.bidimap.DualHashBidiMap;
 import org.opencv.core.Core;
 import org.opencv.core.MatOfKeyPoint;
 
@@ -37,7 +44,7 @@ public class Main
      /**
       * Adding input image
       */
-     images.add("resources/images/Kimmich.jpg");
+     images.add("resources/images/Kenny.jpg");
 
 
      
@@ -82,6 +89,8 @@ public class Main
      {
          reader = new BufferedReader(new FileReader("resources/index/image_distances.txt"));
     	 boolean contains = false;
+    	 
+    	 //Comparing image with images buffered in image_distance.txt
     	 for(int j = 0; j < index; j++)
     	 {
 	    	 if (listOfFiles[i].isFile() && reader.readLine().equals(listOfFiles[i].getPath())) {
@@ -109,20 +118,97 @@ public class Main
       KeypointDetector KPDetector = new KeypointDetector(images); 
       _descriptorList = KPDetector.getDescriptorList();
       
-      System.out.println(_descriptorList);
-
-      JaccardDistance JD = new JaccardDistance();
-      JD.calculateJaccard(_descriptorList, 0);
-
-//      for(MatOfKeyPoint kp : _descriptorList) {
-//    	  System.out.println(kp.toString());
-//      }
-      
       System.out.println("KP Detection Ended....");
-      
+
       System.out.println("Creating clusters on Keypoints...");
 
+      for(MatOfKeyPoint kp : _descriptorList)
+      {
+   	  List<double[]> clusterlist = DBScan.cluster(kp);
+   	  _centeredDescriptors.add(clusterlist);   
+      }
+
+      System.out.println("Clustering Ended....");
+
+      System.out.println("Calculating Distances....");
+      List<Double> listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images);
+
+      //Load buffered images into index
+      List<Double> bufferedDistances = new ArrayList<Double>();
+      List<String> bufferedImages = new ArrayList<String>();
+
+      reader = new BufferedReader(new FileReader("resources/index/image_distances.txt"));
+      
+      for(int i = 1; i < index+1; i++)
+        {
+      	  bufferedImages.add(reader.readLine());
+      	  bufferedDistances.add(new Double(reader.readLine()));
+        }
+        
+        reader.close();
+        
+        images.addAll(bufferedImages);
+        listOfDistances.addAll(bufferedDistances);
+        
+        //Map and sort distances of images
+        BidiMap<String, Double> map = new DualHashBidiMap<>();
+        
+        for(int i = 1; i < images.size(); i++)
+        {
+            map.put(images.get(i), listOfDistances.get(i-1));
+        }
+        
+        Collections.sort(listOfDistances);
+        List<String> sortedImages = new ArrayList<String>();
+        
+        for(int i = 1; i < images.size(); i++)
+        {
+      	  sortedImages.add(map.getKey(listOfDistances.get(i-1)));  	  
+        }
+        
+        
+        for(int i = 0; i < sortedImages.size(); i++)
+        {
+        KeypointDetector.drawKeypoints(sortedImages.get(i), i);
+        }
+        
+        appendingToTxt(sortedImages, listOfDistances, images);
+  
+      System.out.println(_descriptorList);
+
+      /**JaccardDistance JD = new JaccardDistance();
+      List<Double> jacList = JD.calculateJaccard(_descriptorList, 0);
+      System.out.println("Jac Distance: " + jacList.get(0));
+
+      for(MatOfKeyPoint kp : _descriptorList) {
+    	  System.out.println(kp.toString());
+      }
+      */
+
    }
+
+ 
+   	private static void appendingToTxt(List<String> sortedImages, List<Double> listOfDistances, List<String> images) throws IOException 
+ 	{
+	   //Printing index Nr
+	   FileWriter writer = new FileWriter("resources/index/idx.txt");
+	   writer.append("\n" + sortedImages.size());
+	   
+	   //Printing input image
+	   writer.append("\n" + images.get(0));
+	   writer.close();
+	   
+	   writer = new FileWriter("resources/index/image_distances.txt");
+
+	   for(int i = 0; i < sortedImages.size(); i++)
+	      {
+		   writer.append(sortedImages.get(i) + "\n");
+		   writer.append(listOfDistances.get(i) + "\n");	      
+	   }
+	      
+    writer.close();
+	   
+ 	}
 }
    
    

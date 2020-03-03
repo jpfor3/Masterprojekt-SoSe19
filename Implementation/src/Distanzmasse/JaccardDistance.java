@@ -1,6 +1,7 @@
 package Distanzmasse;
 
 import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.opencv.core.MatOfKeyPoint;
 import com.telmomenezes.jfastemd.*;
 
 public class JaccardDistance {
+	
 	
 	// Jaccard-Koeffizient: Zwei Mengen A und B
 	// Betrag der Schnittmenge von A und B geteilt durch Vereinigungsmenge von A und B

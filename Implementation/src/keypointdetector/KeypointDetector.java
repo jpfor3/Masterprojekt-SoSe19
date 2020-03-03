@@ -14,9 +14,9 @@ import java.util.List;
 public class KeypointDetector {
 
     public static List<MatOfKeyPoint> _descriptorList = new ArrayList<MatOfKeyPoint>();
-    private static String _detector;
-    private static int _kpDetector;
-    private static int _descriptorExtractor;
+    public static String _detector;
+    public static int _kpDetector;
+    public static int _descriptorExtractor;
 
 	public KeypointDetector(List<String> images){
 	 
@@ -62,7 +62,7 @@ public class KeypointDetector {
        
        for(String image : images)
        {
-    	   MatOfKeyPoint descriptors = detectKeypoints(image, i);
+    	   MatOfKeyPoint descriptors = detectKeypoints(image);
     	   _descriptorList.add(descriptors);
 	       i +=1;
        } 
@@ -71,7 +71,7 @@ public class KeypointDetector {
 	
 	
 	
-	 private MatOfKeyPoint detectKeypoints(String image, int i)
+	 private MatOfKeyPoint detectKeypoints(String image)
      {
   	   Mat img = Highgui.imread(image, Highgui.CV_LOAD_IMAGE_COLOR);    
        MatOfKeyPoint kp = new MatOfKeyPoint();
