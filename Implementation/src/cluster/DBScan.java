@@ -35,6 +35,7 @@ public class DBScan {
 		EuclideanDoublePoint edp = new EuclideanDoublePoint(param);
 		matOfKeypoints.add(edp);
 	}
+		//TODO: Parameter des Clusterers mit GUI verknüpfen
 		DBSCANClusterer<EuclideanDoublePoint> cls = new DBSCANClusterer<EuclideanDoublePoint>(0.1, 4);
 	    List<Cluster<EuclideanDoublePoint>> list = cls.cluster(matOfKeypoints);
 	    System.out.println("\n___________________________Image_______________________________\n: " );

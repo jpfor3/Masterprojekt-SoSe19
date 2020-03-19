@@ -27,26 +27,54 @@ import org.opencv.core.Core;
 import org.opencv.core.MatOfKeyPoint;
 
 
-public class Main
+public class Controller
 {
-   public static void main(String[] args ) throws IOException
-   {
-	 List<MatOfKeyPoint> _descriptorList = new ArrayList<MatOfKeyPoint>();
+	static List<MatOfKeyPoint> _descriptorList = new ArrayList<MatOfKeyPoint>();
 	 
-	 List<List<double[]>> _centeredDescriptors = new ArrayList<List<double[]>>();
-	 
-     System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-     
-     File folder = new File("resources/images/");
+	static List<List<double[]>> _centeredDescriptors = new ArrayList<List<double[]>>();
+		
+	public Controller()
+	{
+	     System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+	}
+    
+	public static void main(String[] args)
+	{
+		
+		String inputImage = "resources/images/HansSarpei.jpg";
+		String compareImages = "resources/images";
+		try {
+			compareImages(inputImage, compareImages);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void calcJaccard()
+    { 
+      JaccardDistance JD = new JaccardDistance();
+      List<Double> jacList = JD.calculateJaccard(_descriptorList, 0);
+      System.out.println("Jac Distance: " + jacList.get(0));
+
+      for(MatOfKeyPoint kp : _descriptorList) {
+    	  System.out.println(kp.toString());
+      }
+      
+
+    }
+
+   	
+   	public static void compareImages(String inputImage, String compareImages) throws IOException
+   	{     
+     //TODO: Select directory with images 
+     File folder = new File(compareImages);
      File[] listOfFiles = folder.listFiles();
      List<String> images = new ArrayList<String>();
 
      /**
       * Adding input image
       */
-     images.add("resources/images/Kenny.jpg");
-
-
+     images.add(inputImage);
      
      /**
       * Deleting all buffered images if input image changes
@@ -173,22 +201,11 @@ public class Main
         }
         
         appendingToTxt(sortedImages, listOfDistances, images);
-  
-      System.out.println(_descriptorList);
-
-      /**JaccardDistance JD = new JaccardDistance();
-      List<Double> jacList = JD.calculateJaccard(_descriptorList, 0);
-      System.out.println("Jac Distance: " + jacList.get(0));
-
-      for(MatOfKeyPoint kp : _descriptorList) {
-    	  System.out.println(kp.toString());
-      }
-      */
-
-   }
-
- 
-   	private static void appendingToTxt(List<String> sortedImages, List<Double> listOfDistances, List<String> images) throws IOException 
+   	}
+   	
+   	
+   	
+ 	private static void appendingToTxt(List<String> sortedImages, List<Double> listOfDistances, List<String> images) throws IOException 
  	{
 	   //Printing index Nr
 	   FileWriter writer = new FileWriter("resources/index/idx.txt");

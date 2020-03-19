@@ -1,6 +1,7 @@
 package Distanzmasse;
 
 import java.util.ArrayList;
+import java.nio.file.Path.*;
 
 
 import java.util.List;
@@ -131,11 +132,11 @@ public class FastEMD {
 		   	  /**Calculate distance between image g and h
 		   	  */
 		   	  
-		   	  //Choose between ground and hamming distance
+		   	  //TODO: Choose between ground and hamming distance. Mit GUI verknüpfen
 		   	  boolean hamming = false;
 		   	  
 		   	  double EMDdistance = JFastEMD.distance(sigG, sigH, -1, hamming);
-		   	  System.out.println("\nDistance between image " + images.get(0).substring(17) + " and image " + images.get(h).substring(17) + " is " + EMDdistance);
+		   	  System.out.println("\nDistance between image " + images.get(0).substring(images.get(0).lastIndexOf("/")+1) + " and image " + images.get(h).substring(images.get(h).lastIndexOf("/")+1) + " is " + EMDdistance);
 		   	  _listOfDistances.add(EMDdistance);
 			   	  
 			  }
