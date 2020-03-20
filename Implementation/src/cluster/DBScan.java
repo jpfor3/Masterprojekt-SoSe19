@@ -15,8 +15,10 @@ public class DBScan {
 	/**
 	 * 
 	 * @param descriptor MatOfKeyPoint jede Zeile muss einzeln augewertet werden bei Clustering
+	 * @param eps 
+	 * @param minSamples 
 	 */
-	public static List<double[]> cluster(MatOfKeyPoint descriptor)
+	public static List<double[]> cluster(MatOfKeyPoint descriptor, int minSamples, float eps)
 	{
 	_descriptor = descriptor;
 	List<double[]> centroidlist = new ArrayList<double[]>();
@@ -35,8 +37,13 @@ public class DBScan {
 		EuclideanDoublePoint edp = new EuclideanDoublePoint(param);
 		matOfKeypoints.add(edp);
 	}
-		//TODO: Parameter des Clusterers mit GUI verknüpfen
-		DBSCANClusterer<EuclideanDoublePoint> cls = new DBSCANClusterer<EuclideanDoublePoint>(0.1, 4);
+		/**
+		 * @param eps: The maximum distance between two samples for one to be considered as in the 
+		 * neighborhood of the other
+		 * @param min_samples: The number of samples (or total weight) in a neighborhood for a 
+		 * point to be considered as a core point
+		 */
+		DBSCANClusterer<EuclideanDoublePoint> cls = new DBSCANClusterer<EuclideanDoublePoint>(eps, minSamples);
 	    List<Cluster<EuclideanDoublePoint>> list = cls.cluster(matOfKeypoints);
 	    System.out.println("\n___________________________Image_______________________________\n: " );
 	    double[] masses = new double[list.size()];

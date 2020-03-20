@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -55,6 +56,8 @@ public class MainFrame extends JFrame {
 	private int EDMP;
 	private String _inputImage;
 	private String _compareImages;
+	private int _minSamples;
+	private float _eps;
 
 	
 		
@@ -91,23 +94,61 @@ public class MainFrame extends JFrame {
 		infoLabel.setBounds(565, 464, 272, 20);
 		contentPane.add(infoLabel);
 		
-		JLabel lblKeypointDetectionAlgorithmus = new JLabel("Keypoint Detection Algorithmus:");
-		lblKeypointDetectionAlgorithmus.setBounds(35, 464, 258, 20);
-		contentPane.add(lblKeypointDetectionAlgorithmus);
+		JLabel lblActualComparedImage = new JLabel("Actual compared Img:");
+		lblActualComparedImage.setBounds(25, 371, 205, 20);
+		contentPane.add(lblActualComparedImage);
 		
-		String kpdlist[] = {"SURF", "SIFT", "BRISK", "ORB"}; 
-		JComboBox comboBox = new JComboBox(kpdlist);
-		comboBox.setBounds(280, 459, 215, 31);
-		contentPane.add(comboBox);
+		JLabel lblTotalDistance = new JLabel("Total Distance:");
+		lblTotalDistance.setBounds(161, 371, 106, 20);
+		contentPane.add(lblTotalDistance);
+		
+		textField = new JTextField();
+		textField.setBounds(280, 371, 146, 26);
+		textField.setEditable(false);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblDBScan = new JLabel("DBScan Clusterer:");
+		lblDBScan.setBounds(25, 415, 258, 20);
+		contentPane.add(lblDBScan);
+		
+		JLabel lblSamples = new JLabel("min_samples:");
+		lblSamples.setBounds(165, 415, 258, 20);
+		contentPane.add(lblSamples);
+		
+		JTextField min_samples = new JTextField("4");
+		min_samples.setBounds(280, 415, 215, 31);
+		min_samples.setSize(new Dimension(80,31));
+		contentPane.add(min_samples);
+		_minSamples = Integer.parseInt(min_samples.getText());
+		
+		JLabel lblEps = new JLabel("eps:");
+		lblEps.setBounds(219, 464, 258, 20);
+		contentPane.add(lblEps);
+		
+		JTextField eps = new JTextField("0.1");
+		eps.setBounds(280, 459, 215, 31);
+		eps.setSize(new Dimension(80,31));
+		contentPane.add(eps);
+		_eps = Float.parseFloat(eps.getText());
 		
 		JLabel lblClusteringAlgorithmus = new JLabel("Distance Algorithmus:");
-		lblClusteringAlgorithmus.setBounds(99, 513, 174, 20);
+		lblClusteringAlgorithmus.setBounds(121, 513, 174, 20);
 		contentPane.add(lblClusteringAlgorithmus);
 		
 		String dalglist[] = {"EMD", "Hamming", "Jaccard"};
 		JComboBox comboBox_1 = new JComboBox(dalglist);
 		comboBox_1.setBounds(280, 508, 215, 31);
 		contentPane.add(comboBox_1);
+		
+		JLabel lblEdmPenalty = new JLabel("EMD Penalty:");
+		lblEdmPenalty.setBounds(175, 561, 98, 20);
+		contentPane.add(lblEdmPenalty);
+			
+		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setBounds(280, 555, 215, 32);
+		contentPane.add(comboBox_2);		
+		
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
@@ -235,7 +276,7 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
-					Controller.compareImages(_inputImage, _compareImages);
+					Controller.compareImages(_inputImage, _compareImages, _minSamples, _eps);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
@@ -298,22 +339,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 		btnAbort.setBounds(531, 542, 169, 45);
-		contentPane.add(btnAbort);
-		
-		JLabel lblActualComparedImage = new JLabel("Actual compared Image:");
-		lblActualComparedImage.setBounds(25, 371, 205, 20);
-		contentPane.add(lblActualComparedImage);
-		
-		JLabel lblTotalDistance = new JLabel("Total Distance:");
-		lblTotalDistance.setBounds(51, 404, 106, 20);
-		contentPane.add(lblTotalDistance);
-		
-		textField = new JTextField();
-		textField.setBounds(167, 401, 146, 26);
-		textField.setEditable(false);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		
+		contentPane.add(btnAbort);		
 		
 		JButton btnDeleteBuffer = new JButton("Clear bufferd images");
 		btnDeleteBuffer.addActionListener(new ActionListener() {
@@ -337,14 +363,6 @@ public class MainFrame extends JFrame {
 		
 		btnDeleteBuffer.setBounds(464, 354, 420, 29);
 		contentPane.add(btnDeleteBuffer);
-		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(280, 555, 215, 32);
-		contentPane.add(comboBox_2);
-		
-		JLabel lblEdmPenalty = new JLabel("EMD Penalty:");
-		lblEdmPenalty.setBounds(175, 561, 98, 20);
-		contentPane.add(lblEdmPenalty);
 		
 		
 	}

@@ -42,7 +42,6 @@ public class KeypointDetector {
        int i = 0;
        
        
-	   //TODO: Auswahl von detector über GUI
 	   _detector = "SURF";
 	     
 	   switch (_detector) {

@@ -38,18 +38,18 @@ public class Controller
 	     System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 	}
     
-	public static void main(String[] args)
-	{
-		
-		String inputImage = "resources/images/HansSarpei.jpg";
-		String compareImages = "resources/images";
-		try {
-			compareImages(inputImage, compareImages);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
+//	public static void main(String[] args)
+//	{
+//		
+//		String inputImage = "resources/images/HansSarpei.jpg";
+//		String compareImages = "resources/images";
+//		try {
+//			compareImages(inputImage, compareImages, 4, 0.1);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
+//	
 	public void calcJaccard()
     { 
       JaccardDistance JD = new JaccardDistance();
@@ -64,9 +64,8 @@ public class Controller
     }
 
    	
-   	public static void compareImages(String inputImage, String compareImages) throws IOException
+   	public static void compareImages(String inputImage, String compareImages, int minSamples, float eps) throws IOException
    	{     
-     //TODO: Select directory with images 
      File folder = new File(compareImages);
      File[] listOfFiles = folder.listFiles();
      List<String> images = new ArrayList<String>();
@@ -152,7 +151,7 @@ public class Controller
 
       for(MatOfKeyPoint kp : _descriptorList)
       {
-   	  List<double[]> clusterlist = DBScan.cluster(kp);
+   	  List<double[]> clusterlist = DBScan.cluster(kp, minSamples, eps);
    	  _centeredDescriptors.add(clusterlist);   
       }
 
