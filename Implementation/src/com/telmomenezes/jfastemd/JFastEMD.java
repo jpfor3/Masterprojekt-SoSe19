@@ -76,11 +76,20 @@ public class JFastEMD {
         }
         for (int i = 0; i < signature1.getNumberOfFeatures(); i++) {
             for (int j = 0; j < signature2.getNumberOfFeatures(); j++) {
-                double dist = signature1.getFeatures()[i]
-                        .groundDist(signature2.getFeatures()[j]);
-                assert (dist >= 0);
-                C.get(i).set(j + signature1.getNumberOfFeatures(), dist);
-                C.get(j + signature1.getNumberOfFeatures()).set(i, dist);
+            	if(hamming)
+            	{
+            		double dist = signature1.getFeatures()[i]
+	                        .hammingDist(signature2.getFeatures()[j]);
+	                assert (dist >= 0);
+	                C.get(i).set(j + signature1.getNumberOfFeatures(), dist);
+	                C.get(j + signature1.getNumberOfFeatures()).set(i, dist);
+            	} else {
+	                double dist = signature1.getFeatures()[i]
+	                        .groundDist(signature2.getFeatures()[j]);
+	                assert (dist >= 0);
+	                C.get(i).set(j + signature1.getNumberOfFeatures(), dist);
+	                C.get(j + signature1.getNumberOfFeatures()).set(i, dist);
+            	}
             }
         }
 
