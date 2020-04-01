@@ -48,7 +48,7 @@ public class JaccardDistance {
 		 * 
 		 */
 		
-		// Initialize list to contain the jaccard indexes
+		// Initialize list to collect the jaccard indexes
 		List<Double> jaccardList = new ArrayList<Double>();
 
 
@@ -80,6 +80,8 @@ public class JaccardDistance {
 					uniqueDescriptors = sharedDescriptors + (_Descriptors.get(0).rows() + _Descriptors.get(1).rows() - sharedDescriptors);
 					
 					jaccardList.add(sharedDescriptors / uniqueDescriptors);
+					
+					System.out.println("The Jaccard-Distance between the chosen image and image #" + bild + " is: " + (sharedDescriptors / uniqueDescriptors));
 
 					sharedDescriptors = 0;
 					uniqueDescriptors = 0;

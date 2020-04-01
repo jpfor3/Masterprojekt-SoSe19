@@ -1,4 +1,4 @@
-package Distanzmasse;
+ package Distanzmasse;
 
 import java.util.ArrayList;
 import java.nio.file.Path.*;
@@ -24,7 +24,7 @@ public class FastEMD {
 	  * 
 	  * @param centeredDescriptors
 	  */
-	 public static List<Double> calcDistances(List<List<double[]>> centeredDescriptors, List<String> images)
+	 public static List<Double> calcDistances(List<List<double[]>> centeredDescriptors, List<String> images, int emdpenalty, boolean hamming)
 	 { 	  	  
 		 _centeredDescriptors = centeredDescriptors;
 	  	  /**
@@ -133,9 +133,9 @@ public class FastEMD {
 		   	  */
 		   	  
 		   	  //TODO: Choose between ground and hamming distance. Mit GUI verknüpfen
-		   	  boolean hamming = false;
+//		   	  boolean hamming = false;
 		   	  
-		   	  double EMDdistance = JFastEMD.distance(sigG, sigH, -1, hamming);
+		   	  double EMDdistance = JFastEMD.distance(sigG, sigH, emdpenalty, hamming);
 		   	  System.out.println("\nDistance between image " + images.get(0).substring(images.get(0).lastIndexOf("/")+1) + " and image " + images.get(h).substring(images.get(h).lastIndexOf("/")+1) + " is " + EMDdistance);
 		   	  _listOfDistances.add(EMDdistance);
 			   	  

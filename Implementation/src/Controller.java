@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.collections15.BidiMap;
-import org.apache.commons.collections15.bidimap.DualHashBidiMap;
+import org.apache.commons.collections15.bidimap.*;
 import org.opencv.core.Core;
 import org.opencv.core.MatOfKeyPoint;
 
@@ -30,8 +30,8 @@ import org.opencv.core.MatOfKeyPoint;
 public class Controller
 {
 	static List<MatOfKeyPoint> _descriptorList = new ArrayList<MatOfKeyPoint>();
-	 
 	static List<List<double[]>> _centeredDescriptors = new ArrayList<List<double[]>>();
+	static int _threshold;
 		
 	public Controller()
 	{
@@ -50,21 +50,20 @@ public class Controller
 //		}
 //	}
 //	
-	public void calcJaccard()
+	public static void calcJaccard(List<MatOfKeyPoint> descriptorList, int threshold)
     { 
-      JaccardDistance JD = new JaccardDistance();
-      List<Double> jacList = JD.calculateJaccard(_descriptorList, 0);
+      List<Double> jacList = JaccardDistance.calculateJaccard(descriptorList, threshold);
       System.out.println("Jac Distance: " + jacList.get(0));
 
-      for(MatOfKeyPoint kp : _descriptorList) {
-    	  System.out.println(kp.toString());
-      }
+//      for(MatOfKeyPoint kp : _descriptorList) {
+//    	  System.out.println(kp.toString());
+//      }
       
 
     }
 
    	
-   	public static void compareImages(String inputImage, String compareImages, int minSamples, float eps) throws IOException
+   	public static void compareImages(String inputImage, String compareImages, int minSamples, float eps, int emdpenalty, String distanceAlgorithm) throws IOException
    	{     
      File folder = new File(compareImages);
      File[] listOfFiles = folder.listFiles();
@@ -133,11 +132,14 @@ public class Controller
 
      File folder2 = new File("resources/sorted_output_images/");
      File[] listOfFiles2 = folder2.listFiles();
+     System.out.println(listOfFiles2);
      
-     //Clean directories   
-     for(int i = index; i < listOfFiles2.length; i++) 
-     {
-    	 listOfFiles2[i].delete();
+     if(!listOfFiles2.equals(null)) {
+	     //Clean directories   
+	     for(int i = index; i < listOfFiles2.length; i++) 
+	     {
+	    	 listOfFiles2[i].delete();
+	     }
      }
      
      
@@ -158,8 +160,21 @@ public class Controller
       System.out.println("Clustering Ended....");
 
       System.out.println("Calculating Distances....");
-      List<Double> listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images);
-
+      
+      
+      List<Double> listOfDistances = new ArrayList<Double>();
+      // check which distance algorithm was chosen in the UI
+      switch(distanceAlgorithm) {
+      case "Jaccard":
+    	  calcJaccard(_descriptorList, emdpenalty);
+      case "EMD":	
+          listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, emdpenalty, false);
+      case "Hamming":
+          listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, emdpenalty, true);
+      default: 
+    	  System.out.println("");
+      }
+      
       //Load buffered images into index
       List<Double> bufferedDistances = new ArrayList<Double>();
       List<String> bufferedImages = new ArrayList<String>();
@@ -201,6 +216,7 @@ public class Controller
         
         appendingToTxt(sortedImages, listOfDistances, images);
    	}
+   	
    	
    	
    	
