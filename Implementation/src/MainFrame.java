@@ -58,7 +58,8 @@ public class MainFrame extends JFrame {
 	private String _compareImages;
 	private int _minSamples;
 	private float _eps;
-
+	private int _emdpenalty;
+	private String _distancealgorithm;
 	
 		
 	/**
@@ -102,11 +103,11 @@ public class MainFrame extends JFrame {
 		lblTotalDistance.setBounds(161, 371, 106, 20);
 		contentPane.add(lblTotalDistance);
 		
-		textField = new JTextField();
-		textField.setBounds(280, 371, 146, 26);
-		textField.setEditable(false);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		JTextField distanceField = new JTextField();
+		distanceField.setBounds(280, 371, 146, 26);
+		distanceField.setEditable(false);
+		contentPane.add(distanceField);
+		distanceField.setColumns(10);
 		
 		JLabel lblDBScan = new JLabel("DBScan Clusterer:");
 		lblDBScan.setBounds(25, 415, 258, 20);
@@ -141,13 +142,14 @@ public class MainFrame extends JFrame {
 		comboBox_1.setBounds(280, 508, 215, 31);
 		contentPane.add(comboBox_1);
 		
-		JLabel lblEdmPenalty = new JLabel("EMD Penalty:");
-		lblEdmPenalty.setBounds(175, 561, 98, 20);
+		JLabel lblEdmPenalty = new JLabel("EMD Penalty / Jaccard Threshold:");
+		lblEdmPenalty.setBounds(35, 561, 238, 20);
 		contentPane.add(lblEdmPenalty);
 			
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(280, 555, 215, 32);
-		contentPane.add(comboBox_2);		
+		JTextField textField_emdPenalty = new JTextField("-1");
+		textField_emdPenalty.setBounds(280, 558, 80, 26);
+		contentPane.add(textField_emdPenalty);
+		textField_emdPenalty.setColumns(10);
 		
 		
 		JPanel panel_1 = new JPanel();
@@ -166,6 +168,10 @@ public class MainFrame extends JFrame {
 		panel.setBounds(9, 16, 430, 292);
 		contentPane.add(panel);
 		panel.setLayout(null);
+		
+		JLabel lblemdPenaltyWorks = new JLabel("*EMD penalty works only with the EMD algorithm");
+		lblemdPenaltyWorks.setBounds(531, 513, 353, 20);
+		contentPane.add(lblemdPenaltyWorks);
 		
 //		JLayeredPane layeredPane = new JLayeredPane();
 //		layeredPane.setBounds(15, 28, 403, 248);
@@ -271,60 +277,71 @@ public class MainFrame extends JFrame {
 		button.setBounds(464, 314, 420, 29);
 		contentPane.add(button);
 		
+		
+//______________________________________________________________________________________________________		
+
+		
 		JButton btnCompare = new JButton("Compare");
 		btnCompare.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println(_compareImages);
+				System.out.println(_inputImage);
+				_emdpenalty = Integer.parseInt(textField_emdPenalty.getText());
+				_distancealgorithm = comboBox_1.getSelectedItem().toString();
 				
 				try {
-					Controller.compareImages(_inputImage, _compareImages, _minSamples, _eps);
-				} catch (IOException e1) {
+ 					Controller.compareImages(_inputImage, _compareImages, _minSamples, _eps, _emdpenalty, _distancealgorithm);
+ 				} catch (IOException e1) 
+				{
 					e1.printStackTrace();
 				}
 				
-				// run the comparison
-				// First, check which keypoint detector was chosen
-//			    KeypointDetector KPDetector = new KeypointDetector(images1); 
-//			    descriptorList = KPDetector.getDescriptorList();
-//				
-//				String kpdetector = comboBox_1.getSelectedItem().toString();
-//				switch (kpdetector) {
-//				   	case "SIFT": KeypointDetector._kpDetector = 3;
-//				   	KeypointDetector._descriptorExtractor = 1;
-//			    	break;
-//				   	case "SURF": KeypointDetector._kpDetector = 4;
-//				   	KeypointDetector._descriptorExtractor = 2;
-//	    		    break;
-//				   	case "ORB": KeypointDetector._kpDetector = 5;
-//				   	KeypointDetector._descriptorExtractor = 3;
-//	    			break;
-//				   	case "BRISK": KeypointDetector._kpDetector = 11;
-//				   	KeypointDetector._descriptorExtractor = 5;
-//	    			break;
-//				}
-//				
-//				
-//				//KeypointDetector.SurfDetector(images1);    
-//			    descriptorList = KeypointDetector._descriptorList;
-//			    infoLabel.setText("Creating Clusters on Keypoints...");
-//			    infoLabel.repaint();
+//				if (comboBox_1.getSelectedItem().toString().equals("Jaccard")) {
+//				Controller.calcJaccard();
+
+//				List<List<String>> allImages = new ArrayList<List<String>>();
+//				List<MatOfKeyPoint> descriptorList = new ArrayList<MatOfKeyPoint>();
+
+			    // add the descriptors from the input image which all others will be compared to
+//			    allImages.add(0, Collections.singletonList(_inputImage));
+//			    allImages.add(1, Collections.singletonList(_compareImages));
+//			    
+//			    KeypointDetector InputImageDetector = new KeypointDetector(allImages);
+//			    descriptorList = InputImageDetector.getDescriptorList();
+//			       
+
 //			    
 //			    for(MatOfKeyPoint kp : descriptorList)
 //			      {
-//			   	  List<double[]> clusterlist = DBScan.cluster(kp);
+//			   	  List<double[]> clusterlist = DBScan.cluster(kp, _minSamples, _eps);
 //			   	  centeredDescriptors.add(clusterlist);   
 //			      }
 //				
-//			      infoLabel.setText("Clustering Ended...");
-//			      infoLabel.repaint();
-//			      try {
-//					TimeUnit.SECONDS.sleep(2);
-//				} catch (InterruptedException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
-//			      infoLabel.setText("Calculating Distances...");
-//			      infoLabel.repaint();
-//			      List<Double> listOfDistances = FastEMD.calcDistances(centeredDescriptors, images1);
+//			       
+//			    // adding input image to new list of strings
+//			    List<String> imgs2 = new ArrayList<String>();
+//			    imgs2.add(_inputImage);
+//
+//			    // adding the paths of the compared images to that list
+//			    File folder = new File(_compareImages);
+//			    File[] listOfFiles = folder.listFiles();
+//			    for (int i = 0; i < listOfFiles.length; i++) {
+//			    	imgs2.add(listOfFiles[i].getPath());
+//			    }
+//
+//				KeypointDetector KPDetector = new KeypointDetector(imgs2); 
+//				descriptorList = KPDetector.getDescriptorList();
+//				    
+//				  for(MatOfKeyPoint kp : descriptorList)
+//				    {
+//				   	List<double[]> clusterlist = DBScan.cluster(kp, _minSamples, _eps);
+//				   	_1centeredDescriptors.add(clusterlist);   
+//				    }
+//				    
+
+
+//			    // checks if hamming was chosen or not. Runs the chosen algorithm afterwards
+//			    FastEMD.calcDistances(_1centeredDescriptors, imgs2, _emdpenalty, _hamming);
 			}
 		});
 		btnCompare.setBounds(715, 542, 169, 45);
