@@ -28,6 +28,7 @@ public class FastEMD {
 	 public static List<Double> calcDistances(List<List<double[]>> centeredDescriptors, List<String> images)
 	 { 	  	  
 		 _centeredDescriptors = centeredDescriptors;
+		 _listOfDistances.clear();
 	  	  /**
 	  	   * Creation of double arrays which contain every descriptor of an image. Therefore all features of all 
 	  	   * descriptors have to be aggregated in one array of the size of the number of features 

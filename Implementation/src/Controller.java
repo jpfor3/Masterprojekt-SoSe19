@@ -70,17 +70,9 @@ public class Controller
      File[] listOfFiles = folder.listFiles();
      List<String> images = new ArrayList<String>();
 
-     for(int i = 1; i <= _centeredDescriptors.size(); i++)
-     {
-    	 _centeredDescriptors.remove(i); 
-     }
-     System.out.println(_centeredDescriptors.size());
-    
-     for(int i = 1; i <= _descriptorList.size(); i++)
-     {
-    	 _descriptorList.remove(i);
-     }
-     System.out.println(_descriptorList.size());
+     _centeredDescriptors.clear();
+
+     _descriptorList.clear();
 
      /**
       * Adding input image
@@ -168,6 +160,7 @@ public class Controller
 
       System.out.println("Creating clusters on Keypoints...");
 
+      DBScan._massList.clear();
       for(MatOfKeyPoint kp : _descriptorList)
       {
    	  List<double[]> clusterlist = DBScan.cluster(kp, minSamples, eps);
