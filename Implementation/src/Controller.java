@@ -70,6 +70,18 @@ public class Controller
      File[] listOfFiles = folder.listFiles();
      List<String> images = new ArrayList<String>();
 
+     for(int i = 1; i <= _centeredDescriptors.size(); i++)
+     {
+    	 _centeredDescriptors.remove(i); 
+     }
+     System.out.println(_centeredDescriptors.size());
+    
+     for(int i = 1; i <= _descriptorList.size(); i++)
+     {
+    	 _descriptorList.remove(i);
+     }
+     System.out.println(_descriptorList.size());
+
      /**
       * Adding input image
       */
@@ -78,64 +90,71 @@ public class Controller
      /**
       * Deleting all buffered images if input image changes
       */
-     BufferedReader reader = new BufferedReader(new FileReader("resources/index/idx.txt"));
-     reader.readLine();
-     reader.readLine();
-     if(!images.get(0).equals(reader.readLine()))
-	 {
-    	 //Clearing index file
-    	 PrintWriter writer = new PrintWriter("resources/index/idx.txt");
-    	 writer.print("");
-    	 writer.close();
-    	 
-    	 //Clearing image_distances file
-    	 writer = new PrintWriter("resources/index/image_distances.txt");
-    	 writer.print("");
-    	 writer.close();
-	 }
-     reader.close();
-     
-     
-     /**Indexing images by checking if calculations have been done 
-      * on the given images during previous execution
-     */
-     int index = 0;
-     reader = new BufferedReader(new FileReader("resources/index/idx.txt"));
-     if(reader.readLine() != null)
+//     BufferedReader reader = new BufferedReader(new FileReader("resources/index/idx.txt"));
+//     reader.readLine();
+//     reader.readLine();
+//     if(!images.get(0).equals(reader.readLine()))
+//	 {
+//    	 //Clearing index file
+//    	 PrintWriter writer = new PrintWriter("resources/index/idx.txt");
+//    	 writer.print("");
+//    	 writer.close();
+//    	 
+//    	 //Clearing image_distances file
+//    	 writer = new PrintWriter("resources/index/image_distances.txt");
+//    	 writer.print("");
+//    	 writer.close();
+//    	 
+//	 }
+//     reader.close();
+//     
+//     
+//     /**Indexing images by checking if calculations have been done 
+//      * on the given images during previous execution
+//     */
+//     int index = 0;
+//     reader = new BufferedReader(new FileReader("resources/index/idx.txt"));
+//     if(reader.readLine() != null)
+//     {
+//    	index = Integer.parseInt(reader.readLine());
+//     }
+//     else
+//     {
+//    	 index = 0;
+//     }
+//     reader.close();
+//
+//     reader = new BufferedReader(new FileReader("resources/index/image_distances.txt"));
+//     //Adding images for comparison
+//     for(int i = 0; i < listOfFiles.length; i++)
+//     {
+//    	 boolean contains = false;
+//    	 
+//    	 //Comparing image with images buffered in image_distance.txt
+//    	 for(int j = 0; j < index; j++)
+//    	 {
+//	    	 if (listOfFiles[i].isFile() && reader.readLine().equals(listOfFiles[i].getPath())) {
+//	         contains = true;
+//	    	 }   
+//	    	 reader.readLine();
+//    	 }
+//    	 if(!contains) {
+//    		 images.add(listOfFiles[i].getPath());
+//    	 }
+//     }
+//     reader.close();
+//
+     for(File file : listOfFiles)
      {
-    	index = Integer.parseInt(reader.readLine());
+    	 images.add(file.getPath());
      }
-     else
-     {
-    	 index = 0;
-     }
-     reader.close();
 
-     //Adding images for comparison
-     for(int i = 0; i < listOfFiles.length; i++)
-     {
-         reader = new BufferedReader(new FileReader("resources/index/image_distances.txt"));
-    	 boolean contains = false;
     	 
-    	 //Comparing image with images buffered in image_distance.txt
-    	 for(int j = 0; j < index; j++)
-    	 {
-	    	 if (listOfFiles[i].isFile() && reader.readLine().equals(listOfFiles[i].getPath())) {
-	         contains = true;
-	    	 }   
-	    	 reader.readLine();
-    	 }
-    	 if(!contains) {
-    		 images.add(listOfFiles[i].getPath());
-    	 }
-     }
-     reader.close();
-
      File folder2 = new File("resources/sorted_output_images/");
      File[] listOfFiles2 = folder2.listFiles();
      
      //Clean directories   
-     for(int i = index; i < listOfFiles2.length; i++) 
+     for(int i = 0; i < listOfFiles2.length; i++) 
      {
     	 listOfFiles2[i].delete();
      }
@@ -160,22 +179,22 @@ public class Controller
       System.out.println("Calculating Distances....");
       List<Double> listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images);
 
-      //Load buffered images into index
-      List<Double> bufferedDistances = new ArrayList<Double>();
-      List<String> bufferedImages = new ArrayList<String>();
-
-      reader = new BufferedReader(new FileReader("resources/index/image_distances.txt"));
-      
-      for(int i = 1; i < index+1; i++)
-        {
-      	  bufferedImages.add(reader.readLine());
-      	  bufferedDistances.add(new Double(reader.readLine()));
-        }
-        
-        reader.close();
-        
-        images.addAll(bufferedImages);
-        listOfDistances.addAll(bufferedDistances);
+//      //Load buffered images into index
+//      List<Double> bufferedDistances = new ArrayList<Double>();
+//      List<String> bufferedImages = new ArrayList<String>();
+//
+//      reader = new BufferedReader(new FileReader("resources/index/image_distances.txt"));
+//      
+//      for(int i = 1; i < index+1; i++)
+//        {
+//      	  bufferedImages.add(reader.readLine());
+//      	  bufferedDistances.add(new Double(reader.readLine()));
+//        }
+//        
+//        reader.close();
+//        
+//        images.addAll(bufferedImages);
+//        listOfDistances.addAll(bufferedDistances);
         
         //Map and sort distances of images
         BidiMap<String, Double> map = new DualHashBidiMap<>();
@@ -199,7 +218,7 @@ public class Controller
         KeypointDetector.drawKeypoints(sortedImages.get(i), i);
         }
         
-        appendingToTxt(sortedImages, listOfDistances, images);
+//        appendingToTxt(sortedImages, listOfDistances, images);
    	}
    	
    	
