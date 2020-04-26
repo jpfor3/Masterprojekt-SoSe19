@@ -13,6 +13,7 @@ import keypointdetector.KeypointDetector;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +64,9 @@ public class Controller
    	
 	public static void compareImages(String inputImage, String compareImages, int minSamples, float eps, int emdpenalty, String distanceAlgorithm) throws IOException   	
 	{     
-	     File folder = new File(compareImages);
+		long startTime = System.currentTimeMillis()/1000;
+
+		 File folder = new File(compareImages);
 	     File[] listOfFiles = folder.listFiles();
 	     List<String> images = new ArrayList<String>();
 	
@@ -92,7 +95,6 @@ public class Controller
 	    	 listOfFiles2[i].delete();
 	     }
 	     
-	     
 	     //Detecting Keypoints of images
 	      KeypointDetector KPDetector = new KeypointDetector(images); 
 	      _descriptorList = KPDetector.getDescriptorList();
@@ -107,12 +109,14 @@ public class Controller
 	   	  List<double[]> clusterlist = DBScan.cluster(kp, minSamples, eps);
 	   	  _centeredDescriptors.add(clusterlist);   
 	      }
-	
+	      
 	      System.out.println("Clustering Ended....");
 	
 	      System.out.println("Calculating Distances....");
 	     
 	      List<Double> listOfDistances = new ArrayList<Double>();
+	      listOfDistances.clear();
+	      
 	      // check which distance algorithm was chosen in the UI
 	      switch(distanceAlgorithm) {
 	      case "Jaccard":
@@ -121,8 +125,6 @@ public class Controller
 	          listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, emdpenalty, false);
 	      case "Hamming":
 	          listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, emdpenalty, true);
-	      default: 
-	    	  System.out.println("");
 	      }
 	
 	        //Map and sort distances of images
@@ -146,7 +148,11 @@ public class Controller
 	        {
 	        KeypointDetector.drawKeypoints(sortedImages.get(i), i);
 	        }
-	        
+
+			long endTime = System.currentTimeMillis()/1000;
+			long duration = endTime - startTime;
+			System.out.println("Duration: " + duration);
+			
    	}
 	     
 }
