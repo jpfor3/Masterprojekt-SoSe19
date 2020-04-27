@@ -20,6 +20,8 @@ public class KeypointDetector {
 
 	public KeypointDetector(List<String> images){
 	 
+	   _descriptorList.clear();
+	   
 	   File lib = null;
        String os = System.getProperty("os.name");
        String bitness = System.getProperty("sun.arch.data.model");

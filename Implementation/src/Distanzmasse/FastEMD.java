@@ -28,6 +28,7 @@ public class FastEMD {
 	 public static List<Double> calcDistances(List<List<double[]>> centeredDescriptors, List<String> images, int emdpenalty, boolean hamming)
 	 { 	  	  
 		 _centeredDescriptors = centeredDescriptors;
+		 _listOfDistances.clear();
 	  	  /**
 	  	   * Creation of double arrays which contain every descriptor of an image. Therefore all features of all 
 	  	   * descriptors have to be aggregated in one array of the size of the number of features 
@@ -130,19 +131,15 @@ public class FastEMD {
 		   	  sigH.setNumberOfFeatures(features1DH.length);
 		   	  sigH.setFeatures(features1DH);
 		   	  
-		   	  /**Calculate distance between image g and h
-		   	  */
 		   	  
-		   	  //TODO: Choose between ground and hamming distance. Mit GUI verknüpfen
-//		   	  boolean hamming = false;
-		   	  
-		   	  String Euklid_Hamming = new String();
-		   	  if(hamming) { Euklid_Hamming = "The EMD Distance with Hamming is";} else {Euklid_Hamming = "The EMD Distance with Euclid is";}
-		   	  
+//		   	  String Euklid_Hamming = new String();
+//		   	  if(hamming) { Euklid_Hamming = "The EMD Distance with Hamming is";} else {Euklid_Hamming = "The EMD Distance with Euclid is";}
+//		   	  
 		   	  double EMDdistance = JFastEMD.distance(sigG, sigH, emdpenalty, hamming);
-		   	  System.out.println("\n" + Euklid_Hamming + "\t\t" + EMDdistance + "\t" + "between" + "\t\t" + images.get(0).substring(images.get(0).lastIndexOf("\\")+1) + "\t" + "and" + "\t\t" + images.get(h).substring(images.get(h).lastIndexOf("\\")+1));
-		   	  _listOfDistances.add(EMDdistance);
-			   	  
+//		   	  System.out.println("\n" + Euklid_Hamming + "\t\t" + EMDdistance + "\t" + "between" + "\t\t" + images.get(0).substring(images.get(0).lastIndexOf("\\")+1) + "\t" + "and" + "\t\t" + images.get(h).substring(images.get(h).lastIndexOf("\\")+1));
+//		   	  _listOfDistances.add(EMDdistance);
+
+ 		   	  System.out.println("\nDistance between image " + images.get(0).substring(images.get(0).lastIndexOf("/")+1) + " and image " + images.get(h).substring(images.get(h).lastIndexOf("/")+1) + " is " + EMDdistance);
 			  }
 		  
 		 

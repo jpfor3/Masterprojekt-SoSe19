@@ -73,7 +73,6 @@ public class JaccardDistance {
 					temp[0] = i1;
 					temp[1] = i2;
 					temp[2] = calcL2distance(set1, set2);
-					System.out.println(Arrays.toString(temp));
 					distanceList.add(temp);
 					
 					sharedDescriptors = calculateShared(distanceList, _threshold);
@@ -81,7 +80,7 @@ public class JaccardDistance {
 					
 					jaccardList.add(sharedDescriptors / uniqueDescriptors);
 					
-					System.out.println("The Jaccard-Distance between the chosen image and image #" + bild + " is: " + (sharedDescriptors / uniqueDescriptors));
+					System.out.println("The NORM-L2 Distance between descriptors " + temp[0] + " of chosen image and " + temp[1] + " of image " + bild + " is: " + temp[2]);
 
 					sharedDescriptors = 0;
 					uniqueDescriptors = 0;
@@ -112,7 +111,7 @@ public class JaccardDistance {
 	}
 	
 
-//______________________________________________________________________________________________________
+//__________________________________
 
 	
 	
