@@ -1,7 +1,0 @@
-
-30
-<<<<<<< HEAD
-C:\Users\jeanp\git\Masterprojekt-SoSe19_4\Implementation\resources\images\berg1.jpg
-=======
-C:\Users\ACER\Git Repositories\Projekt Master Branch2\Masterprojekt-SoSe19\Implementation\resources\images\berg1.jpg
->>>>>>> branch 'Alternative_DistanceMeasure' of https://github.com/jpfor3/Masterprojekt-SoSe19
