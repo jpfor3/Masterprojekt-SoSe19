@@ -11,10 +11,13 @@ import javax.swing.JComboBox;
 import javax.swing.JLayeredPane;
 import javax.swing.border.TitledBorder;
 
+import org.apache.commons.collections15.BidiMap;
+import org.apache.commons.collections15.bidimap.DualHashBidiMap;
 import org.opencv.core.Core;
 import org.opencv.core.MatOfKeyPoint;
 
 import Distanzmasse.FastEMD;
+import Distanzmasse.JaccardDistance;
 import cluster.DBScan;
 import keypointdetector.KeypointDetector;
 
@@ -30,6 +33,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -139,7 +143,7 @@ public class MainFrame extends JFrame {
 		lblClusteringAlgorithmus.setBounds(121, 513, 174, 20);
 		contentPane.add(lblClusteringAlgorithmus);
 		
-		String dalglist[] = {"EMD", "Hamming", "Jaccard"};
+		String dalglist[] = {"EMD (Euclid)", "EMD (Hamming)", "Jaccard"};
 		JComboBox comboBox_1 = new JComboBox(dalglist);
 		comboBox_1.setBounds(280, 508, 215, 31);
 		contentPane.add(comboBox_1);
@@ -200,13 +204,10 @@ public class MainFrame extends JFrame {
 				    SwingUtilities.invokeLater(new Runnable() {
 				        public void run() {
 				        	JLabel lblInput;
-				        	if(_inputImage.length() > 55)
-				        	{
-							    lblInput = new JLabel(_inputImage.substring(0, 55) + " ...");
-				        	} else {
-				        		lblInput = new JLabel(_inputImage);
-				        	}
-						    lblInput.setBounds(49, 16, 430, 292);
+				        		        			        	
+				        	lblInput = new JLabel(_inputImage.substring(_inputImage.lastIndexOf("\\")+1));
+				        	
+						    lblInput.setBounds(200, 16, 430, 292);
 							contentPane.add(lblInput);
 							contentPane.repaint();
 							
@@ -214,17 +215,6 @@ public class MainFrame extends JFrame {
 				        }
 				    });
 				    
-//					BufferedImage i0 = null;
-//					try {
-//						i0 = ImageIO.read(selectedFile);
-//					} catch (IOException e1) {
-//						// TODO Auto-generated catch block
-//						e1.printStackTrace();
-//					}
-//				    panel.add(new JLabel(new ImageIcon(i0.getScaledInstance(panel.getWidth(), panel.getHeight(), Image.SCALE_SMOOTH))));
-//				    panel.setVisible(true);
-//				    panel.repaint();
-//					images1.add(selectedFile.toString());
 				}
 			}
 		});
@@ -245,12 +235,7 @@ public class MainFrame extends JFrame {
 			    if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			    	File imageDirectory = fileChooser.getSelectedFile();
 			    	_compareImages = imageDirectory.getAbsolutePath();
-//			    	File[] images0 = imageDirectory.listFiles();
-//				    for (File file : images0) {
-//				    	if (file.isFile()) {
-//				            images1.add(imageDirectory.toString() + file.getName());
-//				        }
-//				    }
+
 			    	
 			    	SwingUtilities.invokeLater(new Runnable() {
 				        public void run() {
@@ -286,18 +271,95 @@ public class MainFrame extends JFrame {
 		JButton btnCompare = new JButton("Compare");
 		btnCompare.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(_compareImages);
-				System.out.println(_inputImage);
 				_emdpenalty = Integer.parseInt(textField_emdPenalty.getText());
 				_distancealgorithm = comboBox_1.getSelectedItem().toString();
 				
 
-				try {
-					Controller.compareImages(_inputImage, _compareImages, _minSamples, _eps, _emdpenalty, _distancealgorithm);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-		    
+				
+			    File folder = new File(_compareImages);
+			    File[] listOfFiles = folder.listFiles();
+			    
+			    File folder2 = new File("resources/sorted_output_images/");
+			    File[] listOfFiles2 = folder2.listFiles();
+			    
+			    List<String> images = new ArrayList<String>();
+			    images.add(_inputImage);
+
+			    //Adding images for comparison
+			    for(int i = 0; i < listOfFiles.length; i++)
+			    {
+			    	images.add(listOfFiles[i].getPath());	
+			    }
+			    	
+			    List<List<double[]>> _centeredDescriptors = new ArrayList<List<double[]>>();
+			    
+			    //Detecting Keypoints of images
+			    KeypointDetector KPDetector = new KeypointDetector(images); 
+			    List<MatOfKeyPoint> _descriptorList = KPDetector.getDescriptorList();
+			      
+			    System.out.println("KP Detection Ended....");
+
+			    System.out.println("Creating clusters on Keypoints...");
+
+			    for(MatOfKeyPoint kp : _descriptorList)
+			    {
+			    	List<double[]> clusterlist = DBScan.cluster(kp, _minSamples, _eps);
+			   	  	_centeredDescriptors.add(clusterlist);   
+			    }
+
+			    System.out.println("Clustering Ended....");
+
+			    System.out.println("Calculating Distances....");
+			      
+			    for(int i = 0; i < images.size()-1; i++) {
+			    	System.out.println(images.get(i));
+			    }
+			      
+			    List<Double> listOfDistances = new ArrayList<Double>();
+
+			    
+			    if(_distancealgorithm.equals("Jaccard")) {
+		    		System.out.println("Jaccard chosen");
+		    	    List<Double> jacList = JaccardDistance.calculateJaccard(descriptorList, _emdpenalty);
+		    	    System.out.println("Jac Distance: " + jacList.get(0));
+			    }
+			    else if(_distancealgorithm.equals("EMD (Euclid)")) {
+		    		System.out.println("EMD (Euclid) chosen");
+		    		listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, _emdpenalty, false);
+			    }
+			    else if(_distancealgorithm.equals("EMD (Hamming)")) {
+			    	System.out.println("EMD (Hamming) chosen");
+		    		listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, _emdpenalty, true);
+			    }
+			    
+			 
+			    //Map and sort distances of images
+		        BidiMap<String, Double> map = new DualHashBidiMap<>();
+		        
+		        for(int i = 1; i < images.size(); i++)
+		        {
+		            map.put(images.get(i), listOfDistances.get(i-1));
+		        }
+		        
+		        Collections.sort(listOfDistances);
+		        List<String> sortedImages = new ArrayList<String>();
+		        
+		        for(int i = 1; i < images.size(); i++)
+		        {
+		      	  sortedImages.add(map.getKey(listOfDistances.get(i-1)));  	  
+		        }
+		        
+		        
+		        for(int i = 0; i < sortedImages.size(); i++)
+		        {
+		        KeypointDetector.drawKeypoints(sortedImages.get(i), i);
+		        }
+		        
+		        System.out.println("\n" + "Done!");
+		   	
+		   	
+		   	
+		   	
 				
 //				if (comboBox_1.getSelectedItem().toString().equals("Jaccard")) {
 //					Controller.calcJaccard();

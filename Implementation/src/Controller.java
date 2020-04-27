@@ -37,29 +37,12 @@ public class Controller
 	{
 	     System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 	}
-    
-//	public static void main(String[] args)
-//	{
-//		
-//		String inputImage = "resources/images/HansSarpei.jpg";
-//		String compareImages = "resources/images";
-//		try {
-//			compareImages(inputImage, compareImages, 4, 0.1);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
-//	
+
+	
 	public static void calcJaccard(List<MatOfKeyPoint> descriptorList, int threshold)
     { 
       List<Double> jacList = JaccardDistance.calculateJaccard(descriptorList, threshold);
       System.out.println("Jac Distance: " + jacList.get(0));
-
-//      for(MatOfKeyPoint kp : _descriptorList) {
-//    	  System.out.println(kp.toString());
-//      }
-      
-
     }
 
    	
@@ -167,9 +150,9 @@ public class Controller
       switch(distanceAlgorithm) {
       case "Jaccard":
     	  calcJaccard(_descriptorList, emdpenalty);
-      case "EMD":	
+      case "EMD (Euclid)":	
           listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, emdpenalty, false);
-      case "Hamming":
+      case "EMD (Hamming)":
           listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, emdpenalty, true);
       default: 
     	  System.out.println("");

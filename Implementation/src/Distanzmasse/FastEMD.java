@@ -1,7 +1,7 @@
  package Distanzmasse;
 
 import java.util.ArrayList;
-
+import java.awt.Font;
 import java.nio.file.Path.*;
 
 
@@ -136,8 +136,11 @@ public class FastEMD {
 		   	  //TODO: Choose between ground and hamming distance. Mit GUI verknüpfen
 //		   	  boolean hamming = false;
 		   	  
+		   	  String Euklid_Hamming = new String();
+		   	  if(hamming) { Euklid_Hamming = "The EMD Distance with Hamming is";} else {Euklid_Hamming = "The EMD Distance with Euclid is";}
+		   	  
 		   	  double EMDdistance = JFastEMD.distance(sigG, sigH, emdpenalty, hamming);
-		   	  System.out.println("\nDistance between image " + images.get(0).substring(images.get(0).lastIndexOf("/")+1) + " and image " + images.get(h).substring(images.get(h).lastIndexOf("/")+1) + " is " + EMDdistance);
+		   	  System.out.println("\n" + Euklid_Hamming + "\t\t" + EMDdistance + "\t" + "between" + "\t\t" + images.get(0).substring(images.get(0).lastIndexOf("\\")+1) + "\t" + "and" + "\t\t" + images.get(h).substring(images.get(h).lastIndexOf("\\")+1));
 		   	  _listOfDistances.add(EMDdistance);
 			   	  
 			  }
