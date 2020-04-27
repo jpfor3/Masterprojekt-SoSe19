@@ -299,113 +299,65 @@ public class MainFrame extends JFrame {
 			      
 			    System.out.println("KP Detection Ended....");
 
-			    System.out.println("Creating clusters on Keypoints...");
-
-			    for(MatOfKeyPoint kp : _descriptorList)
-			    {
-			    	List<double[]> clusterlist = DBScan.cluster(kp, _minSamples, _eps);
-			   	  	_centeredDescriptors.add(clusterlist);   
-			    }
-
-			    System.out.println("Clustering Ended....");
-
-			    System.out.println("Calculating Distances....");
-			      
-			    for(int i = 0; i < images.size()-1; i++) {
-			    	System.out.println(images.get(i));
-			    }
-			      
-			    List<Double> listOfDistances = new ArrayList<Double>();
-
-			    
 			    if(_distancealgorithm.equals("Jaccard")) {
 		    		System.out.println("Jaccard chosen");
-		    	    List<Double> jacList = JaccardDistance.calculateJaccard(descriptorList, _emdpenalty);
+		    	    List<Double> jacList = JaccardDistance.calculateJaccard(_descriptorList, _emdpenalty);
 		    	    System.out.println("Jac Distance: " + jacList.get(0));
 			    }
-			    else if(_distancealgorithm.equals("EMD (Euclid)")) {
-		    		System.out.println("EMD (Euclid) chosen");
-		    		listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, _emdpenalty, false);
-			    }
-			    else if(_distancealgorithm.equals("EMD (Hamming)")) {
-			    	System.out.println("EMD (Hamming) chosen");
-		    		listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, _emdpenalty, true);
-			    }
-			    
+			    else {
+
+				    System.out.println("Creating clusters on Keypoints...");
+	
+				    for(MatOfKeyPoint kp : _descriptorList)
+				    {
+				    	List<double[]> clusterlist = DBScan.cluster(kp, _minSamples, _eps);
+				   	  	_centeredDescriptors.add(clusterlist);   
+				    }
+	
+				    System.out.println("Clustering Ended....");
+	
+				    System.out.println("Calculating Distances....");
+				      
+				    for(int i = 0; i < images.size()-1; i++) {
+				    	System.out.println(images.get(i));
+				    }
+				      
+				    List<Double> listOfDistances = new ArrayList<Double>();
+	
+				    if(_distancealgorithm.equals("EMD (Euclid)")) {
+			    		System.out.println("EMD (Euclid) chosen");
+			    		listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, _emdpenalty, false);
+				    }
+				    else if(_distancealgorithm.equals("EMD (Hamming)")) {
+				    	System.out.println("EMD (Hamming) chosen");
+			    		listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, _emdpenalty, true);
+				    }
 			 
-			    //Map and sort distances of images
-		        BidiMap<String, Double> map = new DualHashBidiMap<>();
-		        
-		        for(int i = 1; i < images.size(); i++)
-		        {
-		            map.put(images.get(i), listOfDistances.get(i-1));
-		        }
-		        
-		        Collections.sort(listOfDistances);
-		        List<String> sortedImages = new ArrayList<String>();
-		        
-		        for(int i = 1; i < images.size(); i++)
-		        {
-		      	  sortedImages.add(map.getKey(listOfDistances.get(i-1)));  	  
-		        }
-		        
-		        
-		        for(int i = 0; i < sortedImages.size(); i++)
-		        {
-		        KeypointDetector.drawKeypoints(sortedImages.get(i), i);
-		        }
-		        
+				    //Map and sort distances of images
+			        BidiMap<String, Double> map = new DualHashBidiMap<>();
+			        
+			        for(int i = 1; i < images.size(); i++)
+			        {
+			            map.put(images.get(i), listOfDistances.get(i-1));
+			        }
+			        
+			        Collections.sort(listOfDistances);
+			        List<String> sortedImages = new ArrayList<String>();
+			        
+			        for(int i = 1; i < images.size(); i++)
+			        {
+			      	  sortedImages.add(map.getKey(listOfDistances.get(i-1)));  	  
+			        }
+			        
+			        
+			        for(int i = 0; i < sortedImages.size(); i++)
+			        {
+			        KeypointDetector.drawKeypoints(sortedImages.get(i), i);
+			        }
+			    }
+			        
 		        System.out.println("\n" + "Done!");
 		   	
-		   	
-		   	
-		   	
-				
-//				if (comboBox_1.getSelectedItem().toString().equals("Jaccard")) {
-//					Controller.calcJaccard();
-//				}
-				
-//				List<List<String>> allImages = new ArrayList<List<String>>();
-//				List<MatOfKeyPoint> descriptorList = new ArrayList<MatOfKeyPoint>();
-				
-			    // add the descriptors from the input image which all others will be compared to
-//			    allImages.add(0, Collections.singletonList(_inputImage));
-//			    allImages.add(1, Collections.singletonList(_compareImages));
-//			    
-//			    KeypointDetector InputImageDetector = new KeypointDetector(allImages);
-//			    descriptorList = InputImageDetector.getDescriptorList();
-//			       
-//			    for(MatOfKeyPoint kp : descriptorList)
-//			      {
-//			   	  List<double[]> clusterlist = DBScan.cluster(kp, _minSamples, _eps);
-//			   	  _1centeredDescriptors.add(clusterlist);   
-//			      }
-//			    
-//			    // adding input image to new list of strings
-//			    List<String> imgs2 = new ArrayList<String>();
-//			    imgs2.add(_inputImage);
-//
-//			    // adding the paths of the compared images to that list
-//			    File folder = new File(_compareImages);
-//			    File[] listOfFiles = folder.listFiles();
-//			    for (int i = 0; i < listOfFiles.length; i++) {
-//			    	imgs2.add(listOfFiles[i].getPath());
-//			    }
-//
-//				KeypointDetector KPDetector = new KeypointDetector(imgs2); 
-//				descriptorList = KPDetector.getDescriptorList();
-//				    
-//				  for(MatOfKeyPoint kp : descriptorList)
-//				    {
-//				   	List<double[]> clusterlist = DBScan.cluster(kp, _minSamples, _eps);
-//				   	_1centeredDescriptors.add(clusterlist);   
-//				    }
-//				    
-
-				
-//			    // checks if hamming was chosen or not. Runs the chosen algorithm afterwards
-//			    FastEMD.calcDistances(_1centeredDescriptors, imgs2, _emdpenalty, _hamming);
-
 			    
 			}
 		});
