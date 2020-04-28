@@ -81,62 +81,88 @@ public class Controller
 	      _descriptorList = KPDetector.getDescriptorList();
 	      
 	      System.out.println("KP Detection Ended....");
-	
-	      System.out.println("Creating clusters on Keypoints...");
-	
-	      DBScan._massList.clear();
-	      for(MatOfKeyPoint kp : _descriptorList)
-	      {
-	   	  List<double[]> clusterlist = DBScan.cluster(kp, minSamples, eps);
-	   	  _centeredDescriptors.add(clusterlist);   
+	      
+	      if(distanceAlgorithm.equals("Jaccard")) {
+	    		System.out.println("Jaccard chosen");
+	    	    List<Double> jacList = JaccardDistance.calculateJaccard(_descriptorList, emdpenalty);
+	    	    System.out.println("Jac Distance: " + jacList.get(0));
 	      }
+	      else {
 	
-	      System.out.println("Clustering Ended....");
-	
-	      System.out.println("Calculating Distances....");
-	      
-	      
-	      List<Double> listOfDistances = new ArrayList<Double>();
-	      listOfDistances.clear();
-	      
-	      // check which distance algorithm was chosen in the UI
-	      switch(distanceAlgorithm) {
-	      case "Jaccard":
-	    	  calcJaccard(_descriptorList, emdpenalty);
-	      case "EMD (Euclid)":	
-	          listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, emdpenalty, false);
-	      case "EMD (Hamming)":
-	          listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, emdpenalty, true);
-	      default: 
-	    	  System.out.println("");
+		      System.out.println("Creating clusters on Keypoints...");
+		
+		      DBScan._massList.clear();
+		      for(MatOfKeyPoint kp : _descriptorList)
+		      {
+		   	  List<double[]> clusterlist = DBScan.cluster(kp, minSamples, eps);
+		   	  _centeredDescriptors.add(clusterlist);   
+		      }
+		
+		      System.out.println("Clustering Ended....");
+		
+		      System.out.println("Calculating Distances....");
+		      
+		      
+		      List<Double> listOfDistances = new ArrayList<Double>();
+		      
+		      // check which distance algorithm was chosen in the UI
+		      if(distanceAlgorithm.equals("EMD (Euclid)")) {
+		    		System.out.println("EMD (Euclid) chosen");
+		    		listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, emdpenalty, false);
+			    }
+			    else if(distanceAlgorithm.equals("EMD (Hamming)")) {
+			    	System.out.println("EMD (Hamming) chosen");
+		    		listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, emdpenalty, true);
+			    }
+		    
+		        
+		        //Map and sort distances of images
+		        BidiMap<String, Double> map = new DualHashBidiMap<>();
+		        
+		        for(int i = 1; i < images.size(); i++)
+		        {
+		            map.put(images.get(i), listOfDistances.get(i-1));
+		        }
+		        
+		        Collections.sort(listOfDistances);
+		        List<String> sortedImages = new ArrayList<String>();
+		        
+		        for(int i = 1; i < images.size(); i++)
+		        {
+		      	  sortedImages.add(getNextElement(map, listOfDistances, i));  	  
+		        }
+		        
+		        
+		        for(int i = 0; i < sortedImages.size(); i++)
+		        {
+		        KeypointDetector.drawKeypoints(sortedImages.get(i), i);
+		        }
 	      }
-	    
-	        
-	        //Map and sort distances of images
-	        BidiMap<String, Double> map = new DualHashBidiMap<>();
-	        
-	        for(int i = 1; i < images.size(); i++)
-	        {
-	            map.put(images.get(i), listOfDistances.get(i-1));
-	        }
-	        
-	        Collections.sort(listOfDistances);
-	        List<String> sortedImages = new ArrayList<String>();
-	        
-	        for(int i = 1; i < images.size(); i++)
-	        {
-	      	  sortedImages.add(map.getKey(listOfDistances.get(i-1)));  	  
-	        }
-	        
-	        
-	        for(int i = 0; i < sortedImages.size(); i++)
-	        {
-	        KeypointDetector.drawKeypoints(sortedImages.get(i), i);
-	        }
-	        
+	      
 	       	long endTime = System.currentTimeMillis()/1000;
 	    	long duration = endTime - startTime;
-	    	System.out.println("Duration: " + duration);
+	    	System.out.println("Program Duration: " + duration);
+	}
+
+
+   	
+	private static String getNextElement(BidiMap<String, Double> map, List<Double> listOfDistances, int i) {
+		//Für den Fall, dass Bilder die gleichen Distanzen haben, wird eine marginale Summe aufaddiert um Konflikte zu verhindern
+		if(i < listOfDistances.size())
+		{
+			if(listOfDistances.get(i-1) == listOfDistances.get(i))
+			{
+				listOfDistances.set(i, listOfDistances.get(i) + 0.00001);
+			} else if(listOfDistances.get(i-1) == listOfDistances.get(i) - 0.00001) {
+				listOfDistances.set(i, listOfDistances.get(i) + 0.00002);
+			} else if(listOfDistances.get(i-1) == listOfDistances.get(i) - 0.00002) {
+				listOfDistances.set(i, listOfDistances.get(i) + 0.00003);
+			} else if(listOfDistances.get(i-1) == listOfDistances.get(i) - 0.00003) {
+				listOfDistances.set(i, listOfDistances.get(i) + 0.00004);
+			}
+		}
+		return map.getKey(listOfDistances.get(i-1));
+		
 	}
 	   	
 

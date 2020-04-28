@@ -90,6 +90,8 @@ public class FastEMD {
 	   	  
 		  for(int h=1; h < centeredDescriptors.size(); h++)
 		  {
+			  long startingTime = System.currentTimeMillis()/1000;
+
 			  //Creating the feature array with all features
 		  	  double[] featuresH = new double[centeredDescriptors.get(h).size() * DBScan._descriptor.cols()];
 
@@ -137,10 +139,13 @@ public class FastEMD {
 //		   	  
 		   	  double EMDdistance = JFastEMD.distance(sigG, sigH, emdpenalty, hamming);
 //		   	  System.out.println("\n" + Euklid_Hamming + "\t\t" + EMDdistance + "\t" + "between" + "\t\t" + images.get(0).substring(images.get(0).lastIndexOf("\\")+1) + "\t" + "and" + "\t\t" + images.get(h).substring(images.get(h).lastIndexOf("\\")+1));
-//		   	  _listOfDistances.add(EMDdistance);
+		   	  _listOfDistances.add(EMDdistance);
 
- 		   	  System.out.println("\nDistance between image " + images.get(0).substring(images.get(0).lastIndexOf("/")+1) + " and image " + images.get(h).substring(images.get(h).lastIndexOf("/")+1) + " is " + EMDdistance);
-			  }
+ 		   	  System.out.println("\nDistance between image " + images.get(0).substring(images.get(0).lastIndexOf("\\")+1) + " and image " + images.get(h).substring(images.get(h).lastIndexOf("\\")+1) + " is " + EMDdistance);
+ 		   	  long endTime = System.currentTimeMillis()/1000;
+ 		   	  long duration = endTime - startingTime;
+ 		   	  System.out.println("Duration: " + duration);  
+		  }
 		  
 		 
 		  return _listOfDistances;

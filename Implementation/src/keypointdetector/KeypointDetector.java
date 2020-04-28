@@ -105,7 +105,7 @@ public class KeypointDetector {
 	         
 	         Features2d.drawKeypoints(img, kp, outputImage, KeypointColor, 0);
 	         
-	         Highgui.imwrite("resources/sorted_output_images/" + i + ".jpg", outputImage);
+	         Highgui.imwrite("resources/sorted_output_images/(" + i + ") " + image.substring(image.lastIndexOf("\\")+1) +  ".jpg", outputImage);
          }
      }
 	 
