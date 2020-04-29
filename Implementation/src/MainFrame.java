@@ -185,6 +185,9 @@ public class MainFrame extends JFrame {
 //		layeredPane.setLayout(null);
 //		panel.add(layeredPane);
 		
+    	JLabel lblInput = new JLabel("");
+    	lblInput.setBounds(200, 16, 430, 292);
+    	contentPane.add(lblInput);
 		
 		JButton btnSelectImage = new JButton("Select Image");
 		btnSelectImage.addActionListener(new ActionListener() {
@@ -203,13 +206,11 @@ public class MainFrame extends JFrame {
 				    
 				    SwingUtilities.invokeLater(new Runnable() {
 				        public void run() {
-				        	JLabel lblInput;
+//				        	JLabel lblInput;
 				        		        			        	
-				        	lblInput = new JLabel(_inputImage.substring(_inputImage.lastIndexOf("\\")+1));
+				        	lblInput.setText(_inputImage.substring(_inputImage.lastIndexOf("\\")+1));
 				        	
-						    lblInput.setBounds(200, 16, 430, 292);
-							contentPane.add(lblInput);
-							contentPane.repaint();
+				    		contentPane.repaint();
 							
 							contentPane.setComponentZOrder(lblInput, 1);
 				        }
@@ -221,8 +222,11 @@ public class MainFrame extends JFrame {
 		btnSelectImage.setBounds(19, 314, 420, 29);
 		contentPane.add(btnSelectImage);
 		
-
 		
+    	JLabel lblCompare = new JLabel("");
+    	lblCompare.setBounds(502, 16, 430, 292);
+		contentPane.add(lblCompare);
+
 		JButton button = new JButton("Select directory with images");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -239,15 +243,14 @@ public class MainFrame extends JFrame {
 			    	
 			    	SwingUtilities.invokeLater(new Runnable() {
 				        public void run() {
-				        	JLabel lblCompare;
+
 				        	if(_compareImages.length() > 55)
 				        	{
-				        		lblCompare = new JLabel(_compareImages.substring(0, 55) + " ...");
+				        		lblCompare.setText(_compareImages.substring(0, 55) + " ...");
 				        	} else {
-				        		lblCompare = new JLabel(_compareImages);
+				        		lblCompare.setText(_compareImages);
 				        	}
-				        	lblCompare.setBounds(502, 16, 430, 292);
-							contentPane.add(lblCompare);
+
 							contentPane.repaint();
 							
 							contentPane.setComponentZOrder(lblCompare, 1);

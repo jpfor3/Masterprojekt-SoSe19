@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections15.BidiMap;
 import org.apache.commons.collections15.bidimap.*;
@@ -199,9 +200,6 @@ public class Controller
         
         appendingToTxt(sortedImages, listOfDistances, images);
    	}
-   	
-   	
-   	
    	
  	private static void appendingToTxt(List<String> sortedImages, List<Double> listOfDistances, List<String> images) throws IOException 
  	{
