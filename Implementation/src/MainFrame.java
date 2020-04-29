@@ -62,7 +62,7 @@ public class MainFrame extends JFrame {
 	private String _inputImage;
 	private String _compareImages;
 	private int _minSamples;
-	private float _eps;
+	private double _eps;
 	private int _emdpenalty;
 	private String _distancealgorithm;
 
@@ -137,7 +137,7 @@ public class MainFrame extends JFrame {
 		eps.setBounds(280, 459, 215, 31);
 		eps.setSize(new Dimension(80,31));
 		contentPane.add(eps);
-		_eps = Float.parseFloat(eps.getText());
+		_eps = Double.parseDouble(eps.getText());
 		
 		JLabel lblClusteringAlgorithmus = new JLabel("Distance Algorithmus:");
 		lblClusteringAlgorithmus.setBounds(121, 513, 174, 20);

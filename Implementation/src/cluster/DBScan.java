@@ -18,7 +18,7 @@ public class DBScan {
 	 * @param eps 
 	 * @param minSamples 
 	 */
-	public static List<double[]> cluster(MatOfKeyPoint descriptor, int minSamples, float eps)
+	public static List<double[]> cluster(MatOfKeyPoint descriptor, int minSamples, double eps)
 	{
 	_descriptor = descriptor;
 	List<double[]> centroidlist = new ArrayList<double[]>();

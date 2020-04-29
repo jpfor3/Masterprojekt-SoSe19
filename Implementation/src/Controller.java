@@ -16,7 +16,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.commons.collections15.BidiMap;
 import org.apache.commons.collections15.bidimap.*;
@@ -43,7 +46,7 @@ public class Controller
     }
 
    	
-   	public static void compareImages(String inputImage, String compareImages, int minSamples, float eps, int emdpenalty, String distanceAlgorithm) throws IOException
+   	public static void compareImages(String inputImage, String compareImages, int minSamples, double eps, int emdpenalty, String distanceAlgorithm) throws IOException
    	{     
 		long startTime = System.currentTimeMillis()/1000;
 		
@@ -117,25 +120,32 @@ public class Controller
 		    
 		        
 		        //Map and sort distances of images
-		        BidiMap<String, Double> map = new DualHashBidiMap<>();
-		        
+		        Map<Double, String> map = new HashMap<Double, String>();
+		      		        
 		        for(int i = 1; i < images.size(); i++)
 		        {
-		            map.put(images.get(i), listOfDistances.get(i-1));
+		            map.put(listOfDistances.get(i-1), images.get(i));		       
 		        }
+		        
+			    Map<Double, String> treeMap = new TreeMap<Double, String>();
+			    treeMap.putAll(map);
+
 		        
 		        Collections.sort(listOfDistances);
 		        List<String> sortedImages = new ArrayList<String>();
 		        
-		        for(int i = 1; i < images.size(); i++)
-		        {
-		      	  sortedImages.add(getNextElement(map, listOfDistances, i));  	  
-		        }
+//		        for(int i = 1; i < images.size(); i++)
+//		        {
+//		      	  sortedImages.add(getNextElement(map, listOfDistances, i));  	  
+//		        }
 		        
 		        
-		        for(int i = 0; i < sortedImages.size(); i++)
-		        {
-		        KeypointDetector.drawKeypoints(sortedImages.get(i), i);
+	        	int i = 0; 
+
+		        for(Map.Entry<Double,String> entry : treeMap.entrySet())
+		        { 
+		        	KeypointDetector.drawKeypoints(entry.getValue(), i);
+		        	i++;
 		        }
 	      }
 	      
