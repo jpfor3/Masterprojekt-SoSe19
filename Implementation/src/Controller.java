@@ -4,23 +4,26 @@
  */
 
 import Distanzmasse.FastEMD;
+
 import Distanzmasse.JaccardDistance;
 import cluster.DBScan;
 import keypointdetector.KeypointDetector;
 
 
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.SortedSet;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import org.apache.commons.collections15.BidiMap;
 import org.apache.commons.collections15.bidimap.*;
@@ -47,181 +50,143 @@ public class Controller
     }
 
    	
-   	public static void compareImages(String inputImage, String compareImages, int minSamples, float eps, int emdpenalty, String distanceAlgorithm) throws IOException
+   	public static void compareImages(String inputImage, String compareImages, int minSamples, double eps, int emdpenalty, String distanceAlgorithm) throws IOException
    	{     
-     File folder = new File(compareImages);
-     File[] listOfFiles = folder.listFiles();
-     List<String> images = new ArrayList<String>();
+		long startTime = System.currentTimeMillis()/1000;
+		
+	     File folder = new File(compareImages);
+	     File[] listOfFiles = folder.listFiles();
+	     List<String> images = new ArrayList<String>();
+	
+	     _centeredDescriptors.clear();
+	 	
+	     _descriptorList.clear();
+	
+	     /**
+	      * Adding input image
+	      */
+	     images.add(inputImage);
+	
+	     for(File file : listOfFiles)
+	     {
+	    	 images.add(file.getPath());
+	     }
+	
+	     File folder2 = new File("resources/sorted_output_images/");
+	     File[] listOfFiles2 = folder2.listFiles();
 
-     /**
-      * Adding input image
-      */
-     images.add(inputImage);
-     
-     /**
-      * Deleting all buffered images if input image changes
-      */
-     BufferedReader reader = new BufferedReader(new FileReader("resources/index/idx.txt"));
-     reader.readLine();
-     reader.readLine();
-     if(!images.get(0).equals(reader.readLine()))
-	 {
-    	 //Clearing index file
-    	 PrintWriter writer = new PrintWriter("resources/index/idx.txt");
-    	 writer.print("");
-    	 writer.close();
-    	 
-    	 //Clearing image_distances file
-    	 writer = new PrintWriter("resources/index/image_distances.txt");
-    	 writer.print("");
-    	 writer.close();
-	 }
-     reader.close();
-     
-     
-     /**Indexing images by checking if calculations have been done 
-      * on the given images during previous execution
-     */
-     int index = 0;
-     reader = new BufferedReader(new FileReader("resources/index/idx.txt"));
-     if(reader.readLine() != null)
-     {
-    	index = Integer.parseInt(reader.readLine());
-     }
-     else
-     {
-    	 index = 0;
-     }
-     reader.close();
-
-     //Adding images for comparison
-     for(int i = 0; i < listOfFiles.length; i++)
-     {
-         reader = new BufferedReader(new FileReader("resources/index/image_distances.txt"));
-    	 boolean contains = false;
-    	 
-    	 //Comparing image with images buffered in image_distance.txt
-    	 for(int j = 0; j < index; j++)
-    	 {
-	    	 if (listOfFiles[i].isFile() && reader.readLine().equals(listOfFiles[i].getPath())) {
-	         contains = true;
-	    	 }   
-	    	 reader.readLine();
-    	 }
-    	 if(!contains) {
-    		 images.add(listOfFiles[i].getPath());
-    	 }
-     }
-     reader.close();
-
-     File folder2 = new File("resources/sorted_output_images/");
-     File[] listOfFiles2 = folder2.listFiles();
-     System.out.println(listOfFiles2);
-     
-     if(!listOfFiles2.equals(null)) {
-	     //Clean directories   
-	     for(int i = index; i < listOfFiles2.length; i++) 
+	     
+	   //Clean directories   
+	     for(int i = 0; i < listOfFiles2.length; i++) 
 	     {
 	    	 listOfFiles2[i].delete();
 	     }
-     }
-     
-     
-     //Detecting Keypoints of images
-      KeypointDetector KPDetector = new KeypointDetector(images); 
-      _descriptorList = KPDetector.getDescriptorList();
-      
-      System.out.println("KP Detection Ended....");
-
-      System.out.println("Creating clusters on Keypoints...");
-
-      for(MatOfKeyPoint kp : _descriptorList)
-      {
-   	  List<double[]> clusterlist = DBScan.cluster(kp, minSamples, eps);
-   	  _centeredDescriptors.add(clusterlist);   
-      }
-
-      System.out.println("Clustering Ended....");
-
-      System.out.println("Calculating Distances....");
-      
-      
-      List<Double> listOfDistances = new ArrayList<Double>();
-      // check which distance algorithm was chosen in the UI
-      switch(distanceAlgorithm) {
-      case "Jaccard":
-    	  calcJaccard(_descriptorList, emdpenalty);
-      case "EMD (Euclid)":	
-          listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, emdpenalty, false);
-      case "EMD (Hamming)":
-          listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, emdpenalty, true);
-      default: 
-    	  System.out.println("");
-      }
-      
-      //Load buffered images into index
-      List<Double> bufferedDistances = new ArrayList<Double>();
-      List<String> bufferedImages = new ArrayList<String>();
-
-      reader = new BufferedReader(new FileReader("resources/index/image_distances.txt"));
-      
-      for(int i = 1; i < index+1; i++)
-        {
-      	  bufferedImages.add(reader.readLine());
-      	  bufferedDistances.add(new Double(reader.readLine()));
-        }
-        
-        reader.close();
-        
-        images.addAll(bufferedImages);
-        listOfDistances.addAll(bufferedDistances);
-        
-        //Map and sort distances of images
-        BidiMap<String, Double> map = new DualHashBidiMap<>();
-        
-        for(int i = 1; i < images.size(); i++)
-        {
-            map.put(images.get(i), listOfDistances.get(i-1));
-        }
-        
-        Collections.sort(listOfDistances);
-        List<String> sortedImages = new ArrayList<String>();
-        
-        for(int i = 1; i < images.size(); i++)
-        {
-      	  sortedImages.add(map.getKey(listOfDistances.get(i-1)));  	  
-        }
-        
-        
-        for(int i = 0; i < sortedImages.size(); i++)
-        {
-        KeypointDetector.drawKeypoints(sortedImages.get(i), i);
-        }
-        
-        appendingToTxt(sortedImages, listOfDistances, images);
-   	}
-   	
- 	private static void appendingToTxt(List<String> sortedImages, List<Double> listOfDistances, List<String> images) throws IOException 
- 	{
-	   //Printing index Nr
-	   FileWriter writer = new FileWriter("resources/index/idx.txt");
-	   writer.append("\n" + sortedImages.size());
-	   
-	   //Printing input image
-	   writer.append("\n" + images.get(0));
-	   writer.close();
-	   
-	   writer = new FileWriter("resources/index/image_distances.txt");
-
-	   for(int i = 0; i < sortedImages.size(); i++)
-	      {
-		   writer.append(sortedImages.get(i) + "\n");
-		   writer.append(listOfDistances.get(i) + "\n");	      
-	   }
+	     
+	     
+	     //Detecting Keypoints of images
+	      KeypointDetector KPDetector = new KeypointDetector(images); 
+	      _descriptorList = KPDetector.getDescriptorList();
 	      
-    writer.close();
-	   
- 	}
+	      System.out.println("KP Detection Ended....");
+	      
+	      if(distanceAlgorithm.equals("Jaccard")) {
+	    		System.out.println("Jaccard chosen");
+	    	    List<Double> jacList = JaccardDistance.calculateJaccard(_descriptorList, emdpenalty);
+	    	    System.out.println("Jac Distance: " + jacList.get(0));
+	      }
+	      else {
+	
+		      System.out.println("Creating clusters on Keypoints...");
+		
+		      DBScan._massList.clear();
+		      for(MatOfKeyPoint kp : _descriptorList)
+		      {
+		   	  List<double[]> clusterlist = DBScan.cluster(kp, minSamples, eps);
+		   	  _centeredDescriptors.add(clusterlist);   
+		      }
+		
+		      System.out.println("Clustering Ended....");
+		
+		      System.out.println("Calculating Distances....");
+		      
+		      
+		      List<Double> listOfDistances = new ArrayList<Double>();
+		      
+		      // check which distance algorithm was chosen in the UI
+		      if(distanceAlgorithm.equals("EMD (Euclid)")) {
+		    		System.out.println("EMD (Euclid) chosen");
+		    		listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, emdpenalty, false);
+			    }
+			    else if(distanceAlgorithm.equals("EMD (Hamming)")) {
+			    	System.out.println("EMD (Hamming) chosen");
+		    		listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, emdpenalty, true);
+			    }
+		    
+		        
+		        //Map and sort distances of images
+		        Map<String, Double> map = new HashMap<String, Double>();
+		      		        
+		        for(int i = 1; i < images.size(); i++)
+		        {
+		            map.put(images.get(i), listOfDistances.get(i-1));		       
+		        }
+		        
+			    Map<String, Double> treeMap = new TreeMap<String, Double>();
+			    treeMap.putAll(map); 
+
+		        SortedSet<Entry<String, Double>> finalMap = entriesSortedByValues(treeMap);
+			    
+			    
+		        Collections.sort(listOfDistances);
+		        List<String> sortedImages = new ArrayList<String>();
+		        
+		        for(int i = 1; i < images.size(); i++)
+		        {
+		        	sortedImages.add(finalMap.first().getKey());
+		        	finalMap.remove(finalMap.first());
+//		      	  	sortedImages.add(getNextElement(map, listOfDistances, i));  	  
+		        }
+		        
+		        
+	      }
+	      
+	       	long endTime = System.currentTimeMillis()/1000;
+	    	long duration = endTime - startTime;
+	    	System.out.println("Program Duration: " + duration);
+	}
+
+    static <K,V extends Comparable<? super V>> SortedSet<Map.Entry<K,V>> entriesSortedByValues(Map<K,V> map) {
+        SortedSet<Map.Entry<K,V>> sortedEntries = new TreeSet<Map.Entry<K,V>>(
+            new Comparator<Map.Entry<K,V>>() {
+                @Override public int compare(Map.Entry<K,V> e1, Map.Entry<K,V> e2) {
+                    int res = e1.getValue().compareTo(e2.getValue());
+                    return res != 0 ? res : 1;
+                }
+            }
+        );
+        sortedEntries.addAll(map.entrySet());
+        return sortedEntries;
+    }
+
+   	
+	private static String getNextElement(BidiMap<String, Double> map, List<Double> listOfDistances, int i) {
+		//Für den Fall, dass Bilder die gleichen Distanzen haben, wird eine marginale Summe aufaddiert um Konflikte zu verhindern
+		if(i < listOfDistances.size())
+		{
+			if(listOfDistances.get(i-1) == listOfDistances.get(i))
+			{
+				listOfDistances.set(i, listOfDistances.get(i) + 0.00001);
+			} else if(listOfDistances.get(i-1) == listOfDistances.get(i) - 0.00001) {
+				listOfDistances.set(i, listOfDistances.get(i) + 0.00002);
+			} else if(listOfDistances.get(i-1) == listOfDistances.get(i) - 0.00002) {
+				listOfDistances.set(i, listOfDistances.get(i) + 0.00003);
+			} else if(listOfDistances.get(i-1) == listOfDistances.get(i) - 0.00003) {
+				listOfDistances.set(i, listOfDistances.get(i) + 0.00004);
+			}
+		}
+		return map.getKey(listOfDistances.get(i-1));
+		
+	}
+	   	
+
 }
-   
-   
