@@ -9,17 +9,21 @@ import Distanzmasse.JaccardDistance;
 import cluster.DBScan;
 import keypointdetector.KeypointDetector;
 
-
-
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.SortedSet;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import org.apache.commons.collections15.BidiMap;
 import org.apache.commons.collections15.bidimap.*;
@@ -93,14 +97,32 @@ public class Controller
 	      else {
 	
 		      System.out.println("Creating clusters on Keypoints...");
-		
+		      
 		      DBScan._massList.clear();
+		      
+		   	  //Initializing log file
+			  BufferedWriter writer = new BufferedWriter(new FileWriter("./resources/logs/duration_clustering.txt", false));
+			  writer.write("Date: " + java.time.LocalDateTime.now() + "\n");
+
+
+			  int iterator = 0;
 		      for(MatOfKeyPoint kp : _descriptorList)
 		      {
-		   	  List<double[]> clusterlist = DBScan.cluster(kp, minSamples, eps);
-		   	  _centeredDescriptors.add(clusterlist);   
+		    	  long startingTime = System.currentTimeMillis();
+
+			   	  List<double[]> clusterlist = DBScan.cluster(kp, minSamples, eps);
+			   	  
+		    	  long endTime = System.currentTimeMillis();
+		    	  long duration = endTime - startingTime;
+
+			   	  writer.write("Clustering time for " + images.get(iterator).substring(images.get(iterator).lastIndexOf("\\")+1) + ": " + duration + "\n");
+			   	  iterator++;
+			   	  
+			   	  _centeredDescriptors.add(clusterlist);   
 		      }
-		
+		      
+		      writer.close();
+		      
 		      System.out.println("Clustering Ended....");
 		
 		      System.out.println("Calculating Distances....");
@@ -118,64 +140,79 @@ public class Controller
 		    		listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, emdpenalty, true);
 			    }
 		    
-		        
-		        //Map and sort distances of images
-		        Map<Double, String> map = new HashMap<Double, String>();
+		      
+		    //Map and sort distances of images
+		        Map<String, Double> map = new HashMap<String, Double>();
 		      		        
 		        for(int i = 1; i < images.size(); i++)
 		        {
-		            map.put(listOfDistances.get(i-1), images.get(i));		       
+		            map.put(images.get(i), listOfDistances.get(i-1));		       
 		        }
 		        
-			    Map<Double, String> treeMap = new TreeMap<Double, String>();
-			    treeMap.putAll(map);
+			    Map<String, Double> treeMap = new TreeMap<String, Double>();
+			    treeMap.putAll(map); 
 
-		        
+		        SortedSet<Entry<String, Double>> finalMap = entriesSortedByValues(treeMap);
+			    System.out.println(finalMap);
+			    
 		        Collections.sort(listOfDistances);
 		        List<String> sortedImages = new ArrayList<String>();
+
+		        Iterator<Map.Entry<String, Double>> it = finalMap.iterator();
+
+		        while(it.hasNext())
+		        {
+		        	sortedImages.add(it.next().getKey());
+		        }
 		        
+		        for(int i = 0; i < sortedImages.size(); i++) {
+		        	KeypointDetector.drawKeypoints(sortedImages.get(i), i);
+		        }
+		        
+	      
+		        
+		    //Map and sort distances of images
+//		        BidiMap<String, Double> map = new DualHashBidiMap<>();
+//
 //		        for(int i = 1; i < images.size(); i++)
 //		        {
-//		      	  sortedImages.add(getNextElement(map, listOfDistances, i));  	  
+//		            map.put(images.get(i), listOfDistances.get(i-1));
 //		        }
-		        
-		        
-	        	int i = 0; 
-
-		        for(Map.Entry<Double,String> entry : treeMap.entrySet())
-		        { 
-		        	KeypointDetector.drawKeypoints(entry.getValue(), i);
-		        	i++;
-		        }
+//
+//		        
+//		        Collections.sort(listOfDistances);
+//		        List<String> sortedImages = new ArrayList<String>();
+//
+//		        for(int i = 1; i < images.size(); i++)
+//		        {
+//		      	  sortedImages.add(map.getKey(listOfDistances.get(i-1)));  	  
+//		        }
+//
+//
+//		        for(int i = 0; i < sortedImages.size(); i++)
+//		        {
+//		        KeypointDetector.drawKeypoints(sortedImages.get(i), i);
+//		        }
 	      }
 	      
 	       	long endTime = System.currentTimeMillis()/1000;
 	    	long duration = endTime - startTime;
 	    	System.out.println("Program Duration: " + duration);
 	}
-
-
    	
-	private static String getNextElement(BidiMap<String, Double> map, List<Double> listOfDistances, int i) {
-		//Für den Fall, dass Bilder die gleichen Distanzen haben, wird eine marginale Summe aufaddiert um Konflikte zu verhindern
-		if(i < listOfDistances.size())
-		{
-			if(listOfDistances.get(i-1) == listOfDistances.get(i))
-			{
-				listOfDistances.set(i, listOfDistances.get(i) + 0.00001);
-			} else if(listOfDistances.get(i-1) == listOfDistances.get(i) - 0.00001) {
-				listOfDistances.set(i, listOfDistances.get(i) + 0.00002);
-			} else if(listOfDistances.get(i-1) == listOfDistances.get(i) - 0.00002) {
-				listOfDistances.set(i, listOfDistances.get(i) + 0.00003);
-			} else if(listOfDistances.get(i-1) == listOfDistances.get(i) - 0.00003) {
-				listOfDistances.set(i, listOfDistances.get(i) + 0.00004);
-			}
-		}
-		return map.getKey(listOfDistances.get(i-1));
-		
-	}
-	   	
+   	static <K,V extends Comparable<? super V>> SortedSet<Map.Entry<K,V>> entriesSortedByValues(Map<K,V> map) {
+        SortedSet<Map.Entry<K,V>> sortedEntries = new TreeSet<Map.Entry<K,V>>(
+            new Comparator<Map.Entry<K,V>>() {
+                @Override public int compare(Map.Entry<K,V> e1, Map.Entry<K,V> e2) {
+                    int res = e1.getValue().compareTo(e2.getValue());
+                    return res != 0 ? res : 1;
+                }
+            }
+        );
+        sortedEntries.addAll(map.entrySet());
+        return sortedEntries;
+    }  	
+}  	
 
-}
-   
+
    

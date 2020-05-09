@@ -5,7 +5,13 @@ import org.opencv.features2d.DescriptorExtractor;
 import org.opencv.features2d.FeatureDetector;
 import org.opencv.features2d.Features2d;
 import org.opencv.highgui.Highgui;
+
+import cluster.DBScan;
+
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +24,7 @@ public class KeypointDetector {
     public static int _kpDetector;
     public static int _descriptorExtractor;
 
-	public KeypointDetector(List<String> images){
+	public KeypointDetector(List<String> images) throws IOException{
 	 
 	   _descriptorList.clear();
 	   
@@ -61,12 +67,28 @@ public class KeypointDetector {
 	     			break;
 	     }
        
+	   
+   	  //Initializing log file
+	  BufferedWriter writer = new BufferedWriter(new FileWriter("./resources/logs/duration_keypoints.txt", false));
+	  writer.write("Date: " + java.time.LocalDateTime.now() + "\n");
+	  int iterator = 0;
+		  
        for(String image : images)
        {
+    	   long startingTime = System.currentTimeMillis();
+
     	   MatOfKeyPoint descriptors = detectKeypoints(image);
+    	    	  
+    	   long endTime = System.currentTimeMillis();
+    	   long duration = endTime - startingTime;
+		   writer.write("Time for detecting KP of " + images.get(iterator).substring(images.get(iterator).lastIndexOf("\\")+1) + ": " + duration + "\n");
+		   iterator++;
+	    	  
     	   _descriptorList.add(descriptors);
 	       i +=1;
        } 
+       
+       writer.close();
        
    }
 	

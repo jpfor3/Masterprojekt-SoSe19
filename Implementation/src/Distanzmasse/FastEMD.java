@@ -2,6 +2,9 @@
 
 import java.util.ArrayList;
 import java.awt.Font;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Path.*;
 
 
@@ -24,8 +27,9 @@ public class FastEMD {
 	  * Signatur class.
 	  * 
 	  * @param centeredDescriptors
+	  * @throws IOException 
 	  */
-	 public static List<Double> calcDistances(List<List<double[]>> centeredDescriptors, List<String> images, int emdpenalty, boolean hamming)
+	 public static List<Double> calcDistances(List<List<double[]>> centeredDescriptors, List<String> images, int emdpenalty, boolean hamming) throws IOException
 	 { 	  	  
 		 _centeredDescriptors = centeredDescriptors;
 		 _listOfDistances.clear();
@@ -79,9 +83,9 @@ public class FastEMD {
 	   	  sigG.setFeatures(features1DG);
 	   	  
 	   	  
-	   	  
-	   	  
-	   	  
+	   	  //Initializing log file
+		  BufferedWriter writer = new BufferedWriter(new FileWriter("./resources/logs/duration_distances.txt", false));
+		  writer.write("Date: " + java.time.LocalDateTime.now() + "\n");
 	   	  
 		  
 		  /**
@@ -90,7 +94,7 @@ public class FastEMD {
 	   	  
 		  for(int h=1; h < centeredDescriptors.size(); h++)
 		  {
-			  long startingTime = System.currentTimeMillis()/1000;
+			  long startingTime = System.currentTimeMillis();
 
 			  //Creating the feature array with all features
 		  	  double[] featuresH = new double[centeredDescriptors.get(h).size() * DBScan._descriptor.cols()];
@@ -142,12 +146,14 @@ public class FastEMD {
 		   	  _listOfDistances.add(EMDdistance);
 
  		   	  System.out.println("\nDistance between image " + images.get(0).substring(images.get(0).lastIndexOf("\\")+1) + " and image " + images.get(h).substring(images.get(h).lastIndexOf("\\")+1) + " is " + EMDdistance);
- 		   	  long endTime = System.currentTimeMillis()/1000;
+ 		   	  long endTime = System.currentTimeMillis();
  		   	  long duration = endTime - startingTime;
- 		   	  System.out.println("Duration: " + duration);  
+ 			
+				writer.write("Computing time for distances between " + images.get(0).substring(images.get(0).lastIndexOf("\\")+1) + " and " + images.get(h).substring(images.get(h).lastIndexOf("\\")+1) + ": " + duration + "\n");
 		  }
 		  
-		 
+		  writer.close();
+		  
 		  return _listOfDistances;
 		  		  
 	 }
