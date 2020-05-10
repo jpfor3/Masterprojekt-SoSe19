@@ -140,8 +140,13 @@ public class Controller
 		    		listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, emdpenalty, true);
 			    }
 		    
+<<<<<<< HEAD
 		      
 		    //Map and sort distances of images
+=======
+		        
+		        //Map and sort distances of images
+>>>>>>> 92f76daed8b5f5b30761b5c8eb000d863b648dd4
 		        Map<String, Double> map = new HashMap<String, Double>();
 		      		        
 		        for(int i = 1; i < images.size(); i++)
@@ -153,7 +158,11 @@ public class Controller
 			    treeMap.putAll(map); 
 
 		        SortedSet<Entry<String, Double>> finalMap = entriesSortedByValues(treeMap);
+<<<<<<< HEAD
 			    System.out.println(finalMap);
+=======
+			    
+>>>>>>> 92f76daed8b5f5b30761b5c8eb000d863b648dd4
 			    
 		        Collections.sort(listOfDistances);
 		        List<String> sortedImages = new ArrayList<String>();
@@ -165,6 +174,7 @@ public class Controller
 		        	sortedImages.add(it.next().getKey());
 		        }
 		        
+<<<<<<< HEAD
 		        for(int i = 0; i < sortedImages.size(); i++) {
 		        	KeypointDetector.drawKeypoints(sortedImages.get(i), i);
 		        }
@@ -193,12 +203,39 @@ public class Controller
 //		        {
 //		        KeypointDetector.drawKeypoints(sortedImages.get(i), i);
 //		        }
+=======
+		        for(int i = 1; i < images.size(); i++)
+		        {
+		        	sortedImages.add(finalMap.first().getKey());
+		        	finalMap.remove(finalMap.first());
+//		      	  	sortedImages.add(getNextElement(map, listOfDistances, i));  	  
+		        }
+		        
+		        
+>>>>>>> 92f76daed8b5f5b30761b5c8eb000d863b648dd4
 	      }
 	      
 	       	long endTime = System.currentTimeMillis()/1000;
 	    	long duration = endTime - startTime;
 	    	System.out.println("Program Duration: " + duration);
 	}
+<<<<<<< HEAD
+=======
+
+    static <K,V extends Comparable<? super V>> SortedSet<Map.Entry<K,V>> entriesSortedByValues(Map<K,V> map) {
+        SortedSet<Map.Entry<K,V>> sortedEntries = new TreeSet<Map.Entry<K,V>>(
+            new Comparator<Map.Entry<K,V>>() {
+                @Override public int compare(Map.Entry<K,V> e1, Map.Entry<K,V> e2) {
+                    int res = e1.getValue().compareTo(e2.getValue());
+                    return res != 0 ? res : 1;
+                }
+            }
+        );
+        sortedEntries.addAll(map.entrySet());
+        return sortedEntries;
+    }
+
+>>>>>>> 92f76daed8b5f5b30761b5c8eb000d863b648dd4
    	
    	static <K,V extends Comparable<? super V>> SortedSet<Map.Entry<K,V>> entriesSortedByValues(Map<K,V> map) {
         SortedSet<Map.Entry<K,V>> sortedEntries = new TreeSet<Map.Entry<K,V>>(
@@ -215,4 +252,8 @@ public class Controller
 }  	
 
 
+<<<<<<< HEAD
    
+=======
+}
+>>>>>>> 92f76daed8b5f5b30761b5c8eb000d863b648dd4

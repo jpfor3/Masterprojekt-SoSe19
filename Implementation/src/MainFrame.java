@@ -185,6 +185,9 @@ public class MainFrame extends JFrame {
 //		layeredPane.setLayout(null);
 //		panel.add(layeredPane);
 		
+    	JLabel lblInput = new JLabel("");
+    	lblInput.setBounds(200, 16, 430, 292);
+    	contentPane.add(lblInput);
 		
 		JLabel lblInput = new JLabel("");
     	lblInput.setBounds(200, 16, 430, 292);
@@ -223,9 +226,12 @@ public class MainFrame extends JFrame {
 		btnSelectImage.setBounds(19, 314, 420, 29);
 		contentPane.add(btnSelectImage);
 		
-
 		
+<<<<<<< HEAD
 		JLabel lblCompare = new JLabel("");
+=======
+    	JLabel lblCompare = new JLabel("");
+>>>>>>> 92f76daed8b5f5b30761b5c8eb000d863b648dd4
     	lblCompare.setBounds(502, 16, 430, 292);
 		contentPane.add(lblCompare);
 

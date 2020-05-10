@@ -102,7 +102,7 @@ public class JaccardDistance {
 //			System.out.println(Arrays.toString(set.get(actualRow, h)));
 		}
 		return set;
-	}
+	} 
 
 	
 	public static double calcL2distance(Mat desc1, Mat desc2) {
