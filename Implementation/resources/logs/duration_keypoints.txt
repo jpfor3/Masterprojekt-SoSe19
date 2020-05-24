@@ -1,0 +1,23 @@
+Date: 2020-05-24T16:35:04.736
+Time for detecting KP of Landschaft01.jpg: 63
+Time for detecting KP of Landschaft01.jpg: 66
+Time for detecting KP of Landschaft02.jpg: 35
+Time for detecting KP of Landschaft06.jpg: 31
+Time for detecting KP of Landschaft09.jpg: 32
+Time for detecting KP of Landschaft11.jpg: 47
+Time for detecting KP of Landschaft16.jpg: 31
+Time for detecting KP of Landschaft17.jpg: 47
+Time for detecting KP of Mensch01.png: 140
+Time for detecting KP of Mensch02.png: 125
+Time for detecting KP of Mensch03.png: 111
+Time for detecting KP of Mensch04.png: 313
+Time for detecting KP of Mensch05.png: 153
+Time for detecting KP of Mensch06.png: 117
+Time for detecting KP of Mensch07.png: 172
+Time for detecting KP of Mensch08.png: 125
+Time for detecting KP of Mensch09.png: 127
+Time for detecting KP of Mensch10.png: 126
+Time for detecting KP of Mensch11.png: 125
+Time for detecting KP of Mensch12.png: 156
+Time for detecting KP of Mensch13.png: 121
+Time for detecting KP of Mensch14.png: 83

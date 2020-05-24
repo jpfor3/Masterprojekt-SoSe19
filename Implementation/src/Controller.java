@@ -57,6 +57,42 @@ public class Controller
 	     _centeredDescriptors.clear();
 	 	
 	     _descriptorList.clear();
+	     
+	     //Überprüfe zu welcher Kategorie das Input Image gehört
+	     String refImage = null;
+	     switch(trimPath(inputImage)){
+	        case "Hund":
+	        	refImage = "Hund";
+	        break;
+	        case "Rind":
+	        	refImage = "Rind";
+	        break;
+	        case "Landschaft":
+	        	refImage = "Landschaft";
+	        break;
+	        case "Katze":
+	        	refImage = "Katze";
+	        break;
+	        case "Schaf":
+	        	refImage = "Schaf";
+	        break;
+	        case "Rad":
+	        	refImage = "Rad";
+	        break;
+	        case "Bike":
+	        	refImage = "Bike";
+	        break;
+	        case "Auto":
+	        	refImage = "Auto";
+	        break;
+	        case "Pferd":
+	        	refImage = "Pferd";
+	        break;
+	        case "Mensch":
+	        	refImage = "Mensch";
+	        break;
+	     }
+	     
 	
 	     /**
 	      * Adding input image
@@ -158,6 +194,7 @@ public class Controller
 			    
 		        Collections.sort(listOfDistances);
 		        List<String> sortedImages = new ArrayList<String>();
+		        
 
 		        Iterator<Map.Entry<String, Double>> it = finalMap.iterator();
 
@@ -169,49 +206,35 @@ public class Controller
 
 		        for(int i = 0; i < sortedImages.size(); i++) {
 		        	KeypointDetector.drawKeypoints(sortedImages.get(i), i);
-		        }
-		        
-	      
-		        
-		    //Map and sort distances of images
-//		        BidiMap<String, Double> map = new DualHashBidiMap<>();
-//
-//		        for(int i = 1; i < images.size(); i++)
-//		        {
-//		            map.put(images.get(i), listOfDistances.get(i-1));
-//		        }
-//
-//		        
-//		        Collections.sort(listOfDistances);
-//		        List<String> sortedImages = new ArrayList<String>();
-//
-//		        for(int i = 1; i < images.size(); i++)
-//		        {
-//		      	  sortedImages.add(map.getKey(listOfDistances.get(i-1)));  	  
-//		        }
-//
-//
-//		        for(int i = 0; i < sortedImages.size(); i++)
-//		        {
-//		        KeypointDetector.drawKeypoints(sortedImages.get(i), i);
-//		        }
+		        }      		        
+		   
 
 		        for(int i = 1; i < images.size(); i++)
 		        {
 		        	sortedImages.add(finalMap.first().getKey());
 		        	finalMap.remove(finalMap.first());
-//		      	  	sortedImages.add(getNextElement(map, listOfDistances, i));  	  
+
 		        }
 		        
+		        //Berechne Score der Top Ten Bilder
+		        int score = 0;
+		        for(int i=0; i < 10; i++)
+		        {
+		        	System.out.println(trimPath(sortedImages.get(i)) + " and " + refImage);
+		        	if(trimPath(sortedImages.get(i)).equals(refImage))
+		        	{
+		        		score += 10 - i;
+		        	}
+		        }
 		        
-
+		        BufferedWriter scoreWriter = new BufferedWriter(new FileWriter("./resources/logs/score.txt", true));
+				  scoreWriter.write("Score für " + inputImage.substring(inputImage.lastIndexOf("\\")+1) + ": " + score + "\n");
+				  scoreWriter.close();
 	      }
-
 	}
 
 
-
-    static <K,V extends Comparable<? super V>> SortedSet<Map.Entry<K,V>> entriesSortedByValues(Map<K,V> map) {
+	static <K,V extends Comparable<? super V>> SortedSet<Map.Entry<K,V>> entriesSortedByValues(Map<K,V> map) {
         SortedSet<Map.Entry<K,V>> sortedEntries = new TreeSet<Map.Entry<K,V>>(
             new Comparator<Map.Entry<K,V>>() {
                 @Override public int compare(Map.Entry<K,V> e1, Map.Entry<K,V> e2) {
@@ -223,6 +246,13 @@ public class Controller
         sortedEntries.addAll(map.entrySet());
         return sortedEntries;
     }
+	
+	private static String trimPath(String image)
+	{
+		image = image.substring(image.lastIndexOf("\\")+1);
+		return image.substring(0, image.length()-6);
+	}
+	
 }  	
 
 
