@@ -84,9 +84,9 @@ public class FastEMD {
 	   	  
 	   	  
 	   	  //Initializing log file
-		  BufferedWriter writer = new BufferedWriter(new FileWriter("./resources/logs/duration_distances.txt", false));
-		  writer.write("Date: " + java.time.LocalDateTime.now() + "\n");
-	   	  
+		  BufferedWriter writer = new BufferedWriter(new FileWriter("./resources/logs/duration_distances.txt", true));
+		  writer.write("\nDatum: " + java.time.LocalDateTime.now() + "\n");
+	   	  long overallDuration = 0;
 		  
 		  /**
 		   * Creating arrays for all h compare images 
@@ -149,9 +149,12 @@ public class FastEMD {
  		   	  long endTime = System.currentTimeMillis();
  		   	  long duration = endTime - startingTime;
  			
-				writer.write("Computing time for distances between " + images.get(0).substring(images.get(0).lastIndexOf("\\")+1) + " and " + images.get(h).substring(images.get(h).lastIndexOf("\\")+1) + ": " + duration + "\n");
-		  }
+ 		   	 overallDuration += duration;
+ 		   	}
 		  
+		  long meanDuration = overallDuration/centeredDescriptors.size();
+		  writer.write("Für " + images.get(0).substring(images.get(0).lastIndexOf("\\")+1) + "\n");
+	      writer.write("Mittelere Dauer der Distanzberechnung je Cluster: " + meanDuration + "\n");
 		  writer.close();
 		  
 		  return _listOfDistances;

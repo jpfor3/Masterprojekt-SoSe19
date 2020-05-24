@@ -133,10 +133,12 @@ public class Controller
 		      DBScan._massList.clear();
 		      
 		   	  //Initializing log file
-			  BufferedWriter writer = new BufferedWriter(new FileWriter("./resources/logs/duration_clustering.txt", false));
-			  writer.write("Date: " + java.time.LocalDateTime.now() + "\n");
-
-
+			  BufferedWriter writer = new BufferedWriter(new FileWriter("./resources/logs/duration_clustering.txt", true));
+			  writer.write("\nDatum: " + java.time.LocalDateTime.now() + "\n");
+			  writer.write("Für " + inputImage.substring(inputImage.lastIndexOf("\\")+1) + "\n");
+			  
+			  long overallDuration = 0;
+			  
 			  int iterator = 0;
 		      for(MatOfKeyPoint kp : _descriptorList)
 		      {
@@ -147,12 +149,14 @@ public class Controller
 		    	  long endTime = System.currentTimeMillis();
 		    	  long duration = endTime - startingTime;
 
-			   	  writer.write("Clustering time for " + images.get(iterator).substring(images.get(iterator).lastIndexOf("\\")+1) + ": " + duration + "\n");
+			   	 overallDuration += duration;
 			   	  iterator++;
 			   	  
 			   	  _centeredDescriptors.add(clusterlist);   
 		      }
 		      
+		      long meanDuration = overallDuration/_descriptorList.size();
+		      writer.write("Mittelere Clustering Dauer je KP: " + meanDuration + "\n");
 		      writer.close();
 		      
 		      System.out.println("Clustering Ended....");
@@ -220,7 +224,6 @@ public class Controller
 		        int score = 0;
 		        for(int i=0; i < 10; i++)
 		        {
-		        	System.out.println(trimPath(sortedImages.get(i)) + " and " + refImage);
 		        	if(trimPath(sortedImages.get(i)).equals(refImage))
 		        	{
 		        		score += 10 - i;

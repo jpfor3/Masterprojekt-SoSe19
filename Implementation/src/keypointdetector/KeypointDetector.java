@@ -69,8 +69,10 @@ public class KeypointDetector {
        
 	   
    	  //Initializing log file
-	  BufferedWriter writer = new BufferedWriter(new FileWriter("./resources/logs/duration_keypoints.txt", false));
-	  writer.write("Date: " + java.time.LocalDateTime.now() + "\n");
+	  BufferedWriter writer = new BufferedWriter(new FileWriter("./resources/logs/duration_keypoints.txt", true));
+	  writer.write("\nDatum: " + java.time.LocalDateTime.now() + "\n");
+	  long overallDuration = 0;
+	  
 	  int iterator = 0;
 		  
        for(String image : images)
@@ -81,13 +83,18 @@ public class KeypointDetector {
     	    	  
     	   long endTime = System.currentTimeMillis();
     	   long duration = endTime - startingTime;
-		   writer.write("Time for detecting KP of " + images.get(iterator).substring(images.get(iterator).lastIndexOf("\\")+1) + ": " + duration + "\n");
+    	   
+    	   overallDuration += duration;
+    	   
 		   iterator++;
 	    	  
     	   _descriptorList.add(descriptors);
 	       i +=1;
        } 
        
+       long meanDuration = overallDuration/images.size();
+	   writer.write("Für " + images.get(0).substring(images.get(0).lastIndexOf("\\")+1) + "\n");
+	   writer.write("Mittelere Berechnungsdauer je KP: " + meanDuration + "\n");
        writer.close();
        
    }

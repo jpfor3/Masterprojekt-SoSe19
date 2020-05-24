@@ -1,34 +1,8 @@
-Date: 2020-05-10T14:11:40.217
-Clustering time for berg1.jpg: 880
-Clustering time for berg1.jpg: 619
-Clustering time for berg1_gespiegelt.jpg: 817
-Clustering time for berg2.jpg: 720
-Clustering time for berg2_gespiegelt.jpg: 717
-Clustering time for Bergsteiger1.jpg: 21122
-Clustering time for Burgstaller.jpg: 7652
-Clustering time for FFM.jpg: 3448
-Clustering time for HansSarpei.jpg: 276
-Clustering time for HansSarpei_Aktion.jpg: 386
-Clustering time for HansSarpei_dunkel.jpg: 190
-Clustering time for HansSarpei_gekippt.jpg: 215
-Clustering time for HansSarpei_gekippt2.jpg: 230
-Clustering time for HansSarpei_gespiegelt.jpg: 347
-Clustering time for HansSarpei_hell.jpg: 359
-Clustering time for HansSarpei_inv.jpg: 470
-Clustering time for HansSarpei_klein.jpg: 144
-Clustering time for HansSarpei_Strand.jpg: 871
-Clustering time for HansSarpei_verschwommen.jpg: 14
-Clustering time for Kenny.jpg: 1660
-Clustering time for Kimmich.jpg: 137
-Clustering time for Kimmich_gespiegelt.jpg: 140
-Clustering time for Kimmich_radiert.jpg: 116
-Clustering time for Kittel_Aktion.jpg: 11273
-Clustering time for Lewandowski.jpg: 319
-Clustering time for Matondo.jpg: 1137
-Clustering time for Matondo_Aktion.jpg: 447
-Clustering time for Mueller.jpg: 215
-Clustering time for Oczipka.jpg: 940
-Clustering time for Oczipka_Aktion.jpg: 921
-Clustering time for Reus.jpg: 221
-Clustering time for Strand1.jpg: 519
-Clustering time for strand2.jpg: 5419
+
+Datum: 2020-05-24T18:27:00.287
+Für Landschaft01.jpg
+Mittelere Clustering Dauer je KP: 157
+
+Datum: 2020-05-24T18:32:07.674
+Für Landschaft01.jpg
+Mittelere Clustering Dauer je KP: 101
