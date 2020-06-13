@@ -1,23 +1,87 @@
-Date: 2020-05-24T16:35:04.736
-Time for detecting KP of Landschaft01.jpg: 63
-Time for detecting KP of Landschaft01.jpg: 66
-Time for detecting KP of Landschaft02.jpg: 35
-Time for detecting KP of Landschaft06.jpg: 31
-Time for detecting KP of Landschaft09.jpg: 32
-Time for detecting KP of Landschaft11.jpg: 47
-Time for detecting KP of Landschaft16.jpg: 31
-Time for detecting KP of Landschaft17.jpg: 47
-Time for detecting KP of Mensch01.png: 140
-Time for detecting KP of Mensch02.png: 125
-Time for detecting KP of Mensch03.png: 111
-Time for detecting KP of Mensch04.png: 313
-Time for detecting KP of Mensch05.png: 153
-Time for detecting KP of Mensch06.png: 117
-Time for detecting KP of Mensch07.png: 172
-Time for detecting KP of Mensch08.png: 125
-Time for detecting KP of Mensch09.png: 127
-Time for detecting KP of Mensch10.png: 126
-Time for detecting KP of Mensch11.png: 125
-Time for detecting KP of Mensch12.png: 156
-Time for detecting KP of Mensch13.png: 121
-Time for detecting KP of Mensch14.png: 83
+
+Datum: 2020-05-24T18:26:59.158
+Mittelere Berechnungsdauer je KP: 140
+
+Datum: 2020-05-24T18:32:07.073
+Für Landschaft01.jpg
+Mittelere Berechnungsdauer je KP: 75
+
+Datum: 2020-06-11T12:04:41.144
+Für Landschaft01.jpg
+Mittelere Berechnungsdauer je KP: 92
+
+Datum: 2020-06-11T12:17:47.363
+Für Auto01.png
+Mittelere Berechnungsdauer je KP: 286
+
+Datum: 2020-06-11T12:41:39.275
+Für Rad01.png
+Mittelere Berechnungsdauer je KP: 394
+
+Datum: 2020-06-11T12:51:31.263
+Für Bike01.png
+Mittelere Berechnungsdauer je KP: 192
+
+Datum: 2020-06-11T13:09:12.338
+Für Landschaft01.jpg
+Mittelere Berechnungsdauer je KP: 58
+
+Datum: 2020-06-11T13:16:26.662
+Für Landschaft28.jpeg
+Mittelere Berechnungsdauer je KP: 48
+
+Datum: 2020-06-11T13:20:05.048
+Für Landschaft20.jpg
+Mittelere Berechnungsdauer je KP: 46
+
+Datum: 2020-06-11T13:20:31.854
+Für Landschaft22.jpg
+Mittelere Berechnungsdauer je KP: 34
+
+Datum: 2020-06-11T13:22:28.283
+Für Landschaft23.jpg
+Mittelere Berechnungsdauer je KP: 36
+
+Datum: 2020-06-11T13:24:02.110
+Für Landschaft02.jpg
+Mittelere Berechnungsdauer je KP: 46
+
+Datum: 2020-06-11T13:27:46.765
+Für Landschaft31.jpg
+Mittelere Berechnungsdauer je KP: 45
+
+Datum: 2020-06-11T13:28:40.557
+Für Landschaft06.jpg
+Mittelere Berechnungsdauer je KP: 43
+
+Datum: 2020-06-11T13:31:21.183
+Für Mensch02.png
+Mittelere Berechnungsdauer je KP: 154
+
+Datum: 2020-06-11T13:37:38.951
+Für Pferd01.png
+Mittelere Berechnungsdauer je KP: 156
+
+Datum: 2020-06-11T13:41:19.681
+Für Schaf01.png
+Mittelere Berechnungsdauer je KP: 239
+
+Datum: 2020-06-11T13:47:05.865
+Für 004723.png
+Mittelere Berechnungsdauer je KP: 209
+
+Datum: 2020-06-11T13:50:57.130
+Für Rad01.png
+Mittelere Berechnungsdauer je KP: 197
+
+Datum: 2020-06-11T14:14:10.754
+Für Mensch07.png
+Mittelere Berechnungsdauer je KP: 162
+
+Datum: 2020-06-13T11:47:57.983
+Für Mensch09.png
+Mittelere Berechnungsdauer je KP: 362
+
+Datum: 2020-06-13T12:45:12.046
+Für Mensch09.png
+Mittelere Berechnungsdauer je KP: 275

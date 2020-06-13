@@ -1,12 +1,11 @@
 package keypointdetector;
-import org.opencv.core.*;
-
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfKeyPoint;
+import org.opencv.core.Scalar;
 import org.opencv.features2d.DescriptorExtractor;
 import org.opencv.features2d.FeatureDetector;
 import org.opencv.features2d.Features2d;
 import org.opencv.highgui.Highgui;
-
-import cluster.DBScan;
 
 import java.io.BufferedWriter;
 import java.io.File;

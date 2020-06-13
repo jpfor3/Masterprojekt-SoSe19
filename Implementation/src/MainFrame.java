@@ -1,5 +1,3 @@
-import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 
@@ -11,17 +9,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLayeredPane;
 import javax.swing.border.TitledBorder;
 
-import org.apache.commons.collections15.BidiMap;
-import org.apache.commons.collections15.bidimap.DualHashBidiMap;
-import org.opencv.core.Core;
 import org.opencv.core.MatOfKeyPoint;
 
-import Distanzmasse.FastEMD;
-import Distanzmasse.JaccardDistance;
-import cluster.DBScan;
-import keypointdetector.KeypointDetector;
-
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -29,36 +18,22 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.JFileChooser;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import javax.swing.JOptionPane;
-import javax.imageio.ImageIO;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
+
 
 public class MainFrame extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private File imageDirectory;
 	private List<String> images1 = new ArrayList<String>();
 	List<MatOfKeyPoint> descriptorList = new ArrayList<MatOfKeyPoint>();
 	List<List<double[]>> _1centeredDescriptors = new ArrayList<List<double[]>>();
-	private File mainImage;
-	private int KPD;
-	private int DALG;
-	private int EDMP;
 	private String _inputImage;
 	private String _compareImages;
 	private int _minSamples;
@@ -71,7 +46,7 @@ public class MainFrame extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) {   
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -192,8 +167,6 @@ public class MainFrame extends JFrame {
 		
 		JButton btnSelectImage = new JButton("Select Image");
 		btnSelectImage.addActionListener(new ActionListener() {
-			private Graphics g;
-
 			public void actionPerformed(ActionEvent e) {
 				// Open directory and choose file
 				JFileChooser fileChooser = new JFileChooser();
@@ -278,10 +251,9 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				_emdpenalty = Integer.parseInt(textField_emdPenalty.getText());
 				_distancealgorithm = comboBox_1.getSelectedItem().toString();
-				
 				try {
- 					Controller.compareImages(_inputImage, _compareImages, _minSamples, _eps, _emdpenalty, _distancealgorithm);
- 				} catch (IOException e1) 
+ 				Controller.compareImages(_inputImage, _compareImages, _minSamples, _eps, _emdpenalty, _distancealgorithm);
+				} catch (IOException e1) 
 				{
 					e1.printStackTrace();
 				}

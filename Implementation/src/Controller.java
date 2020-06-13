@@ -5,6 +5,7 @@
 
 import Distanzmasse.FastEMD;
 
+
 import Distanzmasse.JaccardDistance;
 import cluster.DBScan;
 import keypointdetector.KeypointDetector;
@@ -26,6 +27,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import org.opencv.core.Core;
+import org.opencv.core.Mat;
 import org.opencv.core.MatOfKeyPoint;
 
 
@@ -47,9 +49,29 @@ public class Controller
       System.out.println("Jac Distance: " + jacList.get(0));
     }
 
-   	
+	/**
+	 * For Call over Console Prompt
+	 */
+	public static void main(String[] args) throws IOException {
+		
+		String inputImage = args[0];
+		String compareImages = args[1];
+		int minSamples = Integer.parseInt(args[2]);
+		double eps = Double.parseDouble(args[3]);
+		int emdpenalty = Integer.parseInt(args[4]);
+		String distancealgorithm = args[5];
+		
+		compareImages(inputImage, compareImages, minSamples, eps, emdpenalty, distancealgorithm);
+	}
+	
    	public static void compareImages(String inputImage, String compareImages, int minSamples, double eps, int emdpenalty, String distanceAlgorithm) throws IOException
-   	{     		
+   	{    
+        BufferedWriter scoreWriter = new BufferedWriter(new FileWriter("C:\\Users\\ACER\\Git Repositories\\Projekt Master Branch2\\Masterprojekt-SoSe19\\Implementation\\resources\\logs\\score.txt", true));
+   		scoreWriter.write("Date: " + java.time.LocalDateTime.now());
+   		
+		 long startTime = System.nanoTime();
+
+
 	     File folder = new File(compareImages);
 	     File[] listOfFiles = folder.listFiles();
 	     List<String> images = new ArrayList<String>();
@@ -61,36 +83,28 @@ public class Controller
 	     //Überprüfe zu welcher Kategorie das Input Image gehört
 	     String refImage = null;
 	     switch(trimPath(inputImage)){
-	        case "Hund":
-	        	refImage = "Hund";
+	        case "Auto":
+	        	refImage = "Auto";
 	        break;
-	        case "Rind":
-	        	refImage = "Rind";
+	        case "Bike":
+	        	refImage = "Bike"; 
 	        break;
 	        case "Landschaft":
-	        	refImage = "Landschaft";
+	        	refImage = "Landschaft"; 
 	        break;
-	        case "Katze":
-	        	refImage = "Katze";
+	        case "Mensch":
+	        	refImage = "Mensch"; 
 	        break;
-	        case "Schaf":
-	        	refImage = "Schaf";
+	        case "Pferd":
+	        	refImage = "Pferd"; 
 	        break;
 	        case "Rad":
 	        	refImage = "Rad";
 	        break;
-	        case "Bike":
-	        	refImage = "Bike";
+	        case "Schaf":
+	        	refImage = "Schaf"; 
 	        break;
-	        case "Auto":
-	        	refImage = "Auto";
-	        break;
-	        case "Pferd":
-	        	refImage = "Pferd";
-	        break;
-	        case "Mensch":
-	        	refImage = "Mensch";
-	        break;
+	        
 	     }
 	     
 	
@@ -104,7 +118,7 @@ public class Controller
 	    	 images.add(file.getPath());
 	     }
 	
-	     File folder2 = new File("resources/sorted_output_images/");
+	     File folder2 = new File("C:\\Users\\ACER\\Git Repositories\\Projekt Master Branch2\\Masterprojekt-SoSe19\\Implementation\\resources\\sorted_output_images");
 	     File[] listOfFiles2 = folder2.listFiles();
 
 	     
@@ -133,7 +147,7 @@ public class Controller
 		      DBScan._massList.clear();
 		      
 		   	  //Initializing log file
-			  BufferedWriter writer = new BufferedWriter(new FileWriter("./resources/logs/duration_clustering.txt", true));
+			  BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ACER\\Git Repositories\\Projekt Master Branch2\\Masterprojekt-SoSe19\\Implementation\\resources\\logs\\duration_clustering.txt", true));
 			  writer.write("\nDatum: " + java.time.LocalDateTime.now() + "\n");
 			  writer.write("Für " + inputImage.substring(inputImage.lastIndexOf("\\")+1) + "\n");
 			  
@@ -230,8 +244,12 @@ public class Controller
 		        	}
 		        }
 		        
-		        BufferedWriter scoreWriter = new BufferedWriter(new FileWriter("./resources/logs/score.txt", true));
-				  scoreWriter.write("Score für " + inputImage.substring(inputImage.lastIndexOf("\\")+1) + ": " + score + "\n");
+		        
+		          long elapsedTime = System.nanoTime() - startTime;
+				   
+				  scoreWriter.write("\nExecution Time: " + elapsedTime/1000000000 + " s");
+				   
+				  scoreWriter.write("\nScore für " + inputImage.substring(inputImage.lastIndexOf("\\")+1) + ": " + score + "\n\n");
 				  scoreWriter.close();
 	      }
 	}
