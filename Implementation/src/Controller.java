@@ -10,10 +10,14 @@ import Distanzmasse.JaccardDistance;
 import cluster.DBScan;
 import keypointdetector.KeypointDetector;
 
+import java.awt.Image;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -26,6 +30,8 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import javax.imageio.ImageIO;
+
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfKeyPoint;
@@ -36,6 +42,10 @@ public class Controller
 	static List<MatOfKeyPoint> _descriptorList = new ArrayList<MatOfKeyPoint>();
 	static List<List<double[]>> _centeredDescriptors = new ArrayList<List<double[]>>();
 	static int _threshold;
+	
+	public static FileOutputStream fos = null;
+
+	private String dateiname;
 		
 	public Controller()
 	{
@@ -54,30 +64,33 @@ public class Controller
 	 */
 	public static void main(String[] args) throws IOException {
 		
-		String inputImage = args[0];
-		String compareImages = args[1];
+		String imageDirectory = args[0];
+		String inputImage = args[1];
 		int minSamples = Integer.parseInt(args[2]);
 		double eps = Double.parseDouble(args[3]);
 		int emdpenalty = Integer.parseInt(args[4]);
 		String distancealgorithm = args[5];
 		
-		compareImages(inputImage, compareImages, minSamples, eps, emdpenalty, distancealgorithm);
+		compareImages(imageDirectory, inputImage, minSamples, eps, emdpenalty, distancealgorithm);
 	}
 	
-   	public static void compareImages(String inputImage, String compareImages, int minSamples, double eps, int emdpenalty, String distanceAlgorithm) throws IOException
+   	public static void compareImages(String imageDirectory, String inputImage, int minSamples, double eps, int emdpenalty, String distanceAlgorithm) throws IOException
    	{    
-        BufferedWriter scoreWriter = new BufferedWriter(new FileWriter("C:\\Users\\ACER\\Git Repositories\\Projekt Master Branch2\\Masterprojekt-SoSe19\\Implementation\\resources\\logs\\score.txt", true));
-   		scoreWriter.write("Date: " + java.time.LocalDateTime.now());
+        //BufferedWriter scoreWriter = new BufferedWriter(new FileWriter("C:\\Users\\ACER\\Git Repositories\\Projekt Master Branch2\\Masterprojekt-SoSe19\\Implementation\\resources\\logs\\score.txt", true));
+   		//scoreWriter.write("Date: " + java.time.LocalDateTime.now());
+   		
+   		 String ordnername = inputImage + "_minSamples-" + String.valueOf(minSamples) + "_eps-" + String.valueOf(eps) + "_penalty-" + String.valueOf(emdpenalty) + "_algorithm-" + distanceAlgorithm;
+	     String dateiname = trimPath(inputImage) + "_minSamples-" + String.valueOf(minSamples) + "_eps-" + String.valueOf(eps) + "_penalty-" + String.valueOf(emdpenalty) + "_algorithm-" + distanceAlgorithm + ".txt";
+	     File folder2 = new File(ordnername);
+	     fos = new FileOutputStream(dateiname);                                  
    		
 		 long startTime = System.nanoTime();
 
-
-	     File folder = new File(compareImages);
+		 File folder = new File(imageDirectory);
 	     File[] listOfFiles = folder.listFiles();
 	     List<String> images = new ArrayList<String>();
 	
 	     _centeredDescriptors.clear();
-	 	
 	     _descriptorList.clear();
 	     
 	     //Überprüfe zu welcher Kategorie das Input Image gehört
@@ -111,26 +124,27 @@ public class Controller
 	     /**
 	      * Adding input image
 	      */
+	     // Alle Bilder zur Liste hinzufügen
 	     images.add(inputImage);
-	
 	     for(File file : listOfFiles)
 	     {
 	    	 images.add(file.getPath());
 	     }
 	
-	     File folder2 = new File("C:\\Users\\ACER\\Git Repositories\\Projekt Master Branch2\\Masterprojekt-SoSe19\\Implementation\\resources\\sorted_output_images");
-	     File[] listOfFiles2 = folder2.listFiles();
-
-	     
-	   //Clean directories   
-	     for(int i = 0; i < listOfFiles2.length; i++) 
-	     {
-	    	 listOfFiles2[i].delete();
-	     }
-	     
-	     
+	     try {
+	    	 OutputStreamWriter osw = new OutputStreamWriter(fos);
+	    	 osw.write("Date: " + java.time.LocalDateTime.now());
+	    	 osw.write("Compared Image: " + inputImage);
+	    	 osw.write("\n");
+	    	 osw.close();
+	     } finally {
+  		   if (fos != null) {
+			   try {
+				   fos.close();
+			   } finally {}
+		   }
 	     //Detecting Keypoints of images
-	      KeypointDetector KPDetector = new KeypointDetector(images); 
+	      KeypointDetector KPDetector = new KeypointDetector(images, fos); 
 	      _descriptorList = KPDetector.getDescriptorList();
 	      
 	      System.out.println("KP Detection Ended....");
@@ -162,6 +176,17 @@ public class Controller
 			   	  
 		    	  long endTime = System.currentTimeMillis();
 		    	  long duration = endTime - startingTime;
+		    	  
+		    	   try {
+		    		   OutputStreamWriter osw = new OutputStreamWriter(fos); 
+		    		   osw.write(inputImage.substring(inputImage.lastIndexOf("\\")+1) + " Cluster: " + duration + "\n");
+		    	   } finally {
+		    		   if (fos != null) {
+		    			   try {
+		    				   fos.close();
+		    			   } finally {}
+		    		   }
+		    	   }
 
 			   	 overallDuration += duration;
 			   	  iterator++;
@@ -183,11 +208,11 @@ public class Controller
 		      // check which distance algorithm was chosen in the UI
 		      if(distanceAlgorithm.equals("EMD (Euclid)")) {
 		    		System.out.println("EMD (Euclid) chosen");
-		    		listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, emdpenalty, false);
+		    		listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, fos, emdpenalty, false);
 			    }
 			    else if(distanceAlgorithm.equals("EMD (Hamming)")) {
 			    	System.out.println("EMD (Hamming) chosen");
-		    		listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, emdpenalty, true);
+		    		listOfDistances = FastEMD.calcDistances(_centeredDescriptors, images, fos, emdpenalty, true);
 			    }
 		    		      
 		      	//Map and sort distances of images
@@ -246,13 +271,29 @@ public class Controller
 		        
 		        
 		          long elapsedTime = System.nanoTime() - startTime;
-				   
-				  scoreWriter.write("\nExecution Time: " + elapsedTime/1000000000 + " s");
-				   
-				  scoreWriter.write("\nScore für " + inputImage.substring(inputImage.lastIndexOf("\\")+1) + ": " + score + "\n\n");
-				  scoreWriter.close();
+				  
+		          try {
+		 	    	 OutputStreamWriter osw = new OutputStreamWriter(fos);
+		 	    	 osw.write("\nExecution Time: " + elapsedTime/1000000000 + " s");
+		 	    	 osw.write("\nScore für " + inputImage.substring(inputImage.lastIndexOf("\\")+1) + ": " + score + "\n\n");
+		 	    	 osw.write("Rankings: " + "\n");
+		 	    	 // Keine Ahnung ob die Schleife stimmt
+		 	    	 for (int i = 0; i < finalMap.size(); i++) {
+		 	    		 osw.write(String.valueOf(i+1) + ". " + finalMap.first());
+		 	    		 finalMap.remove(finalMap.first());
+		 	    	 }
+		 	    	 osw.close();
+		 	     } finally {
+		   		   if (fos != null) {
+		 			   try {
+		 				   fos.close();
+		 			   } finally {}
+		 		   }
+		 	     }
 	      }
+	     }
 	}
+   	
 
 
 	static <K,V extends Comparable<? super V>> SortedSet<Map.Entry<K,V>> entriesSortedByValues(Map<K,V> map) {

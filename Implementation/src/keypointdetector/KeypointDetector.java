@@ -1,4 +1,4 @@
-package keypointdetector;
+  package keypointdetector;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfKeyPoint;
 import org.opencv.core.Scalar;
@@ -9,8 +9,10 @@ import org.opencv.highgui.Highgui;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +24,14 @@ public class KeypointDetector {
     public static String _detector;
     public static int _kpDetector;
     public static int _descriptorExtractor;
+    
+    public FileOutputStream fos;
+    private String dateiname_clustering;
+    private String dateiname_distanzen;
+    private String dateiname_keypoints;
+    
 
-	public KeypointDetector(List<String> images) throws IOException{
+	public KeypointDetector(List<String> images, FileOutputStream fos) throws IOException{
 	 
 	   _descriptorList.clear();
 	   
@@ -72,6 +80,11 @@ public class KeypointDetector {
 	  writer.write("\nDatum: " + java.time.LocalDateTime.now() + "\n");
 	  long overallDuration = 0;
 	  
+	  // Erstelle die Textdatei
+	  // dateiname = durchlauf mit parametern
+		 
+
+	  
 	  int iterator = 0;
 		  
        for(String image : images)
@@ -83,6 +96,16 @@ public class KeypointDetector {
     	   long endTime = System.currentTimeMillis();
     	   long duration = endTime - startingTime;
     	   
+    	   try {
+    		   OutputStreamWriter osw = new OutputStreamWriter(fos); 
+    		   osw.write(image.substring(image.lastIndexOf("\\")+1) + " KP: " + duration + "\n");
+    	   } finally {
+    		   if (fos != null) {
+    			   try {
+    				   fos.close();
+    			   } finally {}
+    		   }
+    	   }
     	   overallDuration += duration;
     	   
 		   iterator++;
@@ -90,7 +113,7 @@ public class KeypointDetector {
     	   _descriptorList.add(descriptors);
 	       i +=1;
        } 
-       
+
        long meanDuration = overallDuration/images.size();
 	   writer.write("Für " + images.get(0).substring(images.get(0).lastIndexOf("\\")+1) + "\n");
 	   writer.write("Mittelere Berechnungsdauer je KP: " + meanDuration + "\n");
@@ -141,5 +164,7 @@ public class KeypointDetector {
 	 {
 		 return  _descriptorList;
 	 }	
+	 
+
 
 }

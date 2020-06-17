@@ -3,8 +3,10 @@
 import java.util.ArrayList;
 import java.awt.Font;
 import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.nio.file.Path.*;
 
 
@@ -29,7 +31,7 @@ public class FastEMD {
 	  * @param centeredDescriptors
 	  * @throws IOException 
 	  */
-	 public static List<Double> calcDistances(List<List<double[]>> centeredDescriptors, List<String> images, int emdpenalty, boolean hamming) throws IOException
+	 public static List<Double> calcDistances(List<List<double[]>> centeredDescriptors, List<String> images, FileOutputStream fos, int emdpenalty, boolean hamming) throws IOException
 	 { 	  	  
 		 _centeredDescriptors = centeredDescriptors;
 		 _listOfDistances.clear();
@@ -153,6 +155,19 @@ public class FastEMD {
  		   	}
 		  
 		  long meanDuration = overallDuration/centeredDescriptors.size();
+		  
+	   	   try {
+			   OutputStreamWriter osw = new OutputStreamWriter(fos); 
+			   osw.write(images.get(0).substring(images.get(0).lastIndexOf("\\")+1) + " KP: " + meanDuration + "\n");
+		   } finally {
+			   if (fos != null) {
+				   try {
+					   fos.close();
+				   } finally {}
+			   }
+		   }
+		  
+		  
 		  writer.write("Für " + images.get(0).substring(images.get(0).lastIndexOf("\\")+1) + "\n");
 	      writer.write("Mittelere Dauer der Distanzberechnung je Cluster: " + meanDuration + "\n");
 		  writer.close();
