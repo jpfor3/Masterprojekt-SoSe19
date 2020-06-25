@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.nio.file.Path.*;
 
 
@@ -19,6 +20,8 @@ public class FastEMD {
 
 	private static List<List<double[]>> _centeredDescriptors;
  	private static List<Double> _listOfDistances = new ArrayList<Double>();
+ 	
+ 	public static List<Long> _distDurations = new ArrayList<Long>();
 
 	 /**
 	  * Method to which calculates the distances between every image based on EMD.
@@ -29,7 +32,7 @@ public class FastEMD {
 	  * @param centeredDescriptors
 	  * @throws IOException 
 	  */
-	 public static List<Double> calcDistances(List<List<double[]>> centeredDescriptors, List<String> images, int emdpenalty, boolean hamming) throws IOException
+	 public static List<Double> calcDistances(List<List<double[]>> centeredDescriptors, List<String> images, OutputStreamWriter osw, int emdpenalty, boolean hamming) throws IOException
 	 { 	  	  
 		 _centeredDescriptors = centeredDescriptors;
 		 _listOfDistances.clear();
@@ -82,11 +85,6 @@ public class FastEMD {
 	   	  sigG.setNumberOfFeatures(features1DG.length);
 	   	  sigG.setFeatures(features1DG);
 	   	  
-	   	  
-	   	  //Initializing log file
-		  BufferedWriter writer = new BufferedWriter(new FileWriter("./resources/logs/duration_distances.txt", true));
-		  writer.write("\nDatum: " + java.time.LocalDateTime.now() + "\n");
-	   	  long overallDuration = 0;
 		  
 		  /**
 		   * Creating arrays for all h compare images 
@@ -145,18 +143,18 @@ public class FastEMD {
 //		   	  System.out.println("\n" + Euklid_Hamming + "\t\t" + EMDdistance + "\t" + "between" + "\t\t" + images.get(0).substring(images.get(0).lastIndexOf("\\")+1) + "\t" + "and" + "\t\t" + images.get(h).substring(images.get(h).lastIndexOf("\\")+1));
 		   	  _listOfDistances.add(EMDdistance);
 
- 		   	  System.out.println("\nDistance between image " + images.get(0).substring(images.get(0).lastIndexOf("\\")+1) + " and image " + images.get(h).substring(images.get(h).lastIndexOf("\\")+1) + " is " + EMDdistance);
+ 		   	  System.out.println("\nDistanz zwischen " + images.get(0).substring(images.get(0).lastIndexOf("\\")+1) + " und " + images.get(h).substring(images.get(h).lastIndexOf("\\")+1) + " ist " + EMDdistance);
+ 		   	  writeToFile("Distanz zwischen " + images.get(0).substring(images.get(0).lastIndexOf("\\")+1, images.get(0).length() - 4) + " und " + images.get(h).substring(images.get(h).lastIndexOf("\\")+1, images.get(h).length() - 4) + " => " + EMDdistance + "\n" , osw);
+
  		   	  long endTime = System.currentTimeMillis();
  		   	  long duration = endTime - startingTime;
+ 		   	  
+ 		   	  _distDurations.add(duration);
  			
- 		   	 overallDuration += duration;
  		   	}
 		  
-		  long meanDuration = overallDuration/centeredDescriptors.size();
-		  writer.write("Für " + images.get(0).substring(images.get(0).lastIndexOf("\\")+1) + "\n");
-	      writer.write("Mittelere Dauer der Distanzberechnung je Cluster: " + meanDuration + "\n");
-		  writer.close();
-		  
+		  writeToFile("___________________________________________________________________________________\n\n", osw);
+
 		  return _listOfDistances;
 		  		  
 	 }
@@ -205,4 +203,19 @@ public class FastEMD {
 		  }
 		  return weights;
 	 }
+	 
+
+	public static void writeToFile(String message, OutputStreamWriter osw){
+	    try {
+	        osw.write(message);
+	        osw.flush();
+	    } catch (IOException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    }
+	}
+
+	public static void closeFile(OutputStreamWriter osw) throws IOException {
+		osw.close();
+	}
 }

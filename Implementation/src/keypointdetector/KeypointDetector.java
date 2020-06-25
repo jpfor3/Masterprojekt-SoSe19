@@ -22,8 +22,11 @@ public class KeypointDetector {
     public static String _detector;
     public static int _kpDetector;
     public static int _descriptorExtractor;
+    
+    public static List<Long> _kpDurations = new ArrayList<Long>();
 
-	public KeypointDetector(List<String> images) throws IOException{
+
+	public KeypointDetector(List<String> images, String outputdirectory) throws IOException{
 	 
 	   _descriptorList.clear();
 	   
@@ -65,37 +68,21 @@ public class KeypointDetector {
 	   				_descriptorExtractor = 5;
 	     			break;
 	     }
-       
-	   
-   	  //Initializing log file
-	  BufferedWriter writer = new BufferedWriter(new FileWriter("./resources/logs/duration_keypoints.txt", true));
-	  writer.write("\nDatum: " + java.time.LocalDateTime.now() + "\n");
-	  long overallDuration = 0;
 	  
-	  int iterator = 0;
-		  
+	   
        for(String image : images)
        {
     	   long startingTime = System.currentTimeMillis();
 
     	   MatOfKeyPoint descriptors = detectKeypoints(image);
-    	    	  
-    	   long endTime = System.currentTimeMillis();
-    	   long duration = endTime - startingTime;
-    	   
-    	   overallDuration += duration;
-    	   
-		   iterator++;
-	    	  
+    	    	  	    	  
     	   _descriptorList.add(descriptors);
 	       i +=1;
+	       
+	       long endTime = System.currentTimeMillis();
+    	   long duration = endTime - startingTime;
+    	   _kpDurations.add(duration);
        } 
-       
-       long meanDuration = overallDuration/images.size();
-	   writer.write("Für " + images.get(0).substring(images.get(0).lastIndexOf("\\")+1) + "\n");
-	   writer.write("Mittelere Berechnungsdauer je KP: " + meanDuration + "\n");
-       writer.close();
-       
    }
 	
 	
@@ -116,7 +103,7 @@ public class KeypointDetector {
        
      }
 	 
-	 public static void drawKeypoints(String image, int i)
+	 public static void drawKeypoints(String image, int i, String outputdirectory)
 	 {
 		 Mat img = Highgui.imread(image, Highgui.CV_LOAD_IMAGE_COLOR);    
          MatOfKeyPoint kp = new MatOfKeyPoint();
@@ -133,7 +120,10 @@ public class KeypointDetector {
 	         
 	         Features2d.drawKeypoints(img, kp, outputImage, KeypointColor, 0);
 	         
-	         Highgui.imwrite("resources/sorted_output_images/(" + i + ") " + image.substring(image.lastIndexOf("\\")+1) +  ".jpg", outputImage);
+//	         Highgui.imwrite("resources/sorted_output_images/(" + i + ") " + image.substring(image.lastIndexOf("\\")+1) +  ".jpg", outputImage);
+
+	         Highgui.imwrite(outputdirectory + "/(" + i + ") " + image.substring(image.lastIndexOf("\\")+1) +  ".jpg", outputImage);
+
          }
      }
 	 

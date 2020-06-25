@@ -1,5 +1,6 @@
 package cluster;
 
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -18,7 +19,7 @@ public class DBScan {
 	 * @param eps 
 	 * @param minSamples 
 	 */
-	public static List<double[]> cluster(MatOfKeyPoint descriptor, int minSamples, double eps)
+	public static List<double[]> cluster(MatOfKeyPoint descriptor, int minSamples, double eps, OutputStreamWriter osw)
 	{
 	_descriptor = descriptor;
 	List<double[]> centroidlist = new ArrayList<double[]>();
