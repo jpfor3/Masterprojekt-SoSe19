@@ -39,8 +39,10 @@ public class Controller
 	private static List<Long> _clusterDurations = new ArrayList<Long>();
 
 	public static FileOutputStream fos = null;
-
-	private String dateiname;
+	
+	private static int counter_bw;
+	private static int counter_rot;
+	private static int counter_mir;
 		
 	public Controller()
 	{
@@ -59,14 +61,35 @@ public class Controller
 	 */
 	public static void main(String[] args) throws IOException {
 		
-		String inputImage = args[0];
-		String imageDirectory = args[1];
-		int minSamples = Integer.parseInt(args[2]);
-		double eps = Double.parseDouble(args[3]);
-		int emdpenalty = Integer.parseInt(args[4]);
-		String distancealgorithm = args[5];
-		
-		compareImages(inputImage, imageDirectory, minSamples, eps, emdpenalty, distancealgorithm);
+		 List<String> images = new ArrayList<String>();
+		 String imageFolder = "C:\\Users\\ACER\\Git Repositories\\Projekt Master Branch2\\Masterprojekt-SoSe19\\Implementation\\resources\\images";
+		 File folder = new File(imageFolder);
+	     File[] listOfFiles = folder.listFiles();
+	     
+	     for(File file : listOfFiles)
+	     {
+	    	 String imagePath = file.getPath();
+	    	 String imageName = imagePath.substring(imagePath.lastIndexOf("\\")+1);
+	    	
+	    	 if(!imageName.contains("_"))
+	    	 {
+	    		 images.add(file.getPath());
+	    	 }
+	     }
+
+	     
+//		String inputImage = args[0];
+//		String imageDirectory = args[1];
+//		int minSamples = Integer.parseInt(args[2]);
+//		double eps = Double.parseDouble(args[3]);
+//		int emdpenalty = Integer.parseInt(args[4]);
+//		String distancealgorithm = args[5];
+
+	     for(String image: images)
+	     {
+	     compareImages(image, imageFolder, 4, 0.1, -1, "EMD (Euclid)");
+	
+	     }
 	}
 	
    	public static void compareImages(String inputImage, String imageDirectory, int minSamples, double eps, int emdpenalty, String distanceAlgorithm) throws IOException
@@ -82,8 +105,7 @@ public class Controller
 
 		 File folder = new File(imageDirectory);
 	     File[] listOfFiles = folder.listFiles();
-	     List<String> images = new ArrayList<String>();
-	
+
 	     _centeredDescriptors.clear();
 	     _descriptorList.clear();
 	     
@@ -119,6 +141,7 @@ public class Controller
 	      * Adding input image
 	      */
 	     // Alle Bilder zur Liste hinzufügen
+	     List<String> images = new ArrayList<String>();
 	     images.add(inputImage);
 	     for(File file : listOfFiles)
 	     {
@@ -182,7 +205,8 @@ public class Controller
 		    		      
 		        //Map and sort distances of images
 		        Map<String, Double> map = new HashMap<String, Double>();
-		      		        
+		      		  
+
 		        for(int i = 1; i < images.size(); i++)
 		        {
 		            map.put(images.get(i), listOfDistances.get(i-1));		       
@@ -193,7 +217,6 @@ public class Controller
 
 		        SortedSet<Entry<String, Double>> finalMap = entriesSortedByValues(treeMap);
 
-		        System.out.println(finalMap);
 
 			    
 
@@ -226,11 +249,58 @@ public class Controller
 		        int score = 0;
 		        for(int i=0; i < 10; i++)
 		        {
-		        	if(trimPathShort(sortedImages.get(i)).equals(refImage))
+		        	String refFile = sortedImages.get(0).substring(sortedImages.get(i).lastIndexOf("\\")+1);
+		        	String refFileShort = refFile.substring(0, refFile.length() - 4);
+		        	
+		        	String fileName = sortedImages.get(i).substring(sortedImages.get(i).lastIndexOf("\\")+1);
+		        	int index = fileName.indexOf("_");
+
+		        	if(index > 0)
 		        	{
-		        		score += 10 - i;
+			        	String fileNameShort = fileName.substring(0, index);
+
+			        	if(fileNameShort.equals(refFileShort))
+			        	{
+			        		score += 2;
+			        	} else if(fileNameShort.substring(0, fileNameShort.length() - 2).equals(refImage))
+						{
+							score += 1;
+						}
+		        	
+		        	} else if(trimPathShort(sortedImages.get(i)).equals(refImage))
+		        	{
+		        		score += 1;
 		        	}
 		        }
+		        
+		        //Unterschiede zw rot bw und mir
+		        counter_bw = 0; 
+		        counter_rot = 0; 
+		        counter_mir = 0;
+		        for(int i=0; i < 20; i++)
+		        /* Schleife soll wie folgt funktionieren:
+		        	->	Die erste Prüfung ist, ob das Bild aus derselben Kategorie stammt
+		        	->  Falls ja, dann prüfe, ob es bw, rot oder mir ist und erhöhe den Counter
+		        	->  Falls nein, unwichtig
+		        	->  Dies soll nur bei den ersten 20 Bildern erfolgen, um die objektive 
+		        	    Aussagekraft des Algorithmus zu beurteilen
+		        */
+		        {
+		        	// Wenn Kategorie gleich
+		        	if(trimPathLong(sortedImages.get(i)).equals(refImage))
+		        	{
+		        		if(trimPathShort(sortedImages.get(i)).contains("_bw")){
+		        			counter_bw++;
+		        		}
+		        		if(trimPathShort(sortedImages.get(i)).contains("_rot")){
+		        			counter_rot++;
+		        		}
+		        		if(trimPathShort(sortedImages.get(i)).contains("_mir")){
+		        			counter_mir++;
+		        		}
+		        	}
+		        }
+		        
 		        
 		        
 		          long elapsedTime = System.nanoTime() - startTime;
@@ -252,6 +322,11 @@ public class Controller
 			    	  writeToFile("Berechnungszeit Cluster: " + clusterDuration +"\n", osw);
 			    	  writeToFile("Berechnungszeit Distanz: " + distanceDuration +"\n", osw);
 			    	  writeToFile("Gesamt:  " + sum + " ms\n", osw);
+			    	  writeToFile("________\n", osw);
+			    	  writeToFile("Gezählt in den Top 20 wurden für transformierte Bilder derselben Kategorie folgende Werte für: \n", osw);
+			    	  writeToFile("Schwarz-weiß: " + counter_bw + "\n", osw);
+			    	  writeToFile("Rotiert 90 Grad: " + counter_rot + "\n", osw);
+			    	  writeToFile("Gespiegelt: " + counter_mir + "\n", osw);
 
 			      }
 	      }     
@@ -279,6 +354,8 @@ public class Controller
 		image = image.substring(image.lastIndexOf("\\")+1);
 		return image.substring(0, image.length()-6);
 	}
+	
+
 	
 	private static String trimPathLong(String image)
 	{
