@@ -1,8 +1,3 @@
-/**
- * INFO: Falls Bilder aus dem Ordner images entfernt werden, müssen die Inhalte der Textdateien idx.txt und image_distances.txt
- * gelöscht werden
- */
-
 import Distanzmasse.FastEMD;
 
 
@@ -40,9 +35,9 @@ public class Controller
 
 	public static FileOutputStream fos = null;
 	private static int final_score;
-	private static int counter_bw;
-	private static int counter_rot;
-	private static int counter_mir;
+	private static int bw_score = 0;
+	private static int rot_score = 0;
+	private static int mir_score = 0;
 
 	private String dateiname;
 		
@@ -63,14 +58,27 @@ public class Controller
 	 */
 	public static void main(String[] args) throws IOException {
 		
-		String inputImage = args[0];
-		String imageDirectory = args[1];
-		int minSamples = Integer.parseInt(args[2]);
-		double eps = Double.parseDouble(args[3]);
-		int emdpenalty = Integer.parseInt(args[4]);
-		String distancealgorithm = args[5];
-		
-		compareImages(inputImage, imageDirectory, minSamples, eps, emdpenalty, distancealgorithm);
+		 List<String> images = new ArrayList<String>();
+		 String imageFolder = "C:\\Users\\ACER\\Git Repositories\\Projekt Master Branch2\\Masterprojekt-SoSe19\\Implementation\\resources\\images";
+		 File folder = new File(imageFolder);
+	     File[] listOfFiles = folder.listFiles();
+
+	     for(File file : listOfFiles)
+	     {
+	    	 String imagePath = file.getPath();
+	    	 String imageName = imagePath.substring(imagePath.lastIndexOf("\\")+1);
+
+	    	 if(!imageName.contains("_"))
+	    	 {
+	    		 images.add(file.getPath());
+	    	 }
+	     }
+
+	     for(String image: images)
+	     {
+	     compareImages(image, imageFolder, 4, 0.1, -1, "EMD (Euclid)");
+
+	     }
 	}
 	
    	public static void compareImages(String inputImage, String imageDirectory, int minSamples, double eps, int emdpenalty, String distanceAlgorithm) throws IOException
@@ -224,7 +232,7 @@ public class Controller
 
 		        }
 		        
-		      //Berechne Score der Top Ten Bilder
+		      //Berechne Score der Top Ten Bilder sowie Score f�r die Transformationen Black/White, Rotatetd, Mirrored
 		        final_score = 0;
 		        for(int i=0; i < 10; i++)
 		        {
@@ -241,6 +249,19 @@ public class Controller
 			        	if(fileNameShort.equals(refFileShort))
 			        	{
 			        		final_score += 2;
+			        		
+			        		System.out.println(fileName);
+			        		//Berechne Score f�r Transformationen
+			        		if(fileName.contains("_bw")){
+			        			bw_score = 10 - i;
+			        		}
+			        		if(fileName.contains("_rot")){
+			        			rot_score = 10 - i;
+			        		}
+			        		if(fileName.contains("_mir")){
+			        			mir_score = 10 - i;
+			        		}
+			        		
 			        	} else if(fileNameShort.substring(0, fileNameShort.length() - 2).equals(refImage))
 						{
 							final_score += 1;
@@ -251,52 +272,15 @@ public class Controller
 		        		final_score += 1;
 		        	}
 		        }
-		        
-
-		        //Unterschiede zw rot bw und mir
-		        counter_bw = 0; counter_rot = 0; counter_mir = 0;
-		        for(int i=0; i < 20; i++)
-		        /* Schleife soll wie folgt funktionieren:
-		        	->	Die erste Prüfung ist, ob das Bild aus derselben Kategorie stammt
-		        	->  Falls ja, dann prüfe, ob es bw, rot oder mir ist und erhöhe den Counter
-		        	->  Falls nein, unwichtig
-		        	->  Dies soll nur bei den ersten 20 Bildern erfolgen, um die objektive 
-		        	    Aussagekraft des Algorithmus zu beurteilen
-		        */
-		        {
-		        	// Wenn Kategorie gleich
-		        	if(trimPathShort(sortedImages.get(i)).equals(refImage))
-		        	{
-		        		if(trimPathShort(sortedImages.get(i)).contains("_bw")){
-		        			counter_bw++;
-		        		}
-		        		if(trimPathShort(sortedImages.get(i)).contains("_rot")){
-		        			counter_rot++;
-		        		}
-		        		if(trimPathShort(sortedImages.get(i)).contains("_mir")){
-		        			counter_mir++;
-		        		}
-		        	}
-		        }
-		        
-		        // Funktion zählt die Position für die Transformation des Referenzbildes und gibt einen
-		        // zusätzlichen Score der höher ausfällt je weiter oben die Transformation sich befindet
-		        int anzahl_bilder = 10;
-		        for(int i=1; i < anzahl_bilder + 1; i++)
-		        {
-		        	// Wenn transformiertes Bild gefunden erhöhe Score um die Top 10 minus der Position in den Top 10.
-		        	// Bsp.: rotiertes Bild ist auf Rang 6 in den Top 10, d.h. es gibt 10-6 Punkte = 4
-		        	if(sortedImages.get(i).equals(trimPathLong(refImage)) && sortedImages.get(i).contains("_"))
-		        	{
-		        		final_score+=(anzahl_bilder + 1 - i);
-		        	}
-		        }
-		        
-		        
+        
 		          long elapsedTime = System.nanoTime() - startTime;
 		          
 		          writeToFile("\nExecution Time: " + elapsedTime/1000000000 + " s", osw);
-		          writeToFile("\nScore: " + final_score + "\n\n", osw);
+		          writeToFile("\nScore (Image): " + final_score + "\n\n", osw);
+		          
+		    	  writeToFile("Score (Schwarz-wei�): " + bw_score + "\n", osw);
+		    	  writeToFile("Score (Rotiert 90 Grad): " + rot_score + "\n", osw);
+		    	  writeToFile("Score (Gespiegelt): " + mir_score + "\n", osw);
 	 		   	  writeToFile("___________________________________________________________________________________\n\n", osw);
 		          writeToFile("Performance: " + "\n", osw);
 				
@@ -312,14 +296,10 @@ public class Controller
 			    	  writeToFile("Berechnungszeit Cluster: " + clusterDuration +"\n", osw);
 			    	  writeToFile("Berechnungszeit Distanz: " + distanceDuration +"\n", osw);
 			    	  writeToFile("Gesamt:  " + sum + " ms\n", osw);
-			    	  writeToFile("______________________\n", osw);
-			    	  writeToFile("Gezählt in den Top 20 wurden für transformierte Bilder derselben Kategorie folgende Werte für: \n", osw);
-			    	  writeToFile("Schwarz-weiß: " + counter_bw + "\n", osw);
-			    	  writeToFile("Rotiert 90 Grad: " + counter_rot + "\n", osw);
-			    	  writeToFile("Gespiegelt: " + counter_mir + "\n", osw);
-
 			      }
+
 	      }     
+	      
 	      
           closeFile(osw);
 	}
