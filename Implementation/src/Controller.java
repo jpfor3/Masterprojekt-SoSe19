@@ -286,7 +286,7 @@ public class Controller
 		        {
 		        	// Wenn transformiertes Bild gefunden erhöhe Score um die Top 10 minus der Position in den Top 10.
 		        	// Bsp.: rotiertes Bild ist auf Rang 6 in den Top 10, d.h. es gibt 10-6 Punkte = 4
-		        	if(sortedImages.get(i).substring(sortedImages.get(i).lastIndexOf("_")).equals(refImage) && sortedImages.get(i).contains("_"))
+		        	if(sortedImages.get(i).equals(trimPathLong(refImage)) && sortedImages.get(i).contains("_"))
 		        	{
 		        		final_score+=(anzahl_bilder + 1 - i);
 		        	}
