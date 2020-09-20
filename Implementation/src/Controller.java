@@ -76,7 +76,7 @@ public class Controller
 
 	     for(String image: images)
 	     {
-	     compareImages(image, imageFolder, 4, 0.1, -1, "EMD (Euclid)");
+	     compareImages(image, imageFolder, 8, 0.2, -1, "EMD (Euclid)");
 
 	     }
 	}
@@ -220,9 +220,9 @@ public class Controller
 		        }
 		        
 
-		        for(int i = 0; i < sortedImages.size(); i++) {
-		        	KeypointDetector.drawKeypoints(sortedImages.get(i), i, ordnername);
-		        }      		        
+//		        for(int i = 0; i < sortedImages.size(); i++) {
+//		        	KeypointDetector.drawKeypoints(sortedImages.get(i), i, ordnername);
+//		        }      		        
 		   
 
 		        for(int i = 1; i < images.size(); i++)
@@ -233,7 +233,10 @@ public class Controller
 		        }
 		        
 		      //Berechne Score der Top Ten Bilder sowie Score für die Transformationen Black/White, Rotatetd, Mirrored
-		        final_score = 0;
+		        final_score = 0; 	 
+		        bw_score = 0;
+		    	rot_score = 0;
+		    	mir_score = 0;
 		        for(int i=0; i < 10; i++)
 		        {
 		        	String refFile = sortedImages.get(0).substring(sortedImages.get(i).lastIndexOf("\\")+1);
