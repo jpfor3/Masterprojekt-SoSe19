@@ -54,32 +54,32 @@ public class Controller
     }
 
 	/**
-	 * For Call over Console Prompt
+	 * 2nd Main Method for Call over Console Prompt
 	 */
-	public static void main(String[] args) throws IOException {
-		
-		 List<String> images = new ArrayList<String>();
-		 String imageFolder = "C:\\Users\\ACER\\Git Repositories\\Projekt Master Branch2\\Masterprojekt-SoSe19\\Implementation\\resources\\images";
-		 File folder = new File(imageFolder);
-	     File[] listOfFiles = folder.listFiles();
-
-	     for(File file : listOfFiles)
-	     {
-	    	 String imagePath = file.getPath();
-	    	 String imageName = imagePath.substring(imagePath.lastIndexOf("\\")+1);
-
-	    	 if(!imageName.contains("_"))
-	    	 {
-	    		 images.add(file.getPath());
-	    	 }
-	     }
-
-	     for(String image: images)
-	     {
-	     compareImages(image, imageFolder, 8, 0.2, -1, "EMD (Euclid)");
-
-	     }
-	}
+//	public static void main(String[] args) throws IOException {
+//		
+//		 List<String> images = new ArrayList<String>();
+//		 String imageFolder = "C:\\Users\\ACER\\Git Repositories\\Projekt Master Branch2\\Masterprojekt-SoSe19\\Implementation\\resources\\images";
+//		 File folder = new File(imageFolder);
+//	     File[] listOfFiles = folder.listFiles();
+//
+//	     for(File file : listOfFiles)
+//	     {
+//	    	 String imagePath = file.getPath();
+//	    	 String imageName = imagePath.substring(imagePath.lastIndexOf("\\")+1);
+//
+//	    	 if(!imageName.contains("_"))
+//	    	 {
+//	    		 images.add(file.getPath());
+//	    	 }
+//	     }
+//	     String ordnername = "Euclid_8_0.5";
+//	     for(String image: images)
+//	     {
+//	     compareImages(ordnername, image, imageFolder, 8, 0.5, -1, "EMD (Euclid)");
+//
+//	     }
+//	}
 	
    	public static void compareImages(String inputImage, String imageDirectory, int minSamples, double eps, int emdpenalty, String distanceAlgorithm) throws IOException
    	{     		
@@ -217,13 +217,13 @@ public class Controller
 		        while(it.hasNext())
 		        {
 		        	sortedImages.add(it.next().getKey());
-		        }
-		        
-
-//		        for(int i = 0; i < sortedImages.size(); i++) {
-//		        	KeypointDetector.drawKeypoints(sortedImages.get(i), i, ordnername);
-//		        }      		        
+		        }     		        
 		   
+		        //Draw Keypoints on images
+		        for(int i = 0; i < sortedImages.size(); i++) 
+		        {
+		        	KeypointDetector.drawKeypoints(sortedImages.get(i), i, ordnername);
+		        } 
 
 		        for(int i = 1; i < images.size(); i++)
 		        {

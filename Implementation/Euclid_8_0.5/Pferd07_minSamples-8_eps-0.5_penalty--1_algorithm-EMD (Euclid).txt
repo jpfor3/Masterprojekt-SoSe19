@@ -1,0 +1,1704 @@
+Zeitstempel: 2020-09-23T17:56:19.251  ///  Zu vergleichendes Bild: Pferd07
+
+________________________________________________________________________________________
+Distanzen zwischen den Bildern:
+
+Distanz zwischen Pferd07 und Auto01 => 26920.959515256825
+Distanz zwischen Pferd07 und Auto01_bw => 26316.245972755147
+Distanz zwischen Pferd07 und Auto01_mir => 26920.786216969518
+Distanz zwischen Pferd07 und Auto01_rot => 18043.249340007485
+Distanz zwischen Pferd07 und Auto02 => 17251.579412779345
+Distanz zwischen Pferd07 und Auto02_bw => 17514.48062771866
+Distanz zwischen Pferd07 und Auto02_mir => 17250.318890567578
+Distanz zwischen Pferd07 und Auto02_rot => 9018.277699531604
+Distanz zwischen Pferd07 und Auto03 => 15710.16916882792
+Distanz zwischen Pferd07 und Auto03_bw => 15760.643322852266
+Distanz zwischen Pferd07 und Auto03_mir => 15706.389341202474
+Distanz zwischen Pferd07 und Auto03_rot => 18743.263143607874
+Distanz zwischen Pferd07 und Auto04 => 5888.1633383958815
+Distanz zwischen Pferd07 und Auto04_bw => 5198.8205868405785
+Distanz zwischen Pferd07 und Auto04_mir => 5874.3140573757955
+Distanz zwischen Pferd07 und Auto04_rot => 10329.11169916794
+Distanz zwischen Pferd07 und Auto05 => 17517.827221520936
+Distanz zwischen Pferd07 und Auto05_bw => 17835.776601230442
+Distanz zwischen Pferd07 und Auto05_mir => 17516.04558040407
+Distanz zwischen Pferd07 und Auto05_rot => 11121.815175971335
+Distanz zwischen Pferd07 und Auto06 => 16159.409163238892
+Distanz zwischen Pferd07 und Auto06_bw => 16192.755436561076
+Distanz zwischen Pferd07 und Auto06_mir => 16157.200414754758
+Distanz zwischen Pferd07 und Auto06_rot => 9776.705023617897
+Distanz zwischen Pferd07 und Auto07 => 6457.358323392857
+Distanz zwischen Pferd07 und Auto08 => 2034.6900877651633
+Distanz zwischen Pferd07 und Auto08_bw => 2929.490002235035
+Distanz zwischen Pferd07 und Auto08_mir => 2032.6521204506842
+Distanz zwischen Pferd07 und Auto08_rot => 7221.537498200719
+Distanz zwischen Pferd07 und Auto09 => 2158.3559021220417
+Distanz zwischen Pferd07 und Auto09_bw => 1624.3862585183838
+Distanz zwischen Pferd07 und Auto09_mir => 2164.4077327874015
+Distanz zwischen Pferd07 und Auto09_rot => 7486.0277719466
+Distanz zwischen Pferd07 und Auto10 => 10849.498973810742
+Distanz zwischen Pferd07 und Auto10_bw => 10598.832043291968
+Distanz zwischen Pferd07 und Auto10_mir => 10826.638225086243
+Distanz zwischen Pferd07 und Auto10_rot => 3276.2297813873415
+Distanz zwischen Pferd07 und Bike01 => 24613.47311366678
+Distanz zwischen Pferd07 und Bike01_bw => 24075.833438002788
+Distanz zwischen Pferd07 und Bike01_mir => 24587.59110698967
+Distanz zwischen Pferd07 und Bike01_rot => 29337.792565963915
+Distanz zwischen Pferd07 und Bike02 => 11758.016832744186
+Distanz zwischen Pferd07 und Bike02_bw => 11900.959884424543
+Distanz zwischen Pferd07 und Bike02_mir => 11807.295949663125
+Distanz zwischen Pferd07 und Bike02_rot => 1429.149831050506
+Distanz zwischen Pferd07 und Bike03 => 17405.446089075413
+Distanz zwischen Pferd07 und Bike03_bw => 17069.31690724322
+Distanz zwischen Pferd07 und Bike03_mir => 17447.95881825803
+Distanz zwischen Pferd07 und Bike03_rot => 23953.239581151305
+Distanz zwischen Pferd07 und Bike04 => 4340.080300239389
+Distanz zwischen Pferd07 und Bike04_bw => 3976.2185740964196
+Distanz zwischen Pferd07 und Bike04_mir => 4304.653408069686
+Distanz zwischen Pferd07 und Bike04_rot => 7295.472725719847
+Distanz zwischen Pferd07 und Bike05 => 4656.922056045584
+Distanz zwischen Pferd07 und Bike05_bw => 4170.028180556478
+Distanz zwischen Pferd07 und Bike05_mir => 4728.018802103112
+Distanz zwischen Pferd07 und Bike05_rot => 13188.363680324894
+Distanz zwischen Pferd07 und Bike06 => 14849.538880776638
+Distanz zwischen Pferd07 und Bike06_bw => 14912.57997046171
+Distanz zwischen Pferd07 und Bike06_mir => 14823.811414552227
+Distanz zwischen Pferd07 und Bike06_rot => 18284.251245685526
+Distanz zwischen Pferd07 und Bike07 => 11453.471292502287
+Distanz zwischen Pferd07 und Bike07_bw => 11588.040994449855
+Distanz zwischen Pferd07 und Bike07_mir => 11493.615017354034
+Distanz zwischen Pferd07 und Bike07_rot => 16079.820068358491
+Distanz zwischen Pferd07 und Bike08 => 15394.526208857304
+Distanz zwischen Pferd07 und Bike08_bw => 15088.949010124279
+Distanz zwischen Pferd07 und Bike08_mir => 3107.7944460655754
+Distanz zwischen Pferd07 und Bike08_rot => 775.558066640976
+Distanz zwischen Pferd07 und Bike09 => 11209.549186666403
+Distanz zwischen Pferd07 und Bike09_bw => 11368.32879161746
+Distanz zwischen Pferd07 und Bike09_mir => 11228.260777013944
+Distanz zwischen Pferd07 und Bike09_rot => 17428.02283494636
+Distanz zwischen Pferd07 und Bike10 => 5283.742677852875
+Distanz zwischen Pferd07 und Bike10_bw => 5539.059590024563
+Distanz zwischen Pferd07 und Bike10_mir => 5309.947391375525
+Distanz zwischen Pferd07 und Bike10_rot => 9159.773742391368
+Distanz zwischen Pferd07 und Landschaft01 => 39840.46751735542
+Distanz zwischen Pferd07 und Landschaft01_bw => 40086.021411126436
+Distanz zwischen Pferd07 und Landschaft01_mir => 39611.423360277084
+Distanz zwischen Pferd07 und Landschaft01_rot => 41212.86278672517
+Distanz zwischen Pferd07 und Landschaft02 => 40165.81811409791
+Distanz zwischen Pferd07 und Landschaft02_bw => 40277.42819041748
+Distanz zwischen Pferd07 und Landschaft02_mir => 39695.53678280793
+Distanz zwischen Pferd07 und Landschaft02_rot => 40605.07371680978
+Distanz zwischen Pferd07 und Landschaft03 => 35950.843512430576
+Distanz zwischen Pferd07 und Landschaft03_bw => 36473.5997366393
+Distanz zwischen Pferd07 und Landschaft03_mir => 35894.80011939692
+Distanz zwischen Pferd07 und Landschaft03_rot => 38300.030590407885
+Distanz zwischen Pferd07 und Landschaft04 => 40690.63877796383
+Distanz zwischen Pferd07 und Landschaft04_bw => 39515.28238907329
+Distanz zwischen Pferd07 und Landschaft04_mir => 40429.9765939819
+Distanz zwischen Pferd07 und Landschaft04_rot => 41738.69849823273
+Distanz zwischen Pferd07 und Landschaft05 => 37924.770949928716
+Distanz zwischen Pferd07 und Landschaft05_bw => 38232.04858203762
+Distanz zwischen Pferd07 und Landschaft05_mir => 38572.7992840577
+Distanz zwischen Pferd07 und Landschaft05_rot => 40100.188267981684
+Distanz zwischen Pferd07 und Landschaft07 => 44847.77134023628
+Distanz zwischen Pferd07 und Landschaft07_bw => 45423.93297309647
+Distanz zwischen Pferd07 und Landschaft07_mir => 44408.61432598273
+Distanz zwischen Pferd07 und Landschaft07_rot => 44517.30552938597
+Distanz zwischen Pferd07 und Landschaft09 => 40781.76518182807
+Distanz zwischen Pferd07 und Landschaft09_bw => 40933.253280482655
+Distanz zwischen Pferd07 und Landschaft09_mir => 40656.590081174036
+Distanz zwischen Pferd07 und Landschaft09_rot => 42719.247788968016
+Distanz zwischen Pferd07 und Landschaft10 => 41515.13476712169
+Distanz zwischen Pferd07 und Landschaft10_bw => 41313.128007829364
+Distanz zwischen Pferd07 und Landschaft10_mir => 41495.21067009029
+Distanz zwischen Pferd07 und Landschaft10_rot => 42078.8820848769
+Distanz zwischen Pferd07 und Mensch01 => 10851.132285335552
+Distanz zwischen Pferd07 und Mensch01_bw => 10901.550760591233
+Distanz zwischen Pferd07 und Mensch01_mir => 10914.613259790522
+Distanz zwischen Pferd07 und Mensch01_rot => 18310.333279507868
+Distanz zwischen Pferd07 und Mensch02 => 20780.100571960043
+Distanz zwischen Pferd07 und Mensch02_bw => 20602.74090610447
+Distanz zwischen Pferd07 und Mensch02_mir => 20599.95389074401
+Distanz zwischen Pferd07 und Mensch02_rot => 24274.919192599325
+Distanz zwischen Pferd07 und Mensch03 => 35927.203010735386
+Distanz zwischen Pferd07 und Mensch03_bw => 36213.11793121166
+Distanz zwischen Pferd07 und Mensch03_mir => 35995.994674832706
+Distanz zwischen Pferd07 und Mensch03_rot => 36829.58280873336
+Distanz zwischen Pferd07 und Mensch04 => 13905.894282566374
+Distanz zwischen Pferd07 und Mensch05 => 15701.644986017138
+Distanz zwischen Pferd07 und Mensch05_bw => 15822.978505468054
+Distanz zwischen Pferd07 und Mensch05_mir => 15890.610221695699
+Distanz zwischen Pferd07 und Mensch05_rot => 19076.498318256123
+Distanz zwischen Pferd07 und Mensch06 => 25845.738473359663
+Distanz zwischen Pferd07 und Mensch06_bw => 25981.590361317172
+Distanz zwischen Pferd07 und Mensch06_mir => 25807.55087673986
+Distanz zwischen Pferd07 und Mensch06_rot => 28991.677910275394
+Distanz zwischen Pferd07 und Mensch07 => 17431.687436609576
+Distanz zwischen Pferd07 und Mensch07_bw => 17661.83216595669
+Distanz zwischen Pferd07 und Mensch07_mir => 17401.59251391305
+Distanz zwischen Pferd07 und Mensch07_rot => 20907.452995216445
+Distanz zwischen Pferd07 und Mensch08 => 27324.297874182037
+Distanz zwischen Pferd07 und Mensch08_bw => 27317.713721180793
+Distanz zwischen Pferd07 und Mensch08_mir => 27421.08159334012
+Distanz zwischen Pferd07 und Mensch08_rot => 30630.546251607335
+Distanz zwischen Pferd07 und Mensch09 => 8978.402838358617
+Distanz zwischen Pferd07 und Mensch09_bw => 8794.978642556642
+Distanz zwischen Pferd07 und Mensch09_mir => 9160.013285337276
+Distanz zwischen Pferd07 und Mensch09_rot => 15547.807346674545
+Distanz zwischen Pferd07 und Mensch10 => 23052.73431576419
+Distanz zwischen Pferd07 und Mensch10_bw => 22899.37448214233
+Distanz zwischen Pferd07 und Mensch10_mir => 23500.841460718668
+Distanz zwischen Pferd07 und Mensch10_rot => 28119.220073741963
+Distanz zwischen Pferd07 und Pferd01 => 16359.427392638623
+Distanz zwischen Pferd07 und Pferd01_bw => 15883.376370558743
+Distanz zwischen Pferd07 und Pferd01_mir => 16281.419952762442
+Distanz zwischen Pferd07 und Pferd01_rot => 23851.26957364064
+Distanz zwischen Pferd07 und Pferd02 => 6192.062528795238
+Distanz zwischen Pferd07 und Pferd02_bw => 5970.806690608307
+Distanz zwischen Pferd07 und Pferd02_mir => 6522.4730024934115
+Distanz zwischen Pferd07 und Pferd02_rot => 12154.516140502907
+Distanz zwischen Pferd07 und Pferd03 => 25361.109451566255
+Distanz zwischen Pferd07 und Pferd03_bw => 25128.38866996045
+Distanz zwischen Pferd07 und Pferd03_mir => 25398.754602796653
+Distanz zwischen Pferd07 und Pferd03_rot => 28870.69422815554
+Distanz zwischen Pferd07 und Pferd04 => 23150.793955539913
+Distanz zwischen Pferd07 und Pferd04_bw => 22486.337270668733
+Distanz zwischen Pferd07 und Pferd04_mir => 23227.540365998655
+Distanz zwischen Pferd07 und Pferd04_rot => 26007.595618982785
+Distanz zwischen Pferd07 und Pferd05 => 23319.276715950047
+Distanz zwischen Pferd07 und Pferd05_bw => 22918.872318520556
+Distanz zwischen Pferd07 und Pferd05_mir => 23263.379665323533
+Distanz zwischen Pferd07 und Pferd05_rot => 27687.136824549998
+Distanz zwischen Pferd07 und Pferd06 => 1880.176825373069
+Distanz zwischen Pferd07 und Pferd06_bw => 1447.947129082926
+Distanz zwischen Pferd07 und Pferd06_mir => 1278.2297857825008
+Distanz zwischen Pferd07 und Pferd06_rot => 9512.504248201067
+Distanz zwischen Pferd07 und Pferd07 => 0.0
+Distanz zwischen Pferd07 und Pferd07_bw => 796.7558675757602
+Distanz zwischen Pferd07 und Pferd07_mir => 108.26904388843016
+Distanz zwischen Pferd07 und Pferd07_rot => 15637.968696244374
+Distanz zwischen Pferd07 und Pferd08 => 17111.79082144569
+Distanz zwischen Pferd07 und Pferd08_bw => 16553.464442799792
+Distanz zwischen Pferd07 und Pferd08_mir => 17124.560286186377
+Distanz zwischen Pferd07 und Pferd08_rot => 23804.52492186331
+Distanz zwischen Pferd07 und Pferd09 => 21431.595742649988
+Distanz zwischen Pferd07 und Pferd09_bw => 21230.951646161277
+Distanz zwischen Pferd07 und Pferd09_mir => 21625.46502290254
+Distanz zwischen Pferd07 und Pferd09_rot => 23610.78659412448
+Distanz zwischen Pferd07 und Pferd10 => 18365.25208456131
+Distanz zwischen Pferd07 und Pferd10_bw => 18340.2991815335
+Distanz zwischen Pferd07 und Pferd10_mir => 18417.13427939419
+Distanz zwischen Pferd07 und Pferd10_rot => 21028.786215093165
+Distanz zwischen Pferd07 und Rad01 => 54910.10637474221
+Distanz zwischen Pferd07 und Rad01_bw => 54823.73999884226
+Distanz zwischen Pferd07 und Rad01_mir => 54900.44489150422
+Distanz zwischen Pferd07 und Rad01_rot => 44953.51845397594
+Distanz zwischen Pferd07 und Rad03 => 37604.28316172575
+Distanz zwischen Pferd07 und Rad03_bw => 36837.0203893566
+Distanz zwischen Pferd07 und Rad03_mir => 37607.63846821286
+Distanz zwischen Pferd07 und Rad03_rot => 29088.86654899779
+Distanz zwischen Pferd07 und Rad04 => 34730.27186003467
+Distanz zwischen Pferd07 und Rad04_bw => 34505.60727421564
+Distanz zwischen Pferd07 und Rad04_mir => 34726.33530690217
+Distanz zwischen Pferd07 und Rad04_rot => 26861.778780834426
+Distanz zwischen Pferd07 und Rad05 => 45636.02728930808
+Distanz zwischen Pferd07 und Rad06 => 63759.12771626269
+Distanz zwischen Pferd07 und Rad07 => 41337.58563311519
+Distanz zwischen Pferd07 und Rad07_bw => 41103.39856525244
+Distanz zwischen Pferd07 und Rad07_mir => 41334.47189496279
+Distanz zwischen Pferd07 und Rad07_rot => 34111.08361549952
+Distanz zwischen Pferd07 und Rad08 => 46824.65016725984
+Distanz zwischen Pferd07 und Rad08_bw => 47455.52010122896
+Distanz zwischen Pferd07 und Rad08_mir => 46822.496158957256
+Distanz zwischen Pferd07 und Rad08_rot => 39427.56118377449
+Distanz zwischen Pferd07 und Rad09 => 43894.11775580828
+Distanz zwischen Pferd07 und Rad09_bw => 42930.95557109149
+Distanz zwischen Pferd07 und Rad09_mir => 43898.030556322075
+Distanz zwischen Pferd07 und Rad09_rot => 36038.150761375524
+Distanz zwischen Pferd07 und Rad10 => 1312.2554372351012
+Distanz zwischen Pferd07 und Rad10_bw => 2048.7307982846264
+Distanz zwischen Pferd07 und Rad10_mir => 1408.341739280892
+Distanz zwischen Pferd07 und Rad10_rot => 5711.100818560775
+Distanz zwischen Pferd07 und Schaf01 => 8694.158722017388
+Distanz zwischen Pferd07 und Schaf01_bw => 8311.563758956403
+Distanz zwischen Pferd07 und Schaf01_mir => 8860.955461141906
+Distanz zwischen Pferd07 und Schaf01_rot => 644.2492310518712
+Distanz zwischen Pferd07 und Schaf02 => 13348.478593589463
+Distanz zwischen Pferd07 und Schaf03 => 19457.63645554431
+Distanz zwischen Pferd07 und Schaf03_bw => 20167.467113059127
+Distanz zwischen Pferd07 und Schaf03_mir => 19497.832895577936
+Distanz zwischen Pferd07 und Schaf03_rot => 20995.065511262088
+Distanz zwischen Pferd07 und Schaf04 => 22977.204845603876
+Distanz zwischen Pferd07 und Schaf04_bw => 23767.59484850167
+Distanz zwischen Pferd07 und Schaf04_mir => 22562.254386136654
+Distanz zwischen Pferd07 und Schaf04_rot => 23996.08745952128
+Distanz zwischen Pferd07 und Schaf06 => 13485.167292900891
+Distanz zwischen Pferd07 und Schaf06_bw => 14458.980231863317
+Distanz zwischen Pferd07 und Schaf06_mir => 13522.425293704015
+Distanz zwischen Pferd07 und Schaf06_rot => 14789.451912634666
+Distanz zwischen Pferd07 und Schaf07 => 11684.17022196958
+Distanz zwischen Pferd07 und Schaf07_bw => 12460.050770152046
+Distanz zwischen Pferd07 und Schaf07_mir => 11723.548026999966
+Distanz zwischen Pferd07 und Schaf07_rot => 13233.186504618021
+Distanz zwischen Pferd07 und Schaf10 => 1594.0843054829743
+Distanz zwischen Pferd07 und Schaf10_bw => 553.1186659800402
+Distanz zwischen Pferd07 und Schaf10_mir => 1598.2170428426946
+Distanz zwischen Pferd07 und Schaf10_rot => 2936.6506606208186
+___________________________________________________________________________________
+
+
+Execution Time: 413 s
+Score (Image): 6
+
+Score (Schwarz-wei�): 5
+Score (Rotiert 90 Grad): 0
+Score (Gespiegelt): 9
+___________________________________________________________________________________
+
+Performance: 
+
+Für Auto01.png: 
+Berechnungszeit KPs: 373
+Berechnungszeit Cluster: 3937
+Berechnungszeit Distanz: 144
+Gesamt:  4454 ms
+
+Für Auto01_bw.png: 
+Berechnungszeit KPs: 378
+Berechnungszeit Cluster: 3700
+Berechnungszeit Distanz: 336
+Gesamt:  4414 ms
+
+Für Auto01_mir.png: 
+Berechnungszeit KPs: 399
+Berechnungszeit Cluster: 3685
+Berechnungszeit Distanz: 60
+Gesamt:  4144 ms
+
+Für Auto01_rot.png: 
+Berechnungszeit KPs: 303
+Berechnungszeit Cluster: 3875
+Berechnungszeit Distanz: 233
+Gesamt:  4411 ms
+
+Für Auto02.png: 
+Berechnungszeit KPs: 290
+Berechnungszeit Cluster: 2946
+Berechnungszeit Distanz: 265
+Gesamt:  3501 ms
+
+Für Auto02_bw.png: 
+Berechnungszeit KPs: 308
+Berechnungszeit Cluster: 2758
+Berechnungszeit Distanz: 270
+Gesamt:  3336 ms
+
+Für Auto02_mir.png: 
+Berechnungszeit KPs: 292
+Berechnungszeit Cluster: 2524
+Berechnungszeit Distanz: 265
+Gesamt:  3081 ms
+
+Für Auto02_rot.png: 
+Berechnungszeit KPs: 275
+Berechnungszeit Cluster: 2114
+Berechnungszeit Distanz: 293
+Gesamt:  2682 ms
+
+Für Auto03.png: 
+Berechnungszeit KPs: 191
+Berechnungszeit Cluster: 698
+Berechnungszeit Distanz: 271
+Gesamt:  1160 ms
+
+Für Auto03_bw.png: 
+Berechnungszeit KPs: 191
+Berechnungszeit Cluster: 734
+Berechnungszeit Distanz: 142
+Gesamt:  1067 ms
+
+Für Auto03_mir.png: 
+Berechnungszeit KPs: 195
+Berechnungszeit Cluster: 702
+Berechnungszeit Distanz: 141
+Gesamt:  1038 ms
+
+Für Auto03_rot.png: 
+Berechnungszeit KPs: 189
+Berechnungszeit Cluster: 574
+Berechnungszeit Distanz: 161
+Gesamt:  924 ms
+
+Für Auto04.png: 
+Berechnungszeit KPs: 231
+Berechnungszeit Cluster: 1558
+Berechnungszeit Distanz: 161
+Gesamt:  1950 ms
+
+Für Auto04_bw.png: 
+Berechnungszeit KPs: 233
+Berechnungszeit Cluster: 1231
+Berechnungszeit Distanz: 173
+Gesamt:  1637 ms
+
+Für Auto04_mir.png: 
+Berechnungszeit KPs: 233
+Berechnungszeit Cluster: 1352
+Berechnungszeit Distanz: 156
+Gesamt:  1741 ms
+
+Für Auto04_rot.png: 
+Berechnungszeit KPs: 224
+Berechnungszeit Cluster: 954
+Berechnungszeit Distanz: 173
+Gesamt:  1351 ms
+
+Für Auto05.png: 
+Berechnungszeit KPs: 290
+Berechnungszeit Cluster: 3031
+Berechnungszeit Distanz: 142
+Gesamt:  3463 ms
+
+Für Auto05_bw.png: 
+Berechnungszeit KPs: 297
+Berechnungszeit Cluster: 3106
+Berechnungszeit Distanz: 137
+Gesamt:  3540 ms
+
+Für Auto05_mir.png: 
+Berechnungszeit KPs: 293
+Berechnungszeit Cluster: 3009
+Berechnungszeit Distanz: 157
+Gesamt:  3459 ms
+
+Für Auto05_rot.png: 
+Berechnungszeit KPs: 281
+Berechnungszeit Cluster: 3004
+Berechnungszeit Distanz: 133
+Gesamt:  3418 ms
+
+Für Auto06.png: 
+Berechnungszeit KPs: 315
+Berechnungszeit Cluster: 3511
+Berechnungszeit Distanz: 151
+Gesamt:  3977 ms
+
+Für Auto06_bw.png: 
+Berechnungszeit KPs: 374
+Berechnungszeit Cluster: 2959
+Berechnungszeit Distanz: 164
+Gesamt:  3497 ms
+
+Für Auto06_mir.png: 
+Berechnungszeit KPs: 420
+Berechnungszeit Cluster: 3103
+Berechnungszeit Distanz: 152
+Gesamt:  3675 ms
+
+Für Auto06_rot.png: 
+Berechnungszeit KPs: 294
+Berechnungszeit Cluster: 2499
+Berechnungszeit Distanz: 152
+Gesamt:  2945 ms
+
+Für Auto07.png: 
+Berechnungszeit KPs: 407
+Berechnungszeit Cluster: 1799
+Berechnungszeit Distanz: 175
+Gesamt:  2381 ms
+
+Für Auto08.png: 
+Berechnungszeit KPs: 253
+Berechnungszeit Cluster: 1622
+Berechnungszeit Distanz: 162
+Gesamt:  2037 ms
+
+Für Auto08_bw.png: 
+Berechnungszeit KPs: 339
+Berechnungszeit Cluster: 1505
+Berechnungszeit Distanz: 141
+Gesamt:  1985 ms
+
+Für Auto08_mir.png: 
+Berechnungszeit KPs: 313
+Berechnungszeit Cluster: 1527
+Berechnungszeit Distanz: 81
+Gesamt:  1921 ms
+
+Für Auto08_rot.png: 
+Berechnungszeit KPs: 243
+Berechnungszeit Cluster: 1232
+Berechnungszeit Distanz: 91
+Gesamt:  1566 ms
+
+Für Auto09.png: 
+Berechnungszeit KPs: 227
+Berechnungszeit Cluster: 1584
+Berechnungszeit Distanz: 94
+Gesamt:  1905 ms
+
+Für Auto09_bw.png: 
+Berechnungszeit KPs: 230
+Berechnungszeit Cluster: 1447
+Berechnungszeit Distanz: 79
+Gesamt:  1756 ms
+
+Für Auto09_mir.png: 
+Berechnungszeit KPs: 233
+Berechnungszeit Cluster: 1416
+Berechnungszeit Distanz: 91
+Gesamt:  1740 ms
+
+Für Auto09_rot.png: 
+Berechnungszeit KPs: 213
+Berechnungszeit Cluster: 1254
+Berechnungszeit Distanz: 90
+Gesamt:  1557 ms
+
+Für Auto10.png: 
+Berechnungszeit KPs: 266
+Berechnungszeit Cluster: 2528
+Berechnungszeit Distanz: 81
+Gesamt:  2875 ms
+
+Für Auto10_bw.png: 
+Berechnungszeit KPs: 261
+Berechnungszeit Cluster: 2480
+Berechnungszeit Distanz: 81
+Gesamt:  2822 ms
+
+Für Auto10_mir.png: 
+Berechnungszeit KPs: 265
+Berechnungszeit Cluster: 2266
+Berechnungszeit Distanz: 84
+Gesamt:  2615 ms
+
+Für Auto10_rot.png: 
+Berechnungszeit KPs: 251
+Berechnungszeit Cluster: 1870
+Berechnungszeit Distanz: 99
+Gesamt:  2220 ms
+
+Für Bike01.png: 
+Berechnungszeit KPs: 119
+Berechnungszeit Cluster: 413
+Berechnungszeit Distanz: 83
+Gesamt:  615 ms
+
+Für Bike01_bw.png: 
+Berechnungszeit KPs: 115
+Berechnungszeit Cluster: 391
+Berechnungszeit Distanz: 80
+Gesamt:  586 ms
+
+Für Bike01_mir.png: 
+Berechnungszeit KPs: 111
+Berechnungszeit Cluster: 364
+Berechnungszeit Distanz: 91
+Gesamt:  566 ms
+
+Für Bike01_rot.png: 
+Berechnungszeit KPs: 108
+Berechnungszeit Cluster: 236
+Berechnungszeit Distanz: 81
+Gesamt:  425 ms
+
+Für Bike02.png: 
+Berechnungszeit KPs: 193
+Berechnungszeit Cluster: 2484
+Berechnungszeit Distanz: 85
+Gesamt:  2762 ms
+
+Für Bike02_bw.png: 
+Berechnungszeit KPs: 206
+Berechnungszeit Cluster: 3104
+Berechnungszeit Distanz: 70
+Gesamt:  3380 ms
+
+Für Bike02_mir.png: 
+Berechnungszeit KPs: 262
+Berechnungszeit Cluster: 2339
+Berechnungszeit Distanz: 81
+Gesamt:  2682 ms
+
+Für Bike02_rot.png: 
+Berechnungszeit KPs: 192
+Berechnungszeit Cluster: 1438
+Berechnungszeit Distanz: 81
+Gesamt:  1711 ms
+
+Für Bike03.png: 
+Berechnungszeit KPs: 139
+Berechnungszeit Cluster: 637
+Berechnungszeit Distanz: 81
+Gesamt:  857 ms
+
+Für Bike03_bw.png: 
+Berechnungszeit KPs: 126
+Berechnungszeit Cluster: 666
+Berechnungszeit Distanz: 70
+Gesamt:  862 ms
+
+Für Bike03_mir.png: 
+Berechnungszeit KPs: 160
+Berechnungszeit Cluster: 702
+Berechnungszeit Distanz: 79
+Gesamt:  941 ms
+
+Für Bike03_rot.png: 
+Berechnungszeit KPs: 175
+Berechnungszeit Cluster: 441
+Berechnungszeit Distanz: 78
+Gesamt:  694 ms
+
+Für Bike04.png: 
+Berechnungszeit KPs: 240
+Berechnungszeit Cluster: 1833
+Berechnungszeit Distanz: 91
+Gesamt:  2164 ms
+
+Für Bike04_bw.png: 
+Berechnungszeit KPs: 193
+Berechnungszeit Cluster: 1708
+Berechnungszeit Distanz: 89
+Gesamt:  1990 ms
+
+Für Bike04_mir.png: 
+Berechnungszeit KPs: 190
+Berechnungszeit Cluster: 1719
+Berechnungszeit Distanz: 72
+Gesamt:  1981 ms
+
+Für Bike04_rot.png: 
+Berechnungszeit KPs: 274
+Berechnungszeit Cluster: 1141
+Berechnungszeit Distanz: 89
+Gesamt:  1504 ms
+
+Für Bike05.png: 
+Berechnungszeit KPs: 305
+Berechnungszeit Cluster: 1322
+Berechnungszeit Distanz: 81
+Gesamt:  1708 ms
+
+Für Bike05_bw.png: 
+Berechnungszeit KPs: 335
+Berechnungszeit Cluster: 1333
+Berechnungszeit Distanz: 95
+Gesamt:  1763 ms
+
+Für Bike05_mir.png: 
+Berechnungszeit KPs: 230
+Berechnungszeit Cluster: 1480
+Berechnungszeit Distanz: 80
+Gesamt:  1790 ms
+
+Für Bike05_rot.png: 
+Berechnungszeit KPs: 216
+Berechnungszeit Cluster: 811
+Berechnungszeit Distanz: 71
+Gesamt:  1098 ms
+
+Für Bike06.png: 
+Berechnungszeit KPs: 191
+Berechnungszeit Cluster: 746
+Berechnungszeit Distanz: 81
+Gesamt:  1018 ms
+
+Für Bike06_bw.png: 
+Berechnungszeit KPs: 199
+Berechnungszeit Cluster: 722
+Berechnungszeit Distanz: 71
+Gesamt:  992 ms
+
+Für Bike06_mir.png: 
+Berechnungszeit KPs: 200
+Berechnungszeit Cluster: 788
+Berechnungszeit Distanz: 81
+Gesamt:  1069 ms
+
+Für Bike06_rot.png: 
+Berechnungszeit KPs: 201
+Berechnungszeit Cluster: 579
+Berechnungszeit Distanz: 88
+Gesamt:  868 ms
+
+Für Bike07.png: 
+Berechnungszeit KPs: 268
+Berechnungszeit Cluster: 887
+Berechnungszeit Distanz: 76
+Gesamt:  1231 ms
+
+Für Bike07_bw.png: 
+Berechnungszeit KPs: 214
+Berechnungszeit Cluster: 913
+Berechnungszeit Distanz: 80
+Gesamt:  1207 ms
+
+Für Bike07_mir.png: 
+Berechnungszeit KPs: 265
+Berechnungszeit Cluster: 875
+Berechnungszeit Distanz: 81
+Gesamt:  1221 ms
+
+Für Bike07_rot.png: 
+Berechnungszeit KPs: 200
+Berechnungszeit Cluster: 659
+Berechnungszeit Distanz: 71
+Gesamt:  930 ms
+
+Für Bike08.png: 
+Berechnungszeit KPs: 331
+Berechnungszeit Cluster: 2888
+Berechnungszeit Distanz: 68
+Gesamt:  3287 ms
+
+Für Bike08_bw.png: 
+Berechnungszeit KPs: 289
+Berechnungszeit Cluster: 2621
+Berechnungszeit Distanz: 61
+Gesamt:  2971 ms
+
+Für Bike08_mir.png: 
+Berechnungszeit KPs: 292
+Berechnungszeit Cluster: 1892
+Berechnungszeit Distanz: 71
+Gesamt:  2255 ms
+
+Für Bike08_rot.png: 
+Berechnungszeit KPs: 399
+Berechnungszeit Cluster: 1597
+Berechnungszeit Distanz: 72
+Gesamt:  2068 ms
+
+Für Bike09.png: 
+Berechnungszeit KPs: 280
+Berechnungszeit Cluster: 896
+Berechnungszeit Distanz: 81
+Gesamt:  1257 ms
+
+Für Bike09_bw.png: 
+Berechnungszeit KPs: 203
+Berechnungszeit Cluster: 890
+Berechnungszeit Distanz: 73
+Gesamt:  1166 ms
+
+Für Bike09_mir.png: 
+Berechnungszeit KPs: 205
+Berechnungszeit Cluster: 942
+Berechnungszeit Distanz: 81
+Gesamt:  1228 ms
+
+Für Bike09_rot.png: 
+Berechnungszeit KPs: 190
+Berechnungszeit Cluster: 636
+Berechnungszeit Distanz: 71
+Gesamt:  897 ms
+
+Für Bike10.png: 
+Berechnungszeit KPs: 272
+Berechnungszeit Cluster: 1767
+Berechnungszeit Distanz: 81
+Gesamt:  2120 ms
+
+Für Bike10_bw.png: 
+Berechnungszeit KPs: 257
+Berechnungszeit Cluster: 1696
+Berechnungszeit Distanz: 92
+Gesamt:  2045 ms
+
+Für Bike10_mir.png: 
+Berechnungszeit KPs: 260
+Berechnungszeit Cluster: 2340
+Berechnungszeit Distanz: 77
+Gesamt:  2677 ms
+
+Für Bike10_rot.png: 
+Berechnungszeit KPs: 236
+Berechnungszeit Cluster: 1045
+Berechnungszeit Distanz: 91
+Gesamt:  1372 ms
+
+Für Landschaft01.jpg: 
+Berechnungszeit KPs: 62
+Berechnungszeit Cluster: 67
+Berechnungszeit Distanz: 71
+Gesamt:  200 ms
+
+Für Landschaft01_bw.jpg: 
+Berechnungszeit KPs: 60
+Berechnungszeit Cluster: 71
+Berechnungszeit Distanz: 69
+Gesamt:  200 ms
+
+Für Landschaft01_mir.jpg: 
+Berechnungszeit KPs: 70
+Berechnungszeit Cluster: 82
+Berechnungszeit Distanz: 62
+Gesamt:  214 ms
+
+Für Landschaft01_rot.jpg: 
+Berechnungszeit KPs: 63
+Berechnungszeit Cluster: 59
+Berechnungszeit Distanz: 73
+Gesamt:  195 ms
+
+Für Landschaft02.jpg: 
+Berechnungszeit KPs: 58
+Berechnungszeit Cluster: 54
+Berechnungszeit Distanz: 70
+Gesamt:  182 ms
+
+Für Landschaft02_bw.jpg: 
+Berechnungszeit KPs: 78
+Berechnungszeit Cluster: 51
+Berechnungszeit Distanz: 67
+Gesamt:  196 ms
+
+Für Landschaft02_mir.jpg: 
+Berechnungszeit KPs: 91
+Berechnungszeit Cluster: 63
+Berechnungszeit Distanz: 70
+Gesamt:  224 ms
+
+Für Landschaft02_rot.jpg: 
+Berechnungszeit KPs: 70
+Berechnungszeit Cluster: 42
+Berechnungszeit Distanz: 71
+Gesamt:  183 ms
+
+Für Landschaft03.jpg: 
+Berechnungszeit KPs: 81
+Berechnungszeit Cluster: 132
+Berechnungszeit Distanz: 71
+Gesamt:  284 ms
+
+Für Landschaft03_bw.jpg: 
+Berechnungszeit KPs: 60
+Berechnungszeit Cluster: 130
+Berechnungszeit Distanz: 71
+Gesamt:  261 ms
+
+Für Landschaft03_mir.jpg: 
+Berechnungszeit KPs: 60
+Berechnungszeit Cluster: 132
+Berechnungszeit Distanz: 79
+Gesamt:  271 ms
+
+Für Landschaft03_rot.jpg: 
+Berechnungszeit KPs: 61
+Berechnungszeit Cluster: 195
+Berechnungszeit Distanz: 63
+Gesamt:  319 ms
+
+Für Landschaft04.jpg: 
+Berechnungszeit KPs: 47
+Berechnungszeit Cluster: 98
+Berechnungszeit Distanz: 75
+Gesamt:  220 ms
+
+Für Landschaft04_bw.jpg: 
+Berechnungszeit KPs: 58
+Berechnungszeit Cluster: 101
+Berechnungszeit Distanz: 66
+Gesamt:  225 ms
+
+Für Landschaft04_mir.jpg: 
+Berechnungszeit KPs: 52
+Berechnungszeit Cluster: 100
+Berechnungszeit Distanz: 71
+Gesamt:  223 ms
+
+Für Landschaft04_rot.jpg: 
+Berechnungszeit KPs: 48
+Berechnungszeit Cluster: 78
+Berechnungszeit Distanz: 63
+Gesamt:  189 ms
+
+Für Landschaft05.jpg: 
+Berechnungszeit KPs: 43
+Berechnungszeit Cluster: 91
+Berechnungszeit Distanz: 71
+Gesamt:  205 ms
+
+Für Landschaft05_bw.jpg: 
+Berechnungszeit KPs: 63
+Berechnungszeit Cluster: 94
+Berechnungszeit Distanz: 93
+Gesamt:  250 ms
+
+Für Landschaft05_mir.jpg: 
+Berechnungszeit KPs: 50
+Berechnungszeit Cluster: 100
+Berechnungszeit Distanz: 102
+Gesamt:  252 ms
+
+Für Landschaft05_rot.jpg: 
+Berechnungszeit KPs: 40
+Berechnungszeit Cluster: 54
+Berechnungszeit Distanz: 60
+Gesamt:  154 ms
+
+Für Landschaft07.jpg: 
+Berechnungszeit KPs: 40
+Berechnungszeit Cluster: 46
+Berechnungszeit Distanz: 73
+Gesamt:  159 ms
+
+Für Landschaft07_bw.jpg: 
+Berechnungszeit KPs: 30
+Berechnungszeit Cluster: 32
+Berechnungszeit Distanz: 79
+Gesamt:  141 ms
+
+Für Landschaft07_mir.jpg: 
+Berechnungszeit KPs: 41
+Berechnungszeit Cluster: 22
+Berechnungszeit Distanz: 69
+Gesamt:  132 ms
+
+Für Landschaft07_rot.jpg: 
+Berechnungszeit KPs: 40
+Berechnungszeit Cluster: 31
+Berechnungszeit Distanz: 63
+Gesamt:  134 ms
+
+Für Landschaft09.jpg: 
+Berechnungszeit KPs: 44
+Berechnungszeit Cluster: 53
+Berechnungszeit Distanz: 69
+Gesamt:  166 ms
+
+Für Landschaft09_bw.jpg: 
+Berechnungszeit KPs: 38
+Berechnungszeit Cluster: 52
+Berechnungszeit Distanz: 116
+Gesamt:  206 ms
+
+Für Landschaft09_mir.jpg: 
+Berechnungszeit KPs: 43
+Berechnungszeit Cluster: 56
+Berechnungszeit Distanz: 81
+Gesamt:  180 ms
+
+Für Landschaft09_rot.jpg: 
+Berechnungszeit KPs: 33
+Berechnungszeit Cluster: 32
+Berechnungszeit Distanz: 72
+Gesamt:  137 ms
+
+Für Landschaft10.jpg: 
+Berechnungszeit KPs: 31
+Berechnungszeit Cluster: 32
+Berechnungszeit Distanz: 78
+Gesamt:  141 ms
+
+Für Landschaft10_bw.jpg: 
+Berechnungszeit KPs: 47
+Berechnungszeit Cluster: 45
+Berechnungszeit Distanz: 69
+Gesamt:  161 ms
+
+Für Landschaft10_mir.jpg: 
+Berechnungszeit KPs: 38
+Berechnungszeit Cluster: 46
+Berechnungszeit Distanz: 85
+Gesamt:  169 ms
+
+Für Landschaft10_rot.jpg: 
+Berechnungszeit KPs: 31
+Berechnungszeit Cluster: 38
+Berechnungszeit Distanz: 69
+Gesamt:  138 ms
+
+Für Mensch01.png: 
+Berechnungszeit KPs: 264
+Berechnungszeit Cluster: 934
+Berechnungszeit Distanz: 78
+Gesamt:  1276 ms
+
+Für Mensch01_bw.png: 
+Berechnungszeit KPs: 236
+Berechnungszeit Cluster: 1056
+Berechnungszeit Distanz: 90
+Gesamt:  1382 ms
+
+Für Mensch01_mir.png: 
+Berechnungszeit KPs: 223
+Berechnungszeit Cluster: 886
+Berechnungszeit Distanz: 95
+Gesamt:  1204 ms
+
+Für Mensch01_rot.png: 
+Berechnungszeit KPs: 207
+Berechnungszeit Cluster: 559
+Berechnungszeit Distanz: 100
+Gesamt:  866 ms
+
+Für Mensch02.png: 
+Berechnungszeit KPs: 188
+Berechnungszeit Cluster: 534
+Berechnungszeit Distanz: 69
+Gesamt:  791 ms
+
+Für Mensch02_bw.png: 
+Berechnungszeit KPs: 171
+Berechnungszeit Cluster: 500
+Berechnungszeit Distanz: 69
+Gesamt:  740 ms
+
+Für Mensch02_mir.png: 
+Berechnungszeit KPs: 191
+Berechnungszeit Cluster: 463
+Berechnungszeit Distanz: 78
+Gesamt:  732 ms
+
+Für Mensch02_rot.png: 
+Berechnungszeit KPs: 276
+Berechnungszeit Cluster: 356
+Berechnungszeit Distanz: 93
+Gesamt:  725 ms
+
+Für Mensch03.png: 
+Berechnungszeit KPs: 191
+Berechnungszeit Cluster: 116
+Berechnungszeit Distanz: 123
+Gesamt:  430 ms
+
+Für Mensch03_bw.png: 
+Berechnungszeit KPs: 164
+Berechnungszeit Cluster: 106
+Berechnungszeit Distanz: 69
+Gesamt:  339 ms
+
+Für Mensch03_mir.png: 
+Berechnungszeit KPs: 161
+Berechnungszeit Cluster: 108
+Berechnungszeit Distanz: 85
+Gesamt:  354 ms
+
+Für Mensch03_rot.png: 
+Berechnungszeit KPs: 133
+Berechnungszeit Cluster: 87
+Berechnungszeit Distanz: 100
+Gesamt:  320 ms
+
+Für Mensch04.png: 
+Berechnungszeit KPs: 207
+Berechnungszeit Cluster: 931
+Berechnungszeit Distanz: 85
+Gesamt:  1223 ms
+
+Für Mensch05.png: 
+Berechnungszeit KPs: 219
+Berechnungszeit Cluster: 675
+Berechnungszeit Distanz: 75
+Gesamt:  969 ms
+
+Für Mensch05_bw.png: 
+Berechnungszeit KPs: 197
+Berechnungszeit Cluster: 675
+Berechnungszeit Distanz: 71
+Gesamt:  943 ms
+
+Für Mensch05_mir.png: 
+Berechnungszeit KPs: 192
+Berechnungszeit Cluster: 675
+Berechnungszeit Distanz: 72
+Gesamt:  939 ms
+
+Für Mensch05_rot.png: 
+Berechnungszeit KPs: 195
+Berechnungszeit Cluster: 611
+Berechnungszeit Distanz: 100
+Gesamt:  906 ms
+
+Für Mensch06.png: 
+Berechnungszeit KPs: 161
+Berechnungszeit Cluster: 383
+Berechnungszeit Distanz: 154
+Gesamt:  698 ms
+
+Für Mensch06_bw.png: 
+Berechnungszeit KPs: 165
+Berechnungszeit Cluster: 401
+Berechnungszeit Distanz: 100
+Gesamt:  666 ms
+
+Für Mensch06_mir.png: 
+Berechnungszeit KPs: 179
+Berechnungszeit Cluster: 401
+Berechnungszeit Distanz: 76
+Gesamt:  656 ms
+
+Für Mensch06_rot.png: 
+Berechnungszeit KPs: 163
+Berechnungszeit Cluster: 309
+Berechnungszeit Distanz: 87
+Gesamt:  559 ms
+
+Für Mensch07.png: 
+Berechnungszeit KPs: 213
+Berechnungszeit Cluster: 685
+Berechnungszeit Distanz: 84
+Gesamt:  982 ms
+
+Für Mensch07_bw.png: 
+Berechnungszeit KPs: 205
+Berechnungszeit Cluster: 588
+Berechnungszeit Distanz: 69
+Gesamt:  862 ms
+
+Für Mensch07_mir.png: 
+Berechnungszeit KPs: 211
+Berechnungszeit Cluster: 584
+Berechnungszeit Distanz: 84
+Gesamt:  879 ms
+
+Für Mensch07_rot.png: 
+Berechnungszeit KPs: 201
+Berechnungszeit Cluster: 459
+Berechnungszeit Distanz: 79
+Gesamt:  739 ms
+
+Für Mensch08.png: 
+Berechnungszeit KPs: 158
+Berechnungszeit Cluster: 286
+Berechnungszeit Distanz: 89
+Gesamt:  533 ms
+
+Für Mensch08_bw.png: 
+Berechnungszeit KPs: 149
+Berechnungszeit Cluster: 296
+Berechnungszeit Distanz: 111
+Gesamt:  556 ms
+
+Für Mensch08_mir.png: 
+Berechnungszeit KPs: 151
+Berechnungszeit Cluster: 385
+Berechnungszeit Distanz: 69
+Gesamt:  605 ms
+
+Für Mensch08_rot.png: 
+Berechnungszeit KPs: 175
+Berechnungszeit Cluster: 221
+Berechnungszeit Distanz: 69
+Gesamt:  465 ms
+
+Für Mensch09.png: 
+Berechnungszeit KPs: 233
+Berechnungszeit Cluster: 980
+Berechnungszeit Distanz: 78
+Gesamt:  1291 ms
+
+Für Mensch09_bw.png: 
+Berechnungszeit KPs: 222
+Berechnungszeit Cluster: 990
+Berechnungszeit Distanz: 69
+Gesamt:  1281 ms
+
+Für Mensch09_mir.png: 
+Berechnungszeit KPs: 223
+Berechnungszeit Cluster: 987
+Berechnungszeit Distanz: 69
+Gesamt:  1279 ms
+
+Für Mensch09_rot.png: 
+Berechnungszeit KPs: 192
+Berechnungszeit Cluster: 685
+Berechnungszeit Distanz: 79
+Gesamt:  956 ms
+
+Für Mensch10.png: 
+Berechnungszeit KPs: 183
+Berechnungszeit Cluster: 523
+Berechnungszeit Distanz: 63
+Gesamt:  769 ms
+
+Für Mensch10_bw.png: 
+Berechnungszeit KPs: 203
+Berechnungszeit Cluster: 591
+Berechnungszeit Distanz: 79
+Gesamt:  873 ms
+
+Für Mensch10_mir.png: 
+Berechnungszeit KPs: 234
+Berechnungszeit Cluster: 521
+Berechnungszeit Distanz: 115
+Gesamt:  870 ms
+
+Für Mensch10_rot.png: 
+Berechnungszeit KPs: 163
+Berechnungszeit Cluster: 361
+Berechnungszeit Distanz: 69
+Gesamt:  593 ms
+
+Für Pferd01.png: 
+Berechnungszeit KPs: 183
+Berechnungszeit Cluster: 688
+Berechnungszeit Distanz: 69
+Gesamt:  940 ms
+
+Für Pferd01_bw.png: 
+Berechnungszeit KPs: 170
+Berechnungszeit Cluster: 691
+Berechnungszeit Distanz: 79
+Gesamt:  940 ms
+
+Für Pferd01_mir.png: 
+Berechnungszeit KPs: 188
+Berechnungszeit Cluster: 750
+Berechnungszeit Distanz: 87
+Gesamt:  1025 ms
+
+Für Pferd01_rot.png: 
+Berechnungszeit KPs: 169
+Berechnungszeit Cluster: 402
+Berechnungszeit Distanz: 99
+Gesamt:  670 ms
+
+Für Pferd02.png: 
+Berechnungszeit KPs: 252
+Berechnungszeit Cluster: 1208
+Berechnungszeit Distanz: 100
+Gesamt:  1560 ms
+
+Für Pferd02_bw.png: 
+Berechnungszeit KPs: 255
+Berechnungszeit Cluster: 1209
+Berechnungszeit Distanz: 69
+Gesamt:  1533 ms
+
+Für Pferd02_mir.png: 
+Berechnungszeit KPs: 243
+Berechnungszeit Cluster: 1192
+Berechnungszeit Distanz: 169
+Gesamt:  1604 ms
+
+Für Pferd02_rot.png: 
+Berechnungszeit KPs: 241
+Berechnungszeit Cluster: 899
+Berechnungszeit Distanz: 69
+Gesamt:  1209 ms
+
+Für Pferd03.png: 
+Berechnungszeit KPs: 144
+Berechnungszeit Cluster: 391
+Berechnungszeit Distanz: 95
+Gesamt:  630 ms
+
+Für Pferd03_bw.png: 
+Berechnungszeit KPs: 148
+Berechnungszeit Cluster: 386
+Berechnungszeit Distanz: 115
+Gesamt:  649 ms
+
+Für Pferd03_mir.png: 
+Berechnungszeit KPs: 141
+Berechnungszeit Cluster: 392
+Berechnungszeit Distanz: 69
+Gesamt:  602 ms
+
+Für Pferd03_rot.png: 
+Berechnungszeit KPs: 132
+Berechnungszeit Cluster: 299
+Berechnungszeit Distanz: 100
+Gesamt:  531 ms
+
+Für Pferd04.png: 
+Berechnungszeit KPs: 150
+Berechnungszeit Cluster: 465
+Berechnungszeit Distanz: 69
+Gesamt:  684 ms
+
+Für Pferd04_bw.png: 
+Berechnungszeit KPs: 148
+Berechnungszeit Cluster: 444
+Berechnungszeit Distanz: 84
+Gesamt:  676 ms
+
+Für Pferd04_mir.png: 
+Berechnungszeit KPs: 146
+Berechnungszeit Cluster: 408
+Berechnungszeit Distanz: 63
+Gesamt:  617 ms
+
+Für Pferd04_rot.png: 
+Berechnungszeit KPs: 151
+Berechnungszeit Cluster: 336
+Berechnungszeit Distanz: 69
+Gesamt:  556 ms
+
+Für Pferd05.png: 
+Berechnungszeit KPs: 151
+Berechnungszeit Cluster: 497
+Berechnungszeit Distanz: 85
+Gesamt:  733 ms
+
+Für Pferd05_bw.png: 
+Berechnungszeit KPs: 152
+Berechnungszeit Cluster: 516
+Berechnungszeit Distanz: 62
+Gesamt:  730 ms
+
+Für Pferd05_mir.png: 
+Berechnungszeit KPs: 153
+Berechnungszeit Cluster: 564
+Berechnungszeit Distanz: 85
+Gesamt:  802 ms
+
+Für Pferd05_rot.png: 
+Berechnungszeit KPs: 161
+Berechnungszeit Cluster: 356
+Berechnungszeit Distanz: 69
+Gesamt:  586 ms
+
+Für Pferd06.png: 
+Berechnungszeit KPs: 227
+Berechnungszeit Cluster: 1809
+Berechnungszeit Distanz: 72
+Gesamt:  2108 ms
+
+Für Pferd06_bw.png: 
+Berechnungszeit KPs: 231
+Berechnungszeit Cluster: 1693
+Berechnungszeit Distanz: 90
+Gesamt:  2014 ms
+
+Für Pferd06_mir.png: 
+Berechnungszeit KPs: 232
+Berechnungszeit Cluster: 1635
+Berechnungszeit Distanz: 72
+Gesamt:  1939 ms
+
+Für Pferd06_rot.png: 
+Berechnungszeit KPs: 201
+Berechnungszeit Cluster: 1019
+Berechnungszeit Distanz: 69
+Gesamt:  1289 ms
+
+Für Pferd07.png: 
+Berechnungszeit KPs: 225
+Berechnungszeit Cluster: 1595
+Berechnungszeit Distanz: 101
+Gesamt:  1921 ms
+
+Für Pferd07_bw.png: 
+Berechnungszeit KPs: 223
+Berechnungszeit Cluster: 1583
+Berechnungszeit Distanz: 100
+Gesamt:  1906 ms
+
+Für Pferd07_mir.png: 
+Berechnungszeit KPs: 221
+Berechnungszeit Cluster: 1522
+Berechnungszeit Distanz: 62
+Gesamt:  1805 ms
+
+Für Pferd07_rot.png: 
+Berechnungszeit KPs: 183
+Berechnungszeit Cluster: 681
+Berechnungszeit Distanz: 67
+Gesamt:  931 ms
+
+Für Pferd08.png: 
+Berechnungszeit KPs: 170
+Berechnungszeit Cluster: 742
+Berechnungszeit Distanz: 87
+Gesamt:  999 ms
+
+Für Pferd08_bw.png: 
+Berechnungszeit KPs: 175
+Berechnungszeit Cluster: 710
+Berechnungszeit Distanz: 69
+Gesamt:  954 ms
+
+Für Pferd08_mir.png: 
+Berechnungszeit KPs: 183
+Berechnungszeit Cluster: 702
+Berechnungszeit Distanz: 86
+Gesamt:  971 ms
+
+Für Pferd08_rot.png: 
+Berechnungszeit KPs: 173
+Berechnungszeit Cluster: 430
+Berechnungszeit Distanz: 71
+Gesamt:  674 ms
+
+Für Pferd09.png: 
+Berechnungszeit KPs: 171
+Berechnungszeit Cluster: 608
+Berechnungszeit Distanz: 71
+Gesamt:  850 ms
+
+Für Pferd09_bw.png: 
+Berechnungszeit KPs: 278
+Berechnungszeit Cluster: 527
+Berechnungszeit Distanz: 110
+Gesamt:  915 ms
+
+Für Pferd09_mir.png: 
+Berechnungszeit KPs: 191
+Berechnungszeit Cluster: 537
+Berechnungszeit Distanz: 71
+Gesamt:  799 ms
+
+Für Pferd09_rot.png: 
+Berechnungszeit KPs: 175
+Berechnungszeit Cluster: 427
+Berechnungszeit Distanz: 71
+Gesamt:  673 ms
+
+Für Pferd10.png: 
+Berechnungszeit KPs: 188
+Berechnungszeit Cluster: 637
+Berechnungszeit Distanz: 69
+Gesamt:  894 ms
+
+Für Pferd10_bw.png: 
+Berechnungszeit KPs: 171
+Berechnungszeit Cluster: 695
+Berechnungszeit Distanz: 101
+Gesamt:  967 ms
+
+Für Pferd10_mir.png: 
+Berechnungszeit KPs: 171
+Berechnungszeit Cluster: 629
+Berechnungszeit Distanz: 69
+Gesamt:  869 ms
+
+Für Pferd10_rot.png: 
+Berechnungszeit KPs: 203
+Berechnungszeit Cluster: 511
+Berechnungszeit Distanz: 62
+Gesamt:  776 ms
+
+Für Rad01.png: 
+Berechnungszeit KPs: 533
+Berechnungszeit Cluster: 7031
+Berechnungszeit Distanz: 90
+Gesamt:  7654 ms
+
+Für Rad01_bw.png: 
+Berechnungszeit KPs: 501
+Berechnungszeit Cluster: 8489
+Berechnungszeit Distanz: 79
+Gesamt:  9069 ms
+
+Für Rad01_mir.png: 
+Berechnungszeit KPs: 565
+Berechnungszeit Cluster: 6458
+Berechnungszeit Distanz: 85
+Gesamt:  7108 ms
+
+Für Rad01_rot.png: 
+Berechnungszeit KPs: 740
+Berechnungszeit Cluster: 5697
+Berechnungszeit Distanz: 85
+Gesamt:  6522 ms
+
+Für Rad03.png: 
+Berechnungszeit KPs: 535
+Berechnungszeit Cluster: 4824
+Berechnungszeit Distanz: 78
+Gesamt:  5437 ms
+
+Für Rad03_bw.png: 
+Berechnungszeit KPs: 449
+Berechnungszeit Cluster: 4298
+Berechnungszeit Distanz: 69
+Gesamt:  4816 ms
+
+Für Rad03_mir.png: 
+Berechnungszeit KPs: 487
+Berechnungszeit Cluster: 5289
+Berechnungszeit Distanz: 69
+Gesamt:  5845 ms
+
+Für Rad03_rot.png: 
+Berechnungszeit KPs: 498
+Berechnungszeit Cluster: 3679
+Berechnungszeit Distanz: 71
+Gesamt:  4248 ms
+
+Für Rad04.png: 
+Berechnungszeit KPs: 448
+Berechnungszeit Cluster: 5145
+Berechnungszeit Distanz: 60
+Gesamt:  5653 ms
+
+Für Rad04_bw.png: 
+Berechnungszeit KPs: 452
+Berechnungszeit Cluster: 5450
+Berechnungszeit Distanz: 53
+Gesamt:  5955 ms
+
+Für Rad04_mir.png: 
+Berechnungszeit KPs: 525
+Berechnungszeit Cluster: 5096
+Berechnungszeit Distanz: 63
+Gesamt:  5684 ms
+
+Für Rad04_rot.png: 
+Berechnungszeit KPs: 452
+Berechnungszeit Cluster: 3692
+Berechnungszeit Distanz: 53
+Gesamt:  4197 ms
+
+Für Rad05.png: 
+Berechnungszeit KPs: 537
+Berechnungszeit Cluster: 5137
+Berechnungszeit Distanz: 85
+Gesamt:  5759 ms
+
+Für Rad06.png: 
+Berechnungszeit KPs: 547
+Berechnungszeit Cluster: 6831
+Berechnungszeit Distanz: 78
+Gesamt:  7456 ms
+
+Für Rad07.png: 
+Berechnungszeit KPs: 490
+Berechnungszeit Cluster: 5715
+Berechnungszeit Distanz: 84
+Gesamt:  6289 ms
+
+Für Rad07_bw.png: 
+Berechnungszeit KPs: 465
+Berechnungszeit Cluster: 5435
+Berechnungszeit Distanz: 62
+Gesamt:  5962 ms
+
+Für Rad07_mir.png: 
+Berechnungszeit KPs: 475
+Berechnungszeit Cluster: 5070
+Berechnungszeit Distanz: 88
+Gesamt:  5633 ms
+
+Für Rad07_rot.png: 
+Berechnungszeit KPs: 456
+Berechnungszeit Cluster: 4747
+Berechnungszeit Distanz: 61
+Gesamt:  5264 ms
+
+Für Rad08.png: 
+Berechnungszeit KPs: 476
+Berechnungszeit Cluster: 7154
+Berechnungszeit Distanz: 89
+Gesamt:  7719 ms
+
+Für Rad08_bw.png: 
+Berechnungszeit KPs: 474
+Berechnungszeit Cluster: 5186
+Berechnungszeit Distanz: 83
+Gesamt:  5743 ms
+
+Für Rad08_mir.png: 
+Berechnungszeit KPs: 483
+Berechnungszeit Cluster: 5667
+Berechnungszeit Distanz: 81
+Gesamt:  6231 ms
+
+Für Rad08_rot.png: 
+Berechnungszeit KPs: 456
+Berechnungszeit Cluster: 4150
+Berechnungszeit Distanz: 81
+Gesamt:  4687 ms
+
+Für Rad09.png: 
+Berechnungszeit KPs: 456
+Berechnungszeit Cluster: 5565
+Berechnungszeit Distanz: 75
+Gesamt:  6096 ms
+
+Für Rad09_bw.png: 
+Berechnungszeit KPs: 462
+Berechnungszeit Cluster: 4995
+Berechnungszeit Distanz: 81
+Gesamt:  5538 ms
+
+Für Rad09_mir.png: 
+Berechnungszeit KPs: 452
+Berechnungszeit Cluster: 7460
+Berechnungszeit Distanz: 101
+Gesamt:  8013 ms
+
+Für Rad09_rot.png: 
+Berechnungszeit KPs: 438
+Berechnungszeit Cluster: 5923
+Berechnungszeit Distanz: 61
+Gesamt:  6422 ms
+
+Für Rad10.png: 
+Berechnungszeit KPs: 257
+Berechnungszeit Cluster: 2012
+Berechnungszeit Distanz: 91
+Gesamt:  2360 ms
+
+Für Rad10_bw.png: 
+Berechnungszeit KPs: 243
+Berechnungszeit Cluster: 1907
+Berechnungszeit Distanz: 91
+Gesamt:  2241 ms
+
+Für Rad10_mir.png: 
+Berechnungszeit KPs: 241
+Berechnungszeit Cluster: 2247
+Berechnungszeit Distanz: 195
+Gesamt:  2683 ms
+
+Für Rad10_rot.png: 
+Berechnungszeit KPs: 244
+Berechnungszeit Cluster: 1686
+Berechnungszeit Distanz: 124
+Gesamt:  2054 ms
+
+Für Schaf01.png: 
+Berechnungszeit KPs: 269
+Berechnungszeit Cluster: 3102
+Berechnungszeit Distanz: 65
+Gesamt:  3436 ms
+
+Für Schaf01_bw.png: 
+Berechnungszeit KPs: 251
+Berechnungszeit Cluster: 2942
+Berechnungszeit Distanz: 76
+Gesamt:  3269 ms
+
+Für Schaf01_mir.png: 
+Berechnungszeit KPs: 282
+Berechnungszeit Cluster: 3143
+Berechnungszeit Distanz: 69
+Gesamt:  3494 ms
+
+Für Schaf01_rot.png: 
+Berechnungszeit KPs: 261
+Berechnungszeit Cluster: 2572
+Berechnungszeit Distanz: 76
+Gesamt:  2909 ms
+
+Für Schaf02.png: 
+Berechnungszeit KPs: 181
+Berechnungszeit Cluster: 1166
+Berechnungszeit Distanz: 59
+Gesamt:  1406 ms
+
+Für Schaf03.png: 
+Berechnungszeit KPs: 230
+Berechnungszeit Cluster: 922
+Berechnungszeit Distanz: 68
+Gesamt:  1220 ms
+
+Für Schaf03_bw.png: 
+Berechnungszeit KPs: 211
+Berechnungszeit Cluster: 829
+Berechnungszeit Distanz: 85
+Gesamt:  1125 ms
+
+Für Schaf03_mir.png: 
+Berechnungszeit KPs: 234
+Berechnungszeit Cluster: 783
+Berechnungszeit Distanz: 63
+Gesamt:  1080 ms
+
+Für Schaf03_rot.png: 
+Berechnungszeit KPs: 211
+Berechnungszeit Cluster: 692
+Berechnungszeit Distanz: 69
+Gesamt:  972 ms
+
+Für Schaf04.png: 
+Berechnungszeit KPs: 240
+Berechnungszeit Cluster: 575
+Berechnungszeit Distanz: 69
+Gesamt:  884 ms
+
+Für Schaf04_bw.png: 
+Berechnungszeit KPs: 227
+Berechnungszeit Cluster: 563
+Berechnungszeit Distanz: 133
+Gesamt:  923 ms
+
+Für Schaf04_mir.png: 
+Berechnungszeit KPs: 251
+Berechnungszeit Cluster: 576
+Berechnungszeit Distanz: 67
+Gesamt:  894 ms
+
+Für Schaf04_rot.png: 
+Berechnungszeit KPs: 263
+Berechnungszeit Cluster: 663
+Berechnungszeit Distanz: 85
+Gesamt:  1011 ms
+
+Für Schaf06.png: 
+Berechnungszeit KPs: 259
+Berechnungszeit Cluster: 1072
+Berechnungszeit Distanz: 100
+Gesamt:  1431 ms
+
+Für Schaf06_bw.png: 
+Berechnungszeit KPs: 227
+Berechnungszeit Cluster: 1129
+Berechnungszeit Distanz: 116
+Gesamt:  1472 ms
+
+Für Schaf06_mir.png: 
+Berechnungszeit KPs: 252
+Berechnungszeit Cluster: 1123
+Berechnungszeit Distanz: 62
+Gesamt:  1437 ms
+
+Für Schaf06_rot.png: 
+Berechnungszeit KPs: 246
+Berechnungszeit Cluster: 1071
+Berechnungszeit Distanz: 99
+Gesamt:  1416 ms
+
+Für Schaf07.png: 
+Berechnungszeit KPs: 262
+Berechnungszeit Cluster: 1302
+Berechnungszeit Distanz: 86
+Gesamt:  1650 ms
+
+Für Schaf07_bw.png: 
+Berechnungszeit KPs: 255
+Berechnungszeit Cluster: 1138
+Berechnungszeit Distanz: 69
+Gesamt:  1462 ms
+
+Für Schaf07_mir.png: 
+Berechnungszeit KPs: 253
+Berechnungszeit Cluster: 1337
+Berechnungszeit Distanz: 69
+Gesamt:  1659 ms
+
+Für Schaf07_rot.png: 
+Berechnungszeit KPs: 260
+Berechnungszeit Cluster: 1182
+Berechnungszeit Distanz: 62
+Gesamt:  1504 ms
+
+Für Schaf10.png: 
+Berechnungszeit KPs: 307
+Berechnungszeit Cluster: 2568
+Berechnungszeit Distanz: 100
+Gesamt:  2975 ms
+
+Für Schaf10_bw.png: 
+Berechnungszeit KPs: 316
+Berechnungszeit Cluster: 2374
+Berechnungszeit Distanz: 85
+Gesamt:  2775 ms
+
+Für Schaf10_mir.png: 
+Berechnungszeit KPs: 309
+Berechnungszeit Cluster: 2257
+Berechnungszeit Distanz: 147
+Gesamt:  2713 ms
+
+Für Schaf10_rot.png: 
+Berechnungszeit KPs: 297
+Berechnungszeit Cluster: 2226
+Berechnungszeit Distanz: 69
+Gesamt:  2592 ms

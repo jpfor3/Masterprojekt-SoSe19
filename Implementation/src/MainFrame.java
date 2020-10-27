@@ -118,13 +118,13 @@ public class MainFrame extends JFrame {
 		lblClusteringAlgorithmus.setBounds(121, 513, 174, 20);
 		contentPane.add(lblClusteringAlgorithmus);
 		
-		String dalglist[] = {"EMD (Euclid)", "EMD (Hamming)", "Jaccard"};
+		String dalglist[] = {"EMD (Euclid)", "EMD (Hamming)"};
 		JComboBox comboBox_1 = new JComboBox(dalglist);
 		comboBox_1.setBounds(280, 508, 215, 31);
 		contentPane.add(comboBox_1);
 		
-		JLabel lblEdmPenalty = new JLabel("EMD Penalty / Jaccard Threshold:");
-		lblEdmPenalty.setBounds(35, 561, 238, 20);
+		JLabel lblEdmPenalty = new JLabel("EMD Penalty:");
+		lblEdmPenalty.setBounds(173, 561, 238, 20);
 		contentPane.add(lblEdmPenalty);
 
 		JTextField textField_emdPenalty = new JTextField("-1");
